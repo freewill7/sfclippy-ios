@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40D311CD3A24E63269CC1B75 /* Pods_sfclippyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBC2DD6A0A56665259737EA /* Pods_sfclippyUITests.framework */; };
+		4CE72719FF7147A4D1A51FD1 /* Pods_sfclippyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B546F4997AB21F61BE224771 /* Pods_sfclippyTests.framework */; };
 		BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */; };
 		BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F23F91FBE11E500CD6447 /* ViewController.swift */; };
 		BE1F23FD1FBE11E500CD6447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1F23FB1FBE11E500CD6447 /* Main.storyboard */; };
@@ -14,6 +16,11 @@
 		BE1F24021FBE11E500CD6447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1F24001FBE11E500CD6447 /* LaunchScreen.storyboard */; };
 		BE1F240D1FBE11E500CD6447 /* sfclippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F240C1FBE11E500CD6447 /* sfclippyTests.swift */; };
 		BE1F24181FBE11E500CD6447 /* sfclippyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F24171FBE11E500CD6447 /* sfclippyUITests.swift */; };
+		BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
+		BE42474C1FC056F3003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
+		BE42474D1FC056F4003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
+		BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42474E1FC070C3003E08A8 /* SignInViewController.swift */; };
+		BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sfclippy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F1F74618B7CB5D1E17E94A0 /* Pods-sfclippy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.debug.xcconfig"; sourceTree = "<group>"; };
+		A56E63742F27EC72439A5A05 /* Pods-sfclippyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyTests/Pods-sfclippyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B546F4997AB21F61BE224771 /* Pods_sfclippyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sfclippyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F23F41FBE11E500CD6447 /* sfclippy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sfclippy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1F23F91FBE11E500CD6447 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +58,13 @@
 		BE1F24131FBE11E500CD6447 /* sfclippyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sfclippyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F24171FBE11E500CD6447 /* sfclippyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sfclippyUITests.swift; sourceTree = "<group>"; };
 		BE1F24191FBE11E500CD6447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE4247491FC05641003E08A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BE42474E1FC070C3003E08A8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.release.xcconfig"; sourceTree = "<group>"; };
+		C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D851111708E7C9363663312E /* Pods-sfclippyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyTests/Pods-sfclippyTests.release.xcconfig"; sourceTree = "<group>"; };
+		FEBC2DD6A0A56665259737EA /* Pods_sfclippyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sfclippyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE72719FF7147A4D1A51FD1 /* Pods_sfclippyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +88,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D311CD3A24E63269CC1B75 /* Pods_sfclippyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12D6D4CB4D2C76CB2B3644BE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F1F74618B7CB5D1E17E94A0 /* Pods-sfclippy.debug.xcconfig */,
+				C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */,
+				A56E63742F27EC72439A5A05 /* Pods-sfclippyTests.debug.xcconfig */,
+				D851111708E7C9363663312E /* Pods-sfclippyTests.release.xcconfig */,
+				C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */,
+				CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BE1F23EB1FBE11E500CD6447 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +115,8 @@
 				BE1F240B1FBE11E500CD6447 /* sfclippyTests */,
 				BE1F24161FBE11E500CD6447 /* sfclippyUITests */,
 				BE1F23F51FBE11E500CD6447 /* Products */,
+				12D6D4CB4D2C76CB2B3644BE /* Pods */,
+				CFF5B90DB85F365FA55FA3D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +133,14 @@
 		BE1F23F61FBE11E500CD6447 /* sfclippy */ = {
 			isa = PBXGroup;
 			children = (
+				BE4247491FC05641003E08A8 /* GoogleService-Info.plist */,
 				BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */,
 				BE1F23F91FBE11E500CD6447 /* ViewController.swift */,
 				BE1F23FB1FBE11E500CD6447 /* Main.storyboard */,
 				BE1F23FE1FBE11E500CD6447 /* Assets.xcassets */,
 				BE1F24001FBE11E500CD6447 /* LaunchScreen.storyboard */,
 				BE1F24031FBE11E500CD6447 /* Info.plist */,
+				BE42474E1FC070C3003E08A8 /* SignInViewController.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -125,6 +163,16 @@
 			path = sfclippyUITests;
 			sourceTree = "<group>";
 		};
+		CFF5B90DB85F365FA55FA3D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */,
+				B546F4997AB21F61BE224771 /* Pods_sfclippyTests.framework */,
+				FEBC2DD6A0A56665259737EA /* Pods_sfclippyUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE1F241C1FBE11E500CD6447 /* Build configuration list for PBXNativeTarget "sfclippy" */;
 			buildPhases = (
+				63C3030157561C707B915F9D /* [CP] Check Pods Manifest.lock */,
 				BE1F23F01FBE11E500CD6447 /* Sources */,
 				BE1F23F11FBE11E500CD6447 /* Frameworks */,
 				BE1F23F21FBE11E500CD6447 /* Resources */,
+				F96121CD49CF01C8E4C606A8 /* [CP] Embed Pods Frameworks */,
+				38619BF831E90974EF075DEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE1F241F1FBE11E500CD6447 /* Build configuration list for PBXNativeTarget "sfclippyTests" */;
 			buildPhases = (
+				F89BF412C64EF09E54298E42 /* [CP] Check Pods Manifest.lock */,
 				BE1F24041FBE11E500CD6447 /* Sources */,
 				BE1F24051FBE11E500CD6447 /* Frameworks */,
 				BE1F24061FBE11E500CD6447 /* Resources */,
+				F5B48195CEA444EE58861D7F /* [CP] Embed Pods Frameworks */,
+				080585211951156ED8A744BA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +221,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE1F24221FBE11E500CD6447 /* Build configuration list for PBXNativeTarget "sfclippyUITests" */;
 			buildPhases = (
+				C3447C5684018B3FC3766344 /* [CP] Check Pods Manifest.lock */,
 				BE1F240F1FBE11E500CD6447 /* Sources */,
 				BE1F24101FBE11E500CD6447 /* Frameworks */,
 				BE1F24111FBE11E500CD6447 /* Resources */,
+				DDC3A75C48AB930C3AE2BA06 /* [CP] Embed Pods Frameworks */,
+				8B516DC48611CB2E61FF7EFD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1F24021FBE11E500CD6447 /* LaunchScreen.storyboard in Resources */,
+				BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */,
 				BE1F23FF1FBE11E500CD6447 /* Assets.xcassets in Resources */,
 				BE1F23FD1FBE11E500CD6447 /* Main.storyboard in Resources */,
 			);
@@ -242,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE42474C1FC056F3003E08A8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,10 +308,172 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE42474D1FC056F4003E08A8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		080585211951156ED8A744BA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sfclippyTests/Pods-sfclippyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		38619BF831E90974EF075DEB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63C3030157561C707B915F9D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sfclippy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B516DC48611CB2E61FF7EFD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3447C5684018B3FC3766344 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sfclippyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDC3A75C48AB930C3AE2BA06 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5B48195CEA444EE58861D7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sfclippyTests/Pods-sfclippyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F89BF412C64EF09E54298E42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sfclippyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F96121CD49CF01C8E4C606A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE1F23F01FBE11E500CD6447 /* Sources */ = {
@@ -261,6 +482,7 @@
 			files = (
 				BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
+				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +646,7 @@
 		};
 		BE1F241D1FBE11E500CD6447 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F1F74618B7CB5D1E17E94A0 /* Pods-sfclippy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -439,6 +662,7 @@
 		};
 		BE1F241E1FBE11E500CD6447 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -454,6 +678,7 @@
 		};
 		BE1F24201FBE11E500CD6447 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A56E63742F27EC72439A5A05 /* Pods-sfclippyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -471,6 +696,7 @@
 		};
 		BE1F24211FBE11E500CD6447 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D851111708E7C9363663312E /* Pods-sfclippyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -488,6 +714,7 @@
 		};
 		BE1F24231FBE11E500CD6447 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -504,6 +731,7 @@
 		};
 		BE1F24241FBE11E500CD6447 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
