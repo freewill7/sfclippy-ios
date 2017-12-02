@@ -16,10 +16,16 @@
 		BE1F24021FBE11E500CD6447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1F24001FBE11E500CD6447 /* LaunchScreen.storyboard */; };
 		BE1F240D1FBE11E500CD6447 /* sfclippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F240C1FBE11E500CD6447 /* sfclippyTests.swift */; };
 		BE1F24181FBE11E500CD6447 /* sfclippyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F24171FBE11E500CD6447 /* sfclippyUITests.swift */; };
+		BE21692D1FD1FFD1009F0703 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21692C1FD1FFD1009F0703 /* ResultsTableViewController.swift */; };
+		BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */; };
 		BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474C1FC056F3003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474D1FC056F4003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42474E1FC070C3003E08A8 /* SignInViewController.swift */; };
+		BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247501FC1D3B0003E08A8 /* DataModel.swift */; };
+		BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */; };
+		BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */; };
+		BE4247571FC2DD0F003E08A8 /* CharactersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */; };
 		BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +64,14 @@
 		BE1F24131FBE11E500CD6447 /* sfclippyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sfclippyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F24171FBE11E500CD6447 /* sfclippyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sfclippyUITests.swift; sourceTree = "<group>"; };
 		BE1F24191FBE11E500CD6447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE21692C1FD1FFD1009F0703 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247491FC05641003E08A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE42474E1FC070C3003E08A8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		BE4247501FC1D3B0003E08A8 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
+		BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewCell.swift; sourceTree = "<group>"; };
+		BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersUITests.swift; sourceTree = "<group>"; };
 		C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.release.xcconfig"; sourceTree = "<group>"; };
 		C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +153,11 @@
 				BE1F24001FBE11E500CD6447 /* LaunchScreen.storyboard */,
 				BE1F24031FBE11E500CD6447 /* Info.plist */,
 				BE42474E1FC070C3003E08A8 /* SignInViewController.swift */,
+				BE4247501FC1D3B0003E08A8 /* DataModel.swift */,
+				BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */,
+				BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */,
+				BE21692C1FD1FFD1009F0703 /* ResultsTableViewController.swift */,
+				BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -159,6 +176,7 @@
 			children = (
 				BE1F24171FBE11E500CD6447 /* sfclippyUITests.swift */,
 				BE1F24191FBE11E500CD6447 /* Info.plist */,
+				BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */,
 			);
 			path = sfclippyUITests;
 			sourceTree = "<group>";
@@ -481,6 +499,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */,
+				BE21692D1FD1FFD1009F0703 /* ResultsTableViewController.swift in Sources */,
+				BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */,
+				BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */,
+				BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */,
+				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
 			);
@@ -499,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1F24181FBE11E500CD6447 /* sfclippyUITests.swift in Sources */,
+				BE4247571FC2DD0F003E08A8 /* CharactersUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
