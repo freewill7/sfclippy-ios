@@ -40,7 +40,7 @@ class ResultsTableViewController: UITableViewController {
         self.database = Database.database()
         if let db = database {
             let resultsRef = userResultsRef(database: db)
-            resultsRef?.observe(DataEventType.childAdded, with: { (snapshot : DataSnapshot) in
+            resultsRef?.queryOrdered(byChild: BattleResult.keyDate).observe(DataEventType.childAdded, with: { (snapshot : DataSnapshot) in
                 self.observeAddResult(snapshot: snapshot)
             })
             
@@ -80,7 +80,8 @@ class ResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
-        let result = results[indexPath.row]
+        let reverseIndex = (results.count - indexPath.row) - 1
+        let result = results[reverseIndex]
         
         let p1Lookup = characterLookup[result.p1Id]
         let p2Lookup = characterLookup[result.p2Id]

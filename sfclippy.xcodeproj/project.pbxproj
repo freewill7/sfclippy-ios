@@ -18,6 +18,8 @@
 		BE1F24181FBE11E500CD6447 /* sfclippyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F24171FBE11E500CD6447 /* sfclippyUITests.swift */; };
 		BE21692D1FD1FFD1009F0703 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21692C1FD1FFD1009F0703 /* ResultsTableViewController.swift */; };
 		BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */; };
+		BE2169351FD35D75009F0703 /* DragToSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2169341FD35D75009F0703 /* DragToSelectView.xib */; };
+		BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2169321FD350B2009F0703 /* DragToSelectView.swift */; };
 		BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474C1FC056F3003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474D1FC056F4003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
@@ -66,6 +68,8 @@
 		BE1F24191FBE11E500CD6447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE21692C1FD1FFD1009F0703 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
+		BE2169321FD350B2009F0703 /* DragToSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToSelectView.swift; sourceTree = "<group>"; };
+		BE2169341FD35D75009F0703 /* DragToSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragToSelectView.xib; sourceTree = "<group>"; };
 		BE4247491FC05641003E08A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE42474E1FC070C3003E08A8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		BE4247501FC1D3B0003E08A8 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */,
 				BE21692C1FD1FFD1009F0703 /* ResultsTableViewController.swift */,
 				BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */,
+				BE2169321FD350B2009F0703 /* DragToSelectView.swift */,
+				BE2169341FD35D75009F0703 /* DragToSelectView.xib */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -307,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2169351FD35D75009F0703 /* DragToSelectView.xib in Resources */,
 				BE1F24021FBE11E500CD6447 /* LaunchScreen.storyboard in Resources */,
 				BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */,
 				BE1F23FF1FBE11E500CD6447 /* Assets.xcassets in Resources */,
@@ -506,6 +513,7 @@
 				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
+				BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

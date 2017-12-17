@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import AudioToolbox
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DragToSelectObserver {
     var database : Database?
     var p1Name : String?
     var optP1Id : String?
@@ -22,13 +22,16 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var btnChooseP1: UIButton!
     @IBOutlet weak var btnChooseP2: UIButton!
-    @IBOutlet var gesturePanWin: UIPanGestureRecognizer!
-    @IBOutlet weak var labelHint: UILabel!
+    
+    @IBOutlet weak var selectionView: DragToSelectView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.database = Database.database()
+        database = Database.database()
+        selectionView.enabled = false
+        selectionView.observer = self
+        
         updateHint()
     }
 
@@ -68,71 +71,35 @@ class ViewController: UIViewController {
             debugPrint("record battle called with empty values")
         }
     }
-    @IBAction func actionPan(_ sender: Any) {
-        // Get the changes in the X and Y directions relative to
-        // the superview's coordinate space
-        let piece = gesturePanWin.view!
-        let translation = gesturePanWin.translation(in: piece.superview)
-        if gesturePanWin.state == .began {
-            // Save the view's original position.
-            self.initialCenter = piece.center
-            
-            // Instantiate feedback generator
-            self.feedbackGenerator = UINotificationFeedbackGenerator()
-            feedbackGenerator?.prepare()
-        }
-        // Update the position for the .began, .changed, and .ended states
-        if gesturePanWin.state == .changed {
-            // Add just the Y translation to the view's original position.
-            let newCenter = CGPoint(x: initialCenter.x, y: initialCenter.y + translation.y)
-            if newCenter.y < 0 {
-                // feedback that selection has been made
-                debugPrint("top")
-                
-                if #available(iOS 10,*) {
-                    feedbackGenerator?.notificationOccurred(UINotificationFeedbackType.success)
-                    feedbackGenerator?.prepare()
-                }
-                
-                // reset movement
-                gesturePanWin.isEnabled = false
-                gesturePanWin.isEnabled = true
-                piece.center = initialCenter
-                recordBattle(p1Won: true)
-            } else if newCenter.y > piece.superview!.bounds.maxY {
-                // feedback that selection has been made
-                debugPrint("bottom")
-                
-                if #available(iOS 10,*) {
-                    feedbackGenerator?.notificationOccurred(UINotificationFeedbackType.success)
-                    feedbackGenerator?.prepare()
-                }
-                
-                // reset movement
-                gesturePanWin.isEnabled = false
-                gesturePanWin.isEnabled = true
-                piece.center = initialCenter
-                recordBattle(p1Won: false)
-            } else {
-                piece.center = newCenter
-            }
-        } else if gesturePanWin.state == .ended || gesturePanWin.state == .cancelled {
-            // On cancellation, return the piece to its original location.
-            debugPrint("cancelled with velocity", gesturePanWin.velocity(in: piece.superview))
-            piece.center = initialCenter
-            feedbackGenerator = nil
-        }
+    
+    /**
+    Implementation for DragSelectObserver.
+     */
+    func selectedFirstOption() {
+        debugPrint("selected top item")
+        recordBattle(p1Won: true)
+    }
+    
+    /**
+    Implementation for DragSelectObserver.
+     */
+    func selectedSecondOption() {
+        debugPrint("selected bottom item")
+        recordBattle(p1Won: false)
     }
     
     func updateHint( ) {
         if nil == p1Name {
-            labelHint.text = "It looks like you're recording a battle!\n\nPlease select a character for Player 1";
-        } else if ( nil == p2Name ) {
-            labelHint.text = "Great!\n\nNow select a character for Player 2";
-        } else if ( !hadBattle ) {
-            labelHint.text = "Excellent!\n\nNow drag me to the winner of the battle";
+            selectionView.message = "Zzz... (waiting for Player 1 selection)"
+        } else if nil == p2Name {
+            selectionView.message = "Zzz... (waiting for Player 2 selection)"
         } else {
-            labelHint.text = "Congratulations!\n\nDid you know interesting fact goes here";
+            selectionView.enabled = true
+            if ( hadBattle ) {
+                selectionView.message = "Result recorded"
+            } else {
+                selectionView.message = "Drag me to the winner"
+            }
         }
     }
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Kx-Ys-1Bv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Kx-Ys-1Bv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -41,15 +41,15 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Ct-pw4">
-                                <rect key="frame" x="8" y="64" width="359" height="603"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Ct-pw4">
+                                <rect key="frame" x="4" y="68" width="367" height="595"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDA-mq-0Lv">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="120.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDA-mq-0Lv">
+                                        <rect key="frame" x="0.0" y="0.0" width="367" height="119"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Player 1 Character" image="icon_48_p1">
                                             <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,56 +58,14 @@
                                             <segue destination="urN-eq-mWK" kind="show" identifier="selectP1Character" id="FdB-2V-eOp"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-RB-4LS">
-                                        <rect key="frame" x="0.0" y="120.5" width="359" height="362"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oes-dG-Tu8" userLabel="Moveable">
-                                                <rect key="frame" x="8" y="174.5" width="343" height="128"/>
-                                                <subviews>
-                                                    <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="sfclippy_48" translatesAutoresizingMaskIntoConstraints="NO" id="2cS-Q6-FiE">
-                                                        <rect key="frame" x="8" y="8" width="48" height="112"/>
-                                                        <accessibility key="accessibilityConfiguration">
-                                                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                                        </accessibility>
-                                                        <gestureRecognizers/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Drag me to the winner" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2n-gB-p7P">
-                                                        <rect key="frame" x="51" y="8" width="240" height="112"/>
-                                                        <color key="backgroundColor" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" image="YES"/>
-                                                </accessibility>
-                                                <gestureRecognizers/>
-                                                <constraints>
-                                                    <constraint firstItem="2cS-Q6-FiE" firstAttribute="top" secondItem="oes-dG-Tu8" secondAttribute="top" constant="8" id="23B-aZ-UrK"/>
-                                                    <constraint firstAttribute="height" constant="128" id="4Fd-TD-6R3"/>
-                                                    <constraint firstAttribute="bottom" secondItem="2cS-Q6-FiE" secondAttribute="bottom" constant="8" id="6lk-cC-vCz"/>
-                                                    <constraint firstAttribute="trailing" secondItem="a2n-gB-p7P" secondAttribute="trailing" constant="8" id="7Pl-x3-5lR"/>
-                                                    <constraint firstItem="a2n-gB-p7P" firstAttribute="leading" secondItem="2cS-Q6-FiE" secondAttribute="trailing" constant="16" id="LTk-XB-su7"/>
-                                                    <constraint firstAttribute="bottom" secondItem="a2n-gB-p7P" secondAttribute="bottom" constant="8" id="Wyx-7c-E4d"/>
-                                                    <constraint firstItem="a2n-gB-p7P" firstAttribute="top" secondItem="oes-dG-Tu8" secondAttribute="top" constant="8" id="x5h-Sb-uAT"/>
-                                                    <constraint firstItem="2cS-Q6-FiE" firstAttribute="leading" secondItem="oes-dG-Tu8" secondAttribute="leading" constant="8" id="zsL-W0-QON"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="QWL-XH-tNf" appends="YES" id="CQX-U2-bpo"/>
-                                                </connections>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="oes-dG-Tu8" firstAttribute="centerY" secondItem="JkH-RB-4LS" secondAttribute="centerY" id="myD-8L-A3h"/>
-                                            <constraint firstAttribute="trailing" secondItem="oes-dG-Tu8" secondAttribute="trailing" constant="8" id="xqR-8d-9Na"/>
-                                            <constraint firstItem="oes-dG-Tu8" firstAttribute="leading" secondItem="JkH-RB-4LS" secondAttribute="leading" constant="8" id="ycI-r3-HiP"/>
-                                        </constraints>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfq-zh-MHp" customClass="DragToSelectView" customModule="sfclippy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="119" width="367" height="357"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="sfclippy_48"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-eJ-bev">
-                                        <rect key="frame" x="0.0" y="482.5" width="359" height="120.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-eJ-bev">
+                                        <rect key="frame" x="0.0" y="476" width="367" height="119"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Player 2 Character" image="icon_48_p2">
                                             <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -118,18 +76,18 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="JkH-RB-4LS" firstAttribute="height" secondItem="YDA-mq-0Lv" secondAttribute="height" multiplier="3:1" id="CPw-Un-Lex"/>
-                                    <constraint firstItem="JkH-RB-4LS" firstAttribute="height" secondItem="1QD-eJ-bev" secondAttribute="height" multiplier="3:1" id="ifp-BH-1gB"/>
+                                    <constraint firstItem="zfq-zh-MHp" firstAttribute="height" secondItem="YDA-mq-0Lv" secondAttribute="height" multiplier="3:1" id="MwB-T1-RNz"/>
+                                    <constraint firstItem="zfq-zh-MHp" firstAttribute="height" secondItem="1QD-eJ-bev" secondAttribute="height" multiplier="3:1" id="Uac-9q-IhU"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <accessibility key="accessibilityConfiguration" identifier="ViewController"/>
                         <constraints>
-                            <constraint firstItem="Yga-Ct-pw4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="34g-kv-EJ2"/>
-                            <constraint firstItem="Yga-Ct-pw4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AQf-ZM-e3X"/>
-                            <constraint firstAttribute="trailing" secondItem="Yga-Ct-pw4" secondAttribute="trailing" constant="8" id="ZVu-Hh-DRq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Yga-Ct-pw4" secondAttribute="bottom" id="m4x-f0-vfg"/>
+                            <constraint firstItem="Yga-Ct-pw4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="XQJ-HE-ozx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Yga-Ct-pw4" secondAttribute="bottom" constant="4" id="aL5-sf-KSP"/>
+                            <constraint firstItem="Yga-Ct-pw4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="4" id="uaf-T9-tpi"/>
+                            <constraint firstAttribute="trailing" secondItem="Yga-Ct-pw4" secondAttribute="trailing" constant="4" id="xXk-Rp-P6u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -143,16 +101,10 @@
                     <connections>
                         <outlet property="btnChooseP1" destination="YDA-mq-0Lv" id="HW3-gb-VYA"/>
                         <outlet property="btnChooseP2" destination="1QD-eJ-bev" id="7gz-ix-FTk"/>
-                        <outlet property="gesturePanWin" destination="QWL-XH-tNf" id="sU2-ZW-mrb"/>
-                        <outlet property="labelHint" destination="a2n-gB-p7P" id="Naa-Sm-0Lw"/>
+                        <outlet property="selectionView" destination="zfq-zh-MHp" id="tEZ-A7-xJh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="QWL-XH-tNf">
-                    <connections>
-                        <action selector="actionPan:" destination="BYZ-38-t0r" id="tEx-HG-cts"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1053.5999999999999" y="19.340329835082461"/>
         </scene>
