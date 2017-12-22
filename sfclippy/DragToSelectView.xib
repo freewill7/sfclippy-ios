@@ -25,16 +25,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsV-CK-7yi" userLabel="MoveableView">
-                    <rect key="frame" x="4" y="208" width="367" height="250"/>
+                    <rect key="frame" x="4" y="222" width="367" height="222"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppN-jn-E5M">
-                            <rect key="frame" x="4" y="4" width="359" height="242"/>
+                            <rect key="frame" x="4" y="4" width="359" height="214"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aox-Zc-3pg">
-                                    <rect key="frame" x="0.0" y="0.0" width="90" height="242"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="214"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ">
-                                    <rect key="frame" x="90" y="0.0" width="269" height="242"/>
+                                    <rect key="frame" x="90" y="0.0" width="269" height="214"/>
                                     <color key="backgroundColor" red="0.97226307396637146" green="1" blue="0.89905076085360047" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -48,7 +48,6 @@
                     </subviews>
                     <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="250" id="D9g-MP-jEr"/>
                         <constraint firstAttribute="trailing" secondItem="ppN-jn-E5M" secondAttribute="trailing" constant="4" id="eZC-HL-Ol8"/>
                         <constraint firstAttribute="bottom" secondItem="ppN-jn-E5M" secondAttribute="bottom" constant="4" id="iq0-NU-JJV"/>
                         <constraint firstItem="ppN-jn-E5M" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" constant="4" id="kHu-fJ-bA0"/>
@@ -62,6 +61,7 @@
             <constraints>
                 <constraint firstItem="jsV-CK-7yi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="GdX-QV-C8X"/>
                 <constraint firstItem="jsV-CK-7yi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bLh-bE-DNA"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1:3" id="dQX-Of-HT0"/>
                 <constraint firstAttribute="trailing" secondItem="jsV-CK-7yi" secondAttribute="trailing" constant="4" id="twJ-8d-kOr"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

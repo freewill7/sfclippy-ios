@@ -72,21 +72,35 @@ class BattleResult {
 }
 
 class CharacterPref {
+    var id : String?
     var name : String
+    var p1Rating : Int
+    var p2Rating: Int
     
     static let keyName = "name"
+    static let keyP1Rating = "p1Rating"
+    static let keyP2Rating = "p2Rating"
     
-    init( name : String ) {
+    init( name : String, p1Rating: Int, p2Rating: Int, id : String? = nil ) {
         self.name = name
+        self.p1Rating = p1Rating
+        self.p2Rating = p2Rating
+        self.id = id
     }
     
     func toMap( ) -> [String:String] {
-        return [ CharacterPref.keyName : name ]
+        return [ CharacterPref.keyName : name,
+                 CharacterPref.keyP1Rating : String(p1Rating),
+                 CharacterPref.keyP2Rating : String(p2Rating) ]
     }
     
-    static func initFromMap( fromMap map : [String:String] ) -> CharacterPref? {
-        if let name = map[keyName] {
-            return CharacterPref(name: name)
+    static func initFromMap( fromMap map : [String:String], withId id : String ) -> CharacterPref? {
+        if let name = map[keyName],
+            let strP1Rating = map[keyP1Rating],
+            let strP2Rating = map[keyP2Rating],
+            let p1Rating = Int(strP1Rating),
+            let p2Rating = Int(strP2Rating){
+            return CharacterPref(name: name, p1Rating: p1Rating, p2Rating: p2Rating, id: id )
         } else {
             debugPrint("character map missing fields",map)
             return nil
@@ -101,10 +115,17 @@ func userDir( ) -> String? {
     return nil
 }
 
-func userCharactersRef( database : Database ) -> DatabaseReference? {
+func userCharactersDir( database : Database ) -> DatabaseReference? {
     if let userHome = userDir() {
         let path = userHome + "/characters"
         return database.reference(withPath: path)
+    }
+    return nil
+}
+
+func userCharactersPref( database : Database, characterId : String ) -> DatabaseReference? {
+    if let parent = userCharactersDir(database: database ) {
+        return parent.child(characterId)
     }
     return nil
 }

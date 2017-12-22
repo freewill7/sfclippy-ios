@@ -9,32 +9,25 @@
 import UIKit
 import FirebaseDatabase
 
-class CharacterInfo {
-    var id : String
-    var name : String
-    
-    init( id : String, name: String ) {
-        self.id = id
-        self.name = name
-    }
-}
 class CharactersTableViewController: UITableViewController {
-    var characters = [CharacterInfo]()
+    var characters = [CharacterPref]()
     var playerId = 0
     var selectedName = ""
     var selectedId = ""
     
     func characterAdded( snapshot : DataSnapshot ) {
-        if let str = snapshot.childSnapshot(forPath: "name").value as? String {
-            let id = snapshot.key
-            debugPrint("retrieved character",str,id)
-            characters.append( CharacterInfo(id: id, name: str))
+        if let map = snapshot.value as? [String:String],
+            let charPref = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
+            debugPrint("retrieved character",charPref,snapshot.key)
+            characters.append( charPref )
             tableView.reloadData();
         }
     }
     
     func populateCharacter( characterDir : DatabaseReference, characterName : String ) {
-        characterDir.childByAutoId().setValue( ["name" : characterName] )
+        
+        let charPref = CharacterPref(name: characterName, p1Rating: 1, p2Rating: 1)
+        characterDir.childByAutoId().setValue( charPref.toMap() )
     }
     
     func populateWithSample( characterDir: DatabaseReference ) {
@@ -79,7 +72,7 @@ class CharactersTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         let database = Database.database()
-        let ref = userCharactersRef(database: database)
+        let ref = userCharactersDir(database: database)
         
         self.title = "Choose Character (p\(playerId))"
         
@@ -122,17 +115,19 @@ class CharactersTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
         
         // configure cell
-        cell.labelName.text = characters[indexPath.row].name
-
+        cell.setCharacter( character: characters[indexPath.row], isP1: (playerId == 0) )
+        
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
         debugPrint("selected row at \(indexPath.row)")
         let character = characters[indexPath.row]
-        self.selectedName = character.name
-        self.selectedId = character.id
-        performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+        if let id = character.id {
+            self.selectedName = character.name
+            self.selectedId = id
+            performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+        }
     }
     
     /*

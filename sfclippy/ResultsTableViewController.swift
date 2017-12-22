@@ -26,7 +26,7 @@ class ResultsTableViewController: UITableViewController {
     
     func observeAddCharacter( snapshot : DataSnapshot ) {
         if let map = snapshot.value as? [String:String],
-            let character = CharacterPref.initFromMap(fromMap: map) {
+            let character = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
             characterLookup[snapshot.key] = character
             tableView.reloadData()
         } else {
@@ -44,7 +44,7 @@ class ResultsTableViewController: UITableViewController {
                 self.observeAddResult(snapshot: snapshot)
             })
             
-            let prefsRef = userCharactersRef(database: db)
+            let prefsRef = userCharactersDir(database: db)
             prefsRef?.observe(DataEventType.childAdded, with: { (snapshot : DataSnapshot) in
                 self.observeAddCharacter(snapshot: snapshot)
             })
