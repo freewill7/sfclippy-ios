@@ -9,11 +9,18 @@
 import UIKit
 import FirebaseDatabase
 
+class ArcRandomGenerator : RandomGenerator {
+    func randomInteger(_ max: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(max)))
+    }
+}
+
 class CharactersTableViewController: UITableViewController {
     var characters = [CharacterPref]()
     var playerId = 0
     var selectedName = ""
     var selectedId = ""
+    var selector = SelectionMechanism( ArcRandomGenerator() )
     
     func characterAdded( snapshot : DataSnapshot ) {
         if let map = snapshot.value as? [String:String],
@@ -74,7 +81,7 @@ class CharactersTableViewController: UITableViewController {
         let database = Database.database()
         let ref = userCharactersDir(database: database)
         
-        self.title = "Choose Character (p\(playerId))"
+        self.title = "Player \(playerId+1)"
         
         // set up handler to allow for bootstrap
         debugPrint("checking to see if we need to bootstrap")
@@ -130,6 +137,22 @@ class CharactersTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func selectRandom(_ sender: Any) {
+        let elem = selector.randomCharacter(characters)
+        if let index = characters.index(of: elem) {
+            let path = IndexPath(row: index, section: 0)
+            self.tableView.selectRow(at: path, animated: true, scrollPosition: .top)
+        }
+    }
+    
+    @IBAction func selectPreferred(_ sender: Any) {
+        let elem = selector.preferredCharacter(characters, playerId: playerId)
+        if let index = characters.index(of: elem) {
+            let path = IndexPath(row: index, section: 0)
+            self.tableView.selectRow(at: path, animated: true, scrollPosition: .top)
+        }
+    }
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

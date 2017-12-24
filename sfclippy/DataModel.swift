@@ -71,11 +71,15 @@ class BattleResult {
     }
 }
 
-class CharacterPref {
+class CharacterPref : Equatable, CustomStringConvertible {
     var id : String?
     var name : String
     var p1Rating : Int
     var p2Rating: Int
+    
+    var description: String {
+        return "CharacterPref(\(name),\(p1Rating),\(p2Rating))"
+    }
     
     static let keyName = "name"
     static let keyP1Rating = "p1Rating"
@@ -88,10 +92,24 @@ class CharacterPref {
         self.id = id
     }
     
+    static func ==( lhs : CharacterPref, rhs : CharacterPref ) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.p1Rating == rhs.p1Rating &&
+            lhs.p2Rating == rhs.p2Rating
+    }
+    
     func toMap( ) -> [String:String] {
         return [ CharacterPref.keyName : name,
                  CharacterPref.keyP1Rating : String(p1Rating),
                  CharacterPref.keyP2Rating : String(p2Rating) ]
+    }
+    
+    func rating( _ playerId: Int ) -> Int {
+        if 0 == playerId {
+            return p1Rating
+        } else {
+            return p2Rating
+        }
     }
     
     static func initFromMap( fromMap map : [String:String], withId id : String ) -> CharacterPref? {

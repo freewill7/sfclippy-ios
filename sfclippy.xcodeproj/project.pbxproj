@@ -30,6 +30,8 @@
 		BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */; };
 		BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */; };
 		BE4247571FC2DD0F003E08A8 /* CharactersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */; };
+		BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */; };
+		BE985F901FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */; };
 		BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,8 @@
 		BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 		BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersUITests.swift; sourceTree = "<group>"; };
+		BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanism.swift; sourceTree = "<group>"; };
+		BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanismTests.swift; sourceTree = "<group>"; };
 		C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.release.xcconfig"; sourceTree = "<group>"; };
 		C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 				BE2169341FD35D75009F0703 /* DragToSelectView.xib */,
 				BE2B4B5B1FE6A80700C710B7 /* RatingView.xib */,
 				BE2B4B5D1FE6A99200C710B7 /* RatingView.swift */,
+				BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			children = (
 				BE1F240C1FBE11E500CD6447 /* sfclippyTests.swift */,
 				BE1F240E1FBE11E500CD6447 /* Info.plist */,
+				BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */,
 			);
 			path = sfclippyTests;
 			sourceTree = "<group>";
@@ -452,9 +458,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-sfclippyTests/Pods-sfclippyTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -488,7 +499,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f0850809/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -517,6 +528,7 @@
 				BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */,
 				BE2B4B5E1FE6A99200C710B7 /* RatingView.swift in Sources */,
 				BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */,
+				BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */,
 				BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */,
 				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
@@ -529,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE985F901FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift in Sources */,
 				BE1F240D1FBE11E500CD6447 /* sfclippyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

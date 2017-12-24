@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import sfclippy
+//@testable import sfclippy
 
 class sfclippyTests: XCTestCase {
     
