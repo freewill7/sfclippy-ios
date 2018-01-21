@@ -89,17 +89,34 @@ class ViewController: UIViewController, DragToSelectObserver {
     }
     
     func updateHint( ) {
-        if nil == p1Name {
-            selectionView.message = "Zzz... (waiting for Player 1 selection)"
-        } else if nil == p2Name {
-            selectionView.message = "Zzz... (waiting for Player 2 selection)"
+        if p1Name == nil {
+            btnChooseP1.setImage(#imageLiteral(resourceName: "sfclippy_48"), for: UIControlState.normal)
+            btnChooseP1.setTitle("Choose a character for Player 1", for: UIControlState.normal)
         } else {
+            btnChooseP1.setTitle(p1Name, for: UIControlState.normal)
+            btnChooseP1.setImage(#imageLiteral(resourceName: "icon_48_p1"), for: UIControlState.normal)
+        }
+        
+        if p2Name == nil {
+            btnChooseP2.setImage(#imageLiteral(resourceName: "sfclippy_48"), for: UIControlState.normal)
+            btnChooseP2.setTitle("Choose a character for Player 2", for: UIControlState.normal)
+            //selectionView.message = "Zzz... (waiting for Player 1 selection)"
+        } else {
+            btnChooseP2.setTitle(p2Name, for: UIControlState.normal)
+            btnChooseP2.setImage(#imageLiteral(resourceName: "icon_48_p2"), for: UIControlState.normal)
+        }
+        
+        if nil != p1Name && nil != p2Name {
+            selectionView.isHidden = false
             selectionView.enabled = true
             if ( hadBattle ) {
                 selectionView.message = "Result recorded"
             } else {
                 selectionView.message = "Drag me to the winner"
             }
+        } else {
+            selectionView.isHidden = true
+            selectionView.enabled = false
         }
     }
     
