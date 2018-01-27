@@ -26,7 +26,7 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
         }
     }
     
-    func changeRating(nextVal: Int) {
+    func changeRating( _ sender : RatingView, nextVal: Int) {
         debugPrint("change rating to ",nextVal)
         let database = Database.database()
         if let char = character,

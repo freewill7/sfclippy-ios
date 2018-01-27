@@ -29,12 +29,12 @@
                         <viewLayoutGuide key="safeArea" id="YOc-FH-WZi"/>
                     </view>
                     <connections>
-                        <segue destination="mre-pW-ksM" kind="show" identifier="segueEnter" id="eQx-Is-lPY"/>
+                        <segue destination="Pq4-ec-Bpk" kind="show" identifier="segueEnter" id="Ioe-Uy-ifo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lh7-xJ-AVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-700" y="21"/>
+            <point key="canvasLocation" x="-1524" y="19"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -45,10 +45,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Ct-pw4">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDA-mq-0Lv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Player 1 Character" image="icon_48_p1">
                                             <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,13 +58,13 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfq-zh-MHp" customClass="DragToSelectView" customModule="sfclippy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="112" width="375" height="335"/>
+                                        <rect key="frame" x="0.0" y="111" width="375" height="332"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="sfclippy_48"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-eJ-bev">
-                                        <rect key="frame" x="0.0" y="447" width="375" height="112"/>
+                                        <rect key="frame" x="0.0" y="443" width="375" height="111"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Player 2 Character" image="icon_48_p2">
                                             <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -91,13 +91,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cui-LF-JFi">
-                        <barButtonItem key="rightBarButtonItem" title="Results" id="Re2-Eb-fht">
-                            <connections>
-                                <segue destination="uZG-gP-sfU" kind="show" id="n68-in-4tD"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="cui-LF-JFi"/>
                     <connections>
                         <outlet property="btnChooseP1" destination="YDA-mq-0Lv" id="HW3-gb-VYA"/>
                         <outlet property="btnChooseP2" destination="1QD-eJ-bev" id="7gz-ix-FTk"/>
@@ -111,7 +105,7 @@
         <!--Choose Character-->
         <scene sceneID="OU3-cc-rwA">
             <objects>
-                <tableViewController title="Choose Character" id="urN-eq-mWK" customClass="CharactersTableViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Choose Character" hidesBottomBarWhenPushed="YES" id="urN-eq-mWK" customClass="CharactersTableViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sCO-iv-cJx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,7 +167,11 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Title" id="0Sb-bM-erk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jCx-54-xW4"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jCx-54-xW4">
+                            <connections>
+                                <segue destination="OAC-YW-Fgx" kind="show" id="LMi-yO-Ttb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -184,6 +182,95 @@
                 <exit id="AUx-nR-xje" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2063.1999999999998" y="-202.84857571214394"/>
+        </scene>
+        <!--Add Character-->
+        <scene sceneID="Xif-n6-0qC">
+            <objects>
+                <viewController title="Add Character" id="OAC-YW-Fgx" customClass="AddCharacterViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xSr-AE-2xm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3V-vv-y8s">
+                                <rect key="frame" x="16" y="80" width="50" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 1 Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2Q-13-EmB">
+                                <rect key="frame" x="16" y="118" width="117" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZQ-O1-Fia" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="53" y="147" width="268" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dOs-hD-KHs">
+                                <rect key="frame" x="91" y="76" width="268" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textEntryEdited:" destination="OAC-YW-Fgx" eventType="editingChanged" id="LRI-rP-ihn"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2 Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjT-vz-DRX">
+                                <rect key="frame" x="16" y="283" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJw-Eg-meD" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="53" y="312" width="268" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="a7a-B3-nvA"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Character" id="KZK-lU-j84">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sas-U9-EzV">
+                            <connections>
+                                <segue destination="Jnm-Wy-hi2" kind="unwind" unwindAction="unwindToCharactersWithUnwindSegue:" id="M5E-yW-6Cf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnSave" destination="sas-U9-EzV" id="KXb-T1-38W"/>
+                        <outlet property="ratingViewP1" destination="oZQ-O1-Fia" id="caJ-to-HA3"/>
+                        <outlet property="ratingViewP2" destination="ZJw-Eg-meD" id="3mw-tJ-qhc"/>
+                        <outlet property="textCharacter" destination="dOs-hD-KHs" id="pyz-sF-KJ1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hND-Tq-td6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Jnm-Wy-hi2" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3045.5999999999999" y="-203.74812593703149"/>
+        </scene>
+        <!--Results-->
+        <scene sceneID="lLW-KX-EYH">
+            <objects>
+                <navigationController id="s7i-zG-gCD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Results" image="icon_24_view_list" id="aWI-u2-KJq"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rnX-lQ-aIR">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uZG-gP-sfU" kind="relationship" relationship="rootViewController" id="8f6-m5-ae7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LCP-uY-UCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="244" y="830"/>
         </scene>
         <!--Results-->
         <scene sceneID="Dh8-ij-THf">
@@ -259,19 +346,20 @@
                             <outlet property="delegate" destination="uZG-gP-sfU" id="uHJ-nc-K64"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="D6j-Bm-a85"/>
-                    </toolbarItems>
+                    <tabBarItem key="tabBarItem" title="Results" image="icon_24_view_list" id="Ped-3L-zP1"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Results" id="BXt-FJ-bFe"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bn5-0t-JVq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2048.8000000000002" y="494.30284857571218"/>
+            <point key="canvasLocation" x="1054" y="830"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Record-->
         <scene sceneID="gQI-TQ-Q0c">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="mre-pW-ksM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mre-pW-ksM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Record" image="icon_24_record" id="ANc-YR-ye6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nII-U3-KTp">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -279,7 +367,6 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pJS-8Z-MEd">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -290,14 +377,34 @@
             </objects>
             <point key="canvasLocation" x="244.80000000000001" y="19.790104947526238"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="L1L-Zb-Roo">
+            <objects>
+                <tabBarController id="Pq4-ec-Bpk" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c1L-t4-s3l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="mre-pW-ksM" kind="relationship" relationship="viewControllers" id="KJ9-Pp-FlS"/>
+                        <segue destination="s7i-zG-gCD" kind="relationship" relationship="viewControllers" id="QBe-rK-AGA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOQ-ON-Wuc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-606" y="19"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="icon_24_record" width="24" height="24"/>
+        <image name="icon_24_view_list" width="24" height="24"/>
         <image name="icon_36_p1" width="36" height="36"/>
         <image name="icon_48_p1" width="48" height="48"/>
         <image name="icon_48_p2" width="48" height="48"/>
         <image name="sfclippy_48" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FdB-2V-eOp"/>
+        <segue reference="Dma-vb-hM3"/>
     </inferredMetricsTieBreakers>
 </document>

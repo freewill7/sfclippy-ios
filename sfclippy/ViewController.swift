@@ -34,6 +34,11 @@ class ViewController: UIViewController, DragToSelectObserver {
         
         updateHint()
     }
+    
+    /*override func viewWillAppear(_ animated: Bool) {
+        // show tab bar
+        self.tabBarController?.tabBar.isHidden = false
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -122,6 +127,8 @@ class ViewController: UIViewController, DragToSelectObserver {
     
     @IBAction func unwindToBattle(unwindSegue: UIStoryboardSegue) {
         debugPrint("unwound")
+        
+        // update settings
         if let tblController = unwindSegue.source as? CharactersTableViewController {
             if ( 0 == tblController.playerId ) {
                 p1Name = tblController.selectedName

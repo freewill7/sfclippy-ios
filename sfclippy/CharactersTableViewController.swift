@@ -31,9 +31,9 @@ class CharactersTableViewController: UITableViewController {
         }
     }
     
-    func populateCharacter( characterDir : DatabaseReference, characterName : String ) {
+    func populateCharacter( characterDir : DatabaseReference, characterName : String, p1Rating : Int, p2Rating : Int ) {
         
-        let charPref = CharacterPref(name: characterName, p1Rating: 1, p2Rating: 1)
+        let charPref = CharacterPref(name: characterName, p1Rating: p1Rating, p2Rating: p2Rating)
         characterDir.childByAutoId().setValue( charPref.toMap() )
     }
     
@@ -45,9 +45,9 @@ class CharactersTableViewController: UITableViewController {
         let season1 = [ "Guile", "Alex", "Balrog", "Ibuki", "Juri", "Urien"]
         let season2 = [ "Akuma", "Kolin", "Ed", "Birdie", "Menat", "Zeku"]
         
-        originalCharacters.forEach( { (character : String) in populateCharacter(characterDir: characterDir, characterName: character) })
-        season1.forEach( { (character : String) in populateCharacter(characterDir: characterDir, characterName: character) } )
-        season2.forEach( { (character : String) in populateCharacter(characterDir: characterDir, characterName: character) } )
+        originalCharacters.forEach( { (character : String) in populateCharacter(characterDir: characterDir, characterName: character, p1Rating: 1, p2Rating: 1) })
+        season1.forEach( { (character : String) in populateCharacter(characterDir: characterDir, characterName: character, p1Rating: 1, p2Rating: 1) } )
+        season2.forEach( { (character : String) in populateCharacter(characterDir: characterDir, characterName: character, p1Rating: 1, p2Rating: 1) } )
     }
     
     func welcomeUser( characterDir : DatabaseReference ) {
@@ -153,6 +153,26 @@ class CharactersTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func unwindToCharacters(unwindSegue: UIStoryboardSegue) {
+        debugPrint("unwound to characters")
+        
+        if let addChar = unwindSegue.source as? AddCharacterViewController {
+            let database = Database.database()
+            let optionalRef = userCharactersDir(database: database)
+            
+            if let ref = optionalRef {
+                let name = addChar.characterName
+                let p1Rating = addChar.p1Rating
+                let p2Rating = addChar.p2Rating
+                
+                debugPrint("adding \(name) \(p1Rating) \(p2Rating)")
+                populateCharacter( characterDir : ref, characterName : name, p1Rating : p1Rating, p2Rating : p2Rating )
+            }
+        }
+
+
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

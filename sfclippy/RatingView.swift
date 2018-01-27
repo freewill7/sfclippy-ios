@@ -9,22 +9,23 @@
 import UIKit
 
 @objc protocol RatingObserver {
-    func changeRating( nextVal : Int )
+    func changeRating( _ sender: RatingView, nextVal : Int )
 }
 
 @IBDesignable
 class RatingView: UIStackView {
-    @IBOutlet var contentView: UIView!
     @IBOutlet var observer : RatingObserver?
+    var emptyStar : UIImage?
+    var filledStar : UIImage?
     
     var buttons = [UIButton]()
     var rating : Int = 1 {
         didSet {
             for (index,element) in buttons.enumerated() {
                 if index < rating {
-                    element.setImage(#imageLiteral(resourceName: "star_24"), for: .normal)
+                    element.setImage(filledStar, for: .normal)
                 } else {
-                    element.setImage(#imageLiteral(resourceName: "star_border_24"), for: .normal)
+                    element.setImage(emptyStar, for: .normal)
                 }
             }
         }
@@ -38,13 +39,6 @@ class RatingView: UIStackView {
     }
     */
     
-    private func commonInit( ) {
-        let bundle = Bundle(for: RatingView.self)
-        bundle.loadNibNamed("RatingView", owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-    }
-    
     @objc
     func ratingButtonTapped(button: UIButton) {
         debugPrint("rating button pressed")
@@ -53,43 +47,60 @@ class RatingView: UIStackView {
             rating = index+1
             
             if let obs = observer {
-                obs.changeRating(nextVal: rating)
+                obs.changeRating( self, nextVal: rating)
             }
         }
     }
     
     private func buttonsInit( ) {
+        self.distribution = UIStackViewDistribution.fillEqually
+        self.alignment = UIStackViewAlignment.fill
         
+        let myBundle = Bundle(for: type(of: self))
+        emptyStar = UIImage( named: "star_border_24", in: myBundle, compatibleWith: self.traitCollection)
+        filledStar = UIImage( named: "star_24", in: myBundle, compatibleWith: self.traitCollection)
+        
+        // Create the button
         for _ in 0...4 {
             let button = UIButton()
-            button.setImage(#imageLiteral(resourceName: "star_border_24"), for: UIControlState.normal)
+            
+            button.setImage(emptyStar, for: UIControlState.normal)
             button.addTarget(self, action: #selector(RatingView.ratingButtonTapped(button:)), for: .touchUpInside)
+        
+            // Add constraints
+            button.translatesAutoresizingMaskIntoConstraints = false
+            //button.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+            //button.contentEdgeInsets = UIEdgeInsets( top:4, left:4, bottom:4, right:4 );
+            // button.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+            //    equalToConstant: self.bounds.height).isActive = true
+            //button.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
+        
+            // Add the button to the stack
             addArrangedSubview(button)
             buttons.append(button)
         }
-        /* button.setImage(#imageLiteral(resourceName: "star_border_24"), for: UIControlState.normal)
-         */
+        
         /*
-        for _ in 0...5 {
+        for _ in 0...4 {
             let button = UIButton()
-            button.setTitle("hullo", for: UIControlState.normal)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
-            addArrangedSubview(button)
+            //button.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
+            //button.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
+            button.setImage(#imageLiteral(resourceName: "star_border_24"), for: UIControlState.normal)
+            self.addArrangedSubview(button)
+            buttons.append(button)
         }
  */
+
     }
-    
+
     override init( frame : CGRect ) {
         super.init(frame: frame)
-        commonInit()
         buttonsInit()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
         buttonsInit()
     }
 
