@@ -37,31 +37,28 @@ class BattleResult {
         self.p1Won = p1Won
     }
     
-    func toMap( ) -> [String:String] {
+    func toMap( ) -> [String:Any] {
         let dateFormatter = getFormatter()
         let strDate = dateFormatter.string(from: date)
-        let strBool = p1Won ? BattleResult.valueTrue : BattleResult.valueFalse
         
         return [ BattleResult.keyP1 : p1Id,
                  BattleResult.keyP2 : p2Id,
                  BattleResult.keyDate : strDate,
-                 BattleResult.keyP1Won : strBool ]
+                 BattleResult.keyP1Won : p1Won ]
     }
     
-    static func initFromMap( fromMap map: [String:String] ) -> BattleResult? {
-        if let pDate = map[keyDate],
-            let pP1Id = map[keyP1],
-            let pP2Id = map[keyP2],
-            let pP1Won = map[keyP1Won] {
+    static func initFromMap( fromMap map: [String:Any] ) -> BattleResult? {
+        if let pDate = map[keyDate] as? String,
+            let pP1Id = map[keyP1] as? String,
+            let pP2Id = map[keyP2] as? String,
+            let pP1Won = map[keyP1Won] as? Bool {
             
             let formatter = getFormatter()
-            let optP1Won = (pP1Won == valueTrue) ? (true as Bool?) : ((pP1Won == valueFalse) ? false : nil)
             
-            if let date = formatter.date(from: pDate),
-                let p1Won = optP1Won {
-                return BattleResult(date: date, p1Id: pP1Id, p2Id: pP2Id, p1Won: p1Won)
+            if let date = formatter.date(from: pDate) {
+                return BattleResult(date: date, p1Id: pP1Id, p2Id: pP2Id, p1Won: pP1Won)
             } else {
-                debugPrint("Bad date or boolean")
+                debugPrint("Bad date")
                 return nil
             }
         } else {
@@ -98,10 +95,10 @@ class CharacterPref : Equatable, CustomStringConvertible {
             lhs.p2Rating == rhs.p2Rating
     }
     
-    func toMap( ) -> [String:String] {
+    func toMap( ) -> [String:Any] {
         return [ CharacterPref.keyName : name,
-                 CharacterPref.keyP1Rating : String(p1Rating),
-                 CharacterPref.keyP2Rating : String(p2Rating) ]
+                 CharacterPref.keyP1Rating : p1Rating,
+                 CharacterPref.keyP2Rating : p2Rating ]
     }
     
     func rating( _ playerId: Int ) -> Int {
@@ -112,12 +109,10 @@ class CharacterPref : Equatable, CustomStringConvertible {
         }
     }
     
-    static func initFromMap( fromMap map : [String:String], withId id : String ) -> CharacterPref? {
-        if let name = map[keyName],
-            let strP1Rating = map[keyP1Rating],
-            let strP2Rating = map[keyP2Rating],
-            let p1Rating = Int(strP1Rating),
-            let p2Rating = Int(strP2Rating){
+    static func initFromMap( fromMap map : [String:Any], withId id : String ) -> CharacterPref? {
+        if let name = map[keyName] as? String,
+            let p1Rating = map[keyP1Rating] as? Int,
+            let p2Rating = map[keyP2Rating] as? Int {
             return CharacterPref(name: name, p1Rating: p1Rating, p2Rating: p2Rating, id: id )
         } else {
             debugPrint("character map missing fields",map)

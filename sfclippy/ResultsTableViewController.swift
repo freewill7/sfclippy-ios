@@ -15,7 +15,7 @@ class ResultsTableViewController: UITableViewController {
     var characterLookup = [String:CharacterPref]()
     
     func observeAddResult( snapshot : DataSnapshot ) {
-        if let map = snapshot.value as? [String:String],
+        if let map = snapshot.value as? [String:Any],
             let result = BattleResult.initFromMap(fromMap: map) {
             results.append(result)
             tableView.reloadData()
@@ -25,7 +25,7 @@ class ResultsTableViewController: UITableViewController {
     }
     
     func observeAddCharacter( snapshot : DataSnapshot ) {
-        if let map = snapshot.value as? [String:String],
+        if let map = snapshot.value as? [String:Any],
             let character = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
             characterLookup[snapshot.key] = character
             tableView.reloadData()

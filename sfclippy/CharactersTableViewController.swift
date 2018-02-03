@@ -23,7 +23,7 @@ class CharactersTableViewController: UITableViewController {
     var selector = SelectionMechanism( ArcRandomGenerator() )
     
     func characterAdded( snapshot : DataSnapshot ) {
-        if let map = snapshot.value as? [String:String],
+        if let map = snapshot.value as? [String:Any],
             let charPref = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
             debugPrint("retrieved character",charPref,snapshot.key)
             characters.append( charPref )
