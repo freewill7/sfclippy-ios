@@ -31,29 +31,28 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ppN-jn-E5M">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="222"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aox-Zc-3pg">
-                                    <rect key="frame" x="0.0" y="0.0" width="117" height="222"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="222" translatesAutoresizingMaskIntoConstraints="NO" id="aox-Zc-3pg">
+                                    <rect key="frame" x="0.0" y="0.0" width="122.5" height="222"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ">
-                                    <rect key="frame" x="125" y="0.0" width="250" height="222"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="222" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ">
+                                    <rect key="frame" x="130.5" y="0.0" width="244.5" height="222"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="aox-Zc-3pg" firstAttribute="width" secondItem="ppN-jn-E5M" secondAttribute="width" multiplier="1:3" id="BpF-G4-XBY"/>
-                                <constraint firstItem="tFx-yI-OFQ" firstAttribute="width" secondItem="ppN-jn-E5M" secondAttribute="width" multiplier="2:3" id="JCo-Wb-LhO"/>
+                                <constraint firstItem="tFx-yI-OFQ" firstAttribute="width" secondItem="aox-Zc-3pg" secondAttribute="width" multiplier="2" id="etC-c6-OeS"/>
                             </constraints>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="ppN-jn-E5M" secondAttribute="trailing" id="eZC-HL-Ol8"/>
-                        <constraint firstAttribute="bottom" secondItem="ppN-jn-E5M" secondAttribute="bottom" id="iq0-NU-JJV" userLabel="bottom = Stack View.bottom"/>
-                        <constraint firstItem="ppN-jn-E5M" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" id="kHu-fJ-bA0" userLabel="Stack View.leading = leading"/>
-                        <constraint firstItem="ppN-jn-E5M" firstAttribute="top" secondItem="jsV-CK-7yi" secondAttribute="top" id="u6K-Wq-HNq" userLabel="Stack View.top = top"/>
+                        <constraint firstAttribute="trailing" secondItem="ppN-jn-E5M" secondAttribute="trailing" identifier="content_right" id="eZC-HL-Ol8"/>
+                        <constraint firstAttribute="bottom" secondItem="ppN-jn-E5M" secondAttribute="bottom" identifier="content_bottom" id="iq0-NU-JJV" userLabel="bottom = Stack View.bottom"/>
+                        <constraint firstItem="ppN-jn-E5M" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" identifier="content_left" id="kHu-fJ-bA0" userLabel="Stack View.leading = leading"/>
+                        <constraint firstItem="ppN-jn-E5M" firstAttribute="top" secondItem="jsV-CK-7yi" secondAttribute="top" identifier="content_top" id="u6K-Wq-HNq" userLabel="Stack View.top = top"/>
                     </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="uYZ-yI-xwp" appends="YES" id="o0b-2x-4e7"/>
@@ -61,10 +60,10 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GdX-QV-C8X"/>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bLh-bE-DNA"/>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1:3" id="dQX-Of-HT0"/>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="twJ-8d-kOr"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" identifier="move_left" id="GdX-QV-C8X"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" identifier="move_middle" id="bLh-bE-DNA"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1:3" identifier="move_height" id="dQX-Of-HT0"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" identifier="move_right" id="twJ-8d-kOr"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

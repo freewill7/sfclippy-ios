@@ -5,11 +5,14 @@ target 'sfclippy' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for sfclippy
+  # Pods for firebase 
   pod 'Firebase/Core'
   pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
   pod 'GoogleSignIn'
+
+  # Pods for toast
+  pod 'Toast-Swift', '~> 3.0.1'
 
   target 'sfclippyTests' do
     inherit! :search_paths

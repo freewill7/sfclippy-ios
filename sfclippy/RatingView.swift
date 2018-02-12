@@ -31,6 +31,8 @@ class RatingView: UIStackView {
         }
     }
     
+    var editable = true
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -42,12 +44,14 @@ class RatingView: UIStackView {
     @objc
     func ratingButtonTapped(button: UIButton) {
         debugPrint("rating button pressed")
-        if let index = buttons.index(of: button) {
-            debugPrint("selected button \(index)")
-            rating = index+1
-            
-            if let obs = observer {
-                obs.changeRating( self, nextVal: rating)
+        if editable {
+            if let index = buttons.index(of: button) {
+                debugPrint("selected button \(index)")
+                rating = index+1
+                
+                if let obs = observer {
+                    obs.changeRating( self, nextVal: rating)
+                }
             }
         }
     }

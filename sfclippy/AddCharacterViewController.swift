@@ -16,6 +16,7 @@ class AddCharacterViewController: UIViewController, RatingObserver {
     var characterName : String = ""
     var p1Rating : Int = 1
     var p2Rating : Int = 1
+    var characterId : String?
     
     @IBAction func textEntryEdited(_ sender: Any) {
         if let txt = textCharacter.text {
@@ -42,7 +43,10 @@ class AddCharacterViewController: UIViewController, RatingObserver {
         ratingViewP2.rating = p2Rating
         ratingViewP2.observer = self
         btnSave.isEnabled = false
+        textCharacter.text = characterName
         textCharacter.becomeFirstResponder()
+        
+        textEntryEdited(self)
     }
 
     override func didReceiveMemoryWarning() {

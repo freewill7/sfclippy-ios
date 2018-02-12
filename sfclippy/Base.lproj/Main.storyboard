@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,7 +49,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDA-mq-0Lv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Player 1 Character" image="icon_48_p1">
                                             <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,13 +59,13 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfq-zh-MHp" customClass="DragToSelectView" customModule="sfclippy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="111" width="375" height="332"/>
+                                        <rect key="frame" x="0.0" y="48" width="375" height="458"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="sfclippy_48"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-eJ-bev">
-                                        <rect key="frame" x="0.0" y="443" width="375" height="111"/>
+                                        <rect key="frame" x="0.0" y="506" width="375" height="48"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Player 2 Character" image="icon_48_p2">
                                             <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,11 +75,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="zfq-zh-MHp" firstAttribute="height" secondItem="Yga-Ct-pw4" secondAttribute="height" multiplier="3:5" id="MwB-T1-RNz"/>
-                                    <constraint firstItem="YDA-mq-0Lv" firstAttribute="height" secondItem="Yga-Ct-pw4" secondAttribute="height" multiplier="1:5" id="Sxy-eM-gRb"/>
-                                    <constraint firstItem="1QD-eJ-bev" firstAttribute="height" secondItem="Yga-Ct-pw4" secondAttribute="height" multiplier="1:5" id="aQC-T7-YFz"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,32 +115,68 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vtx-VX-3I5">
-                                            <rect key="frame" x="4" y="8" width="243" height="27.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="8" y="10.5" width="46.5" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOz-gU-UjG" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
-                                            <rect key="frame" x="251" y="8" width="120" height="28"/>
+                                            <rect key="frame" x="247" y="-2" width="120" height="48"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="S1L-Ng-7yg"/>
+                                                <constraint firstAttribute="height" constant="48" id="ao2-Y8-utH"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="oOz-gU-UjG" firstAttribute="top" secondItem="SXM-R0-r46" secondAttribute="top" constant="8" id="DpT-2e-1Dy"/>
-                                        <constraint firstItem="Vtx-VX-3I5" firstAttribute="top" secondItem="SXM-R0-r46" secondAttribute="top" constant="8" id="hT3-yM-7yv"/>
-                                        <constraint firstItem="oOz-gU-UjG" firstAttribute="leading" secondItem="Vtx-VX-3I5" secondAttribute="trailing" constant="4" id="heC-5h-IsZ"/>
-                                        <constraint firstAttribute="bottom" secondItem="Vtx-VX-3I5" secondAttribute="bottom" constant="8" id="jIA-Zw-77o"/>
-                                        <constraint firstAttribute="trailing" secondItem="oOz-gU-UjG" secondAttribute="trailing" constant="4" id="tH8-ps-jIe"/>
-                                        <constraint firstItem="Vtx-VX-3I5" firstAttribute="leading" secondItem="SXM-R0-r46" secondAttribute="leading" constant="4" id="xWp-bZ-nsb"/>
-                                        <constraint firstAttribute="bottom" secondItem="oOz-gU-UjG" secondAttribute="bottom" constant="8" id="y0V-gk-02s"/>
+                                        <constraint firstItem="oOz-gU-UjG" firstAttribute="centerY" secondItem="SXM-R0-r46" secondAttribute="centerY" id="1sI-u4-QNe"/>
+                                        <constraint firstItem="Vtx-VX-3I5" firstAttribute="leading" secondItem="SXM-R0-r46" secondAttribute="leading" constant="8" id="GPk-mE-Jhv"/>
+                                        <constraint firstItem="Vtx-VX-3I5" firstAttribute="centerY" secondItem="SXM-R0-r46" secondAttribute="centerY" id="MZS-FB-UcI"/>
+                                        <constraint firstAttribute="trailing" secondItem="oOz-gU-UjG" secondAttribute="trailing" constant="8" id="orE-Ba-jGI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="labelName" destination="Vtx-VX-3I5" id="oSk-gP-fEu"/>
+                                    <outlet property="labelName" destination="Vtx-VX-3I5" id="rSu-zq-VHt"/>
                                     <outlet property="viewRating" destination="oOz-gU-UjG" id="rgX-T8-QaT"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="editCharacterCell" id="dDH-FF-5G6" customClass="EditCharactersTableViewCell" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dDH-FF-5G6" id="isc-bn-dDO">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-8l-8IF" userLabel="Label Name">
+                                            <rect key="frame" x="9" y="10" width="46.5" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQX-Ce-Ykn" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
+                                            <rect key="frame" x="69" y="-2" width="120" height="48"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="1r0-RA-2YG"/>
+                                            </constraints>
+                                        </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_24_right" translatesAutoresizingMaskIntoConstraints="NO" id="FHG-eO-cNR">
+                                            <rect key="frame" x="343" y="9" width="24" height="24"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="FHG-eO-cNR" firstAttribute="centerY" secondItem="isc-bn-dDO" secondAttribute="centerY" id="EgH-01-9Re"/>
+                                        <constraint firstItem="TQX-Ce-Ykn" firstAttribute="centerY" secondItem="isc-bn-dDO" secondAttribute="centerY" id="QuT-Mw-Ddw"/>
+                                        <constraint firstItem="sHz-8l-8IF" firstAttribute="leading" secondItem="isc-bn-dDO" secondAttribute="leading" constant="9" id="Rxm-iI-SJV"/>
+                                        <constraint firstItem="sHz-8l-8IF" firstAttribute="centerY" secondItem="isc-bn-dDO" secondAttribute="centerY" id="agU-NQ-vXP"/>
+                                        <constraint firstItem="FHG-eO-cNR" firstAttribute="leading" secondItem="TQX-Ce-Ykn" secondAttribute="trailing" constant="9" id="jct-kP-hZE"/>
+                                        <constraint firstAttribute="trailing" secondItem="FHG-eO-cNR" secondAttribute="trailing" constant="8" id="ya1-au-CqH"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="labelName" destination="sHz-8l-8IF" id="Q6E-aZ-OgE"/>
+                                    <outlet property="ratingControl" destination="TQX-Ce-Ykn" id="7gJ-DM-1gw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -167,15 +199,24 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Title" id="0Sb-bM-erk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jCx-54-xW4">
-                            <connections>
-                                <segue destination="OAC-YW-Fgx" kind="show" id="LMi-yO-Ttb"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="jCx-54-xW4">
+                                <connections>
+                                    <segue destination="OAC-YW-Fgx" kind="show" identifier="createCharacter" id="LMi-yO-Ttb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="67L-Z4-fV9">
+                                <connections>
+                                    <action selector="clickEditCancel:" destination="urN-eq-mWK" id="Phk-eS-N4y"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonEditCancel" destination="67L-Z4-fV9" id="5zm-XC-QcK"/>
                         <segue destination="AUx-nR-xje" kind="unwind" identifier="segueUnwindToBattle" unwindAction="unwindToBattleWithUnwindSegue:" id="lIx-gL-mcm"/>
+                        <segue destination="OAC-YW-Fgx" kind="show" identifier="editCharacter" id="Hff-QG-Lfq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zN-7Y-KSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -398,6 +439,7 @@
     </scenes>
     <resources>
         <image name="icon_24_record" width="24" height="24"/>
+        <image name="icon_24_right" width="24" height="24"/>
         <image name="icon_24_view_list" width="24" height="24"/>
         <image name="icon_36_p1" width="36" height="36"/>
         <image name="icon_48_p1" width="48" height="48"/>
@@ -405,6 +447,7 @@
         <image name="sfclippy_48" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="LMi-yO-Ttb"/>
         <segue reference="Dma-vb-hM3"/>
     </inferredMetricsTieBreakers>
 </document>

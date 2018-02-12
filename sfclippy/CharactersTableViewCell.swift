@@ -12,6 +12,7 @@ import FirebaseDatabase
 class CharactersTableViewCell: UITableViewCell, RatingObserver {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var viewRating: RatingView!
+    var imageEdit: UIImageView?
     var character : CharacterPref?
     var isP1Rating : Bool?
     

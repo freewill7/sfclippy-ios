@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import AudioToolbox
+import Toast_Swift
 
 class ViewController: UIViewController, DragToSelectObserver {
     var database : Database?
@@ -72,6 +73,7 @@ class ViewController: UIViewController, DragToSelectObserver {
             // feed back
             hadBattle = true
             updateHint()
+            self.view.makeToast("Result recorded")
         } else {
             debugPrint("record battle called with empty values")
         }

@@ -21,6 +21,18 @@ class CharactersTableViewController: UITableViewController {
     var selectedName = ""
     var selectedId = ""
     var selector = SelectionMechanism( ArcRandomGenerator() )
+    var editMode = false
+    @IBOutlet weak var buttonEditCancel: UIBarButtonItem!
+    
+    @IBAction func clickEditCancel(_ sender: Any) {
+        editMode = !editMode
+        if editMode {
+            buttonEditCancel.title = "Cancel"
+        } else {
+            buttonEditCancel.title = "Edit"
+        }
+        tableView.reloadData()
+    }
     
     func characterAdded( snapshot : DataSnapshot ) {
         if let map = snapshot.value as? [String:Any],
@@ -35,6 +47,23 @@ class CharactersTableViewController: UITableViewController {
         
         let charPref = CharacterPref(name: characterName, p1Rating: p1Rating, p2Rating: p2Rating)
         characterDir.childByAutoId().setValue( charPref.toMap() )
+    }
+    
+    func updateCharacter( characterDir : DatabaseReference, characterId: String, characterName : String, p1Rating : Int, p2Rating : Int ) {
+        let ref = characterDir.child(characterId)
+        ref.child(CharacterPref.keyName).setValue(characterName)
+        ref.child(CharacterPref.keyP1Rating).setValue(p1Rating)
+        ref.child(CharacterPref.keyP2Rating).setValue(p2Rating)
+        
+        // update cache
+        for character in characters {
+            if character.id == characterId {
+                character.name = characterName
+                character.p1Rating = p1Rating
+                character.p2Rating = p2Rating
+            }
+        }
+        tableView.reloadData()
     }
     
     func populateWithSample( characterDir: DatabaseReference ) {
@@ -119,21 +148,31 @@ class CharactersTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
         
-        // configure cell
-        cell.setCharacter( character: characters[indexPath.row], isP1: (playerId == 0) )
+        let isP1 = (0==playerId)
         
-        return cell
+        if editMode {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "editCharacterCell", for: indexPath) as! EditCharactersTableViewCell
+            cell.setCharacter( character: characters[indexPath.row], isP1: isP1 )
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
+            cell.setCharacter( character: characters[indexPath.row], isP1: isP1 )
+            return cell
+        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
         debugPrint("selected row at \(indexPath.row)")
         let character = characters[indexPath.row]
-        if let id = character.id {
-            self.selectedName = character.name
-            self.selectedId = id
-            performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+        if editMode {
+            performSegue(withIdentifier: "editCharacter", sender: self)
+        } else {
+            if let id = character.id {
+                self.selectedName = character.name
+                self.selectedId = id
+                performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+            }
         }
     }
     
@@ -165,8 +204,13 @@ class CharactersTableViewController: UITableViewController {
                 let p1Rating = addChar.p1Rating
                 let p2Rating = addChar.p2Rating
                 
-                debugPrint("adding \(name) \(p1Rating) \(p2Rating)")
-                populateCharacter( characterDir : ref, characterName : name, p1Rating : p1Rating, p2Rating : p2Rating )
+                if let id = addChar.characterId {
+                    debugPrint("updating \(id) \(name) \(p1Rating) \(p2Rating)")
+                    updateCharacter( characterDir: ref, characterId: id, characterName: name, p1Rating: p1Rating, p2Rating: p2Rating)
+                } else {
+                    debugPrint("adding \(name) \(p1Rating) \(p2Rating)")
+                    populateCharacter( characterDir : ref, characterName : name, p1Rating : p1Rating, p2Rating : p2Rating )
+                }
             }
         }
 
@@ -208,14 +252,20 @@ class CharactersTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
+        if let dest = segue.destination as? AddCharacterViewController {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                dest.characterId = characters[indexPath.row].id
+                dest.characterName = characters[indexPath.row].name
+                dest.p1Rating = characters[indexPath.row].p1Rating
+                dest.p2Rating = characters[indexPath.row].p2Rating
+            }
+        }
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
