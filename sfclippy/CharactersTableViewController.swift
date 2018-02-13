@@ -28,8 +28,10 @@ class CharactersTableViewController: UITableViewController {
         editMode = !editMode
         if editMode {
             buttonEditCancel.title = "Cancel"
+            navigationController?.setToolbarHidden(false, animated: true)
         } else {
             buttonEditCancel.title = "Edit"
+            navigationController?.setToolbarHidden(true, animated: true)
         }
         tableView.reloadData()
     }
@@ -130,6 +132,7 @@ class CharactersTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.setToolbarHidden(!editMode, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -256,6 +259,7 @@ class CharactersTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        navigationController?.setToolbarHidden(true, animated: false)
         // Get the new view controller using segue.destinationViewController.
         if let dest = segue.destination as? AddCharacterViewController {
             if let indexPath = tableView.indexPathForSelectedRow {

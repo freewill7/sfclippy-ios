@@ -36,10 +36,14 @@ class ViewController: UIViewController, DragToSelectObserver {
         updateHint()
     }
     
-    /*override func viewWillAppear(_ animated: Bool) {
-        // show tab bar
-        self.tabBarController?.tabBar.isHidden = false
+    /*override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }*/
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // hide toolbar
+        navigationController?.setToolbarHidden(true, animated: false)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

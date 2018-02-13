@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,7 +114,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vtx-VX-3I5">
-                                            <rect key="frame" x="8" y="10.5" width="46.5" height="23"/>
+                                            <rect key="frame" x="8" y="10.5" width="231" height="23"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -133,6 +132,7 @@
                                         <constraint firstItem="oOz-gU-UjG" firstAttribute="centerY" secondItem="SXM-R0-r46" secondAttribute="centerY" id="1sI-u4-QNe"/>
                                         <constraint firstItem="Vtx-VX-3I5" firstAttribute="leading" secondItem="SXM-R0-r46" secondAttribute="leading" constant="8" id="GPk-mE-Jhv"/>
                                         <constraint firstItem="Vtx-VX-3I5" firstAttribute="centerY" secondItem="SXM-R0-r46" secondAttribute="centerY" id="MZS-FB-UcI"/>
+                                        <constraint firstItem="oOz-gU-UjG" firstAttribute="leading" secondItem="Vtx-VX-3I5" secondAttribute="trailing" constant="8" id="iy3-ge-0lj"/>
                                         <constraint firstAttribute="trailing" secondItem="oOz-gU-UjG" secondAttribute="trailing" constant="8" id="orE-Ba-jGI"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -154,11 +154,12 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQX-Ce-Ykn" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
-                                            <rect key="frame" x="69" y="-2" width="120" height="48"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQX-Ce-Ykn" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
+                                            <rect key="frame" x="214" y="-2" width="120" height="48"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="1r0-RA-2YG"/>
+                                                <constraint firstAttribute="width" constant="120" id="eWu-e9-lSu"/>
                                             </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_24_right" translatesAutoresizingMaskIntoConstraints="NO" id="FHG-eO-cNR">
@@ -186,31 +187,18 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Random" id="um2-z5-Jqk">
+                        <barButtonItem systemItem="add" id="jCx-54-xW4">
                             <connections>
-                                <action selector="selectRandom:" destination="urN-eq-mWK" id="P6r-K8-v9q"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="4gN-1w-91R"/>
-                        <barButtonItem title="Preferred" id="nIF-ar-0dx">
-                            <connections>
-                                <action selector="selectPreferred:" destination="urN-eq-mWK" id="MpX-9X-VvQ"/>
+                                <segue destination="OAC-YW-Fgx" kind="show" identifier="createCharacter" id="LMi-yO-Ttb"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Title" id="0Sb-bM-erk">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="jCx-54-xW4">
-                                <connections>
-                                    <segue destination="OAC-YW-Fgx" kind="show" identifier="createCharacter" id="LMi-yO-Ttb"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Edit" id="67L-Z4-fV9">
-                                <connections>
-                                    <action selector="clickEditCancel:" destination="urN-eq-mWK" id="Phk-eS-N4y"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="67L-Z4-fV9">
+                            <connections>
+                                <action selector="clickEditCancel:" destination="urN-eq-mWK" id="Phk-eS-N4y"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
