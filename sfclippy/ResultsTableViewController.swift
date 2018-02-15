@@ -99,10 +99,14 @@ class ResultsTableViewController: UITableViewController {
         }
     }
     
+    func resultForIndex( _ indexPath: IndexPath ) -> BattleResult {
+        return resultsArr[indexPath.section].value[indexPath.row]
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
-        let result = resultsArr[indexPath.section].value[indexPath.row]
+        let result = resultForIndex( indexPath )
         
         let p1Lookup = characterLookup[result.p1Id]
         let p2Lookup = characterLookup[result.p2Id]
@@ -114,9 +118,9 @@ class ResultsTableViewController: UITableViewController {
         let p2Name = nameOrDefault( optPref:p2Lookup, def:"unknown")
         cell.labelCharacters.text = "\(p1Name) vs \(p2Name)"
         if result.p1Won {
-            cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win2")
-        } else {
             cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win1")
+        } else {
+            cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win2")
         }
         
         return cell
@@ -124,6 +128,10 @@ class ResultsTableViewController: UITableViewController {
     
     override func tableView(_ tableView : UITableView, titleForHeaderInSection section: Int) -> String? {
         return resultsArr[section].key
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
+        performSegue(withIdentifier: "showResult", sender: self)
     }
     
     /*
@@ -161,14 +169,17 @@ class ResultsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let dest = segue.destination as? ResultViewController,
+            let indexPath = tableView.indexPathForSelectedRow {
+            dest.characterMap = characterLookup
+            dest.result = resultForIndex(indexPath)
+        }
     }
-    */
 
 }

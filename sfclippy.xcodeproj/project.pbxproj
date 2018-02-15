@@ -33,6 +33,7 @@
 		BE4247571FC2DD0F003E08A8 /* CharactersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */; };
 		BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */; };
 		BE985F901FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */; };
+		BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEACF71B20364B51001A8A6D /* ResultViewController.swift */; };
 		BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersUITests.swift; sourceTree = "<group>"; };
 		BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanism.swift; sourceTree = "<group>"; };
 		BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanismTests.swift; sourceTree = "<group>"; };
+		BEACF71B20364B51001A8A6D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.release.xcconfig"; sourceTree = "<group>"; };
 		C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */,
 				BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */,
 				BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */,
+				BEACF71B20364B51001A8A6D /* ResultViewController.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */,
 				BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */,
 				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
+				BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */,
 				BE325912203221A5004509C2 /* EditCharactersTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
