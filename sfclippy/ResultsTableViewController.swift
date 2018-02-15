@@ -11,13 +11,34 @@ import FirebaseDatabase
 
 class ResultsTableViewController: UITableViewController {
     var database : Database?
-    var results = [BattleResult]()
+    var results = [String:[BattleResult]]()
+    // array representation to allow sorting
+    var resultsArr = [(key: String,value: [BattleResult])]()
     var characterLookup = [String:CharacterPref]()
+    
+    func addToResults( _ res : BattleResult ) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        let key = dateFormatter.string(from: res.date)
+        
+        // append to results for that date (and sort descending)
+        var val = results[ key, default: [BattleResult]() ]
+        val.append(res)
+        val = val.sorted(by: { (resulta, resultb) -> Bool in
+            return resulta.date > resultb.date
+        })
+        
+        // update map and sort cached version
+        results[key] = val
+        resultsArr = results.sorted { (kv1, kv2) -> Bool in
+            return kv1.key > kv2.key
+        }
+    }
     
     func observeAddResult( snapshot : DataSnapshot ) {
         if let map = snapshot.value as? [String:Any],
             let result = BattleResult.initFromMap(fromMap: map) {
-            results.append(result)
+            addToResults(result)
             tableView.reloadData()
         } else {
             debugPrint("failed to decode result",snapshot.value!)
@@ -62,11 +83,12 @@ class ResultsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        //return 1
+        return results.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return resultsArr[section].value.count
     }
 
     func nameOrDefault( optPref: CharacterPref?, def : String ) -> String {
@@ -80,26 +102,28 @@ class ResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
-        let reverseIndex = (results.count - indexPath.row) - 1
-        let result = results[reverseIndex]
+        let result = resultsArr[indexPath.section].value[indexPath.row]
         
         let p1Lookup = characterLookup[result.p1Id]
         let p2Lookup = characterLookup[result.p2Id]
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd"
+        dateFormatter.dateFormat = "YYYY-MM-dd"
         
-        cell.labelDate.text =
-            dateFormatter.string(from: result.date)
-        cell.labelPlayer1.text = nameOrDefault( optPref:p1Lookup, def:"unknown")
-        cell.labelPlayer2.text = nameOrDefault( optPref:p2Lookup, def:"unknown")
+        let p1Name = nameOrDefault( optPref:p1Lookup, def:"unknown")
+        let p2Name = nameOrDefault( optPref:p2Lookup, def:"unknown")
+        cell.labelCharacters.text = "\(p1Name) vs \(p2Name)"
         if result.p1Won {
-            cell.imageWinner.image = #imageLiteral(resourceName: "icon_36_p1")
+            cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win2")
         } else {
-            cell.imageWinner.image = #imageLiteral(resourceName: "icon_36_p2")
+            cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win1")
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView : UITableView, titleForHeaderInSection section: Int) -> String? {
+        return resultsArr[section].key
     }
     
     /*

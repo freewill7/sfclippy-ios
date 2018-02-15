@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -317,56 +316,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIh-tI-g2A">
-                                            <rect key="frame" x="8" y="4" width="359" height="35.5"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAD-71-Avb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="119" height="35.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pud-MQ-eQG">
-                                                    <rect key="frame" x="119" y="0.0" width="168" height="35.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-xJ-8KG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="168" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaC-3D-spg">
-                                                            <rect key="frame" x="0.0" y="18" width="168" height="17.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_36_p1" translatesAutoresizingMaskIntoConstraints="NO" id="To5-1Z-gYM">
-                                                    <rect key="frame" x="287" y="0.0" width="72" height="35.5"/>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="rAD-71-Avb" firstAttribute="width" secondItem="GIh-tI-g2A" secondAttribute="width" multiplier="1:3" id="eVC-AM-nm6"/>
-                                                <constraint firstItem="To5-1Z-gYM" firstAttribute="width" secondItem="GIh-tI-g2A" secondAttribute="width" multiplier="1:5" id="qIb-FN-YUC"/>
-                                            </constraints>
-                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Char1 vs Char2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-xJ-8KG" userLabel="Label Characters">
+                                            <rect key="frame" x="8" y="12" width="116.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_36_p1" translatesAutoresizingMaskIntoConstraints="NO" id="To5-1Z-gYM">
+                                            <rect key="frame" x="331" y="3" width="36" height="36"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="GIh-tI-g2A" firstAttribute="top" secondItem="PIR-dJ-YFK" secondAttribute="top" constant="4" id="12u-hj-Oy7"/>
-                                        <constraint firstAttribute="trailing" secondItem="GIh-tI-g2A" secondAttribute="trailing" constant="8" id="EdE-Dv-rn6"/>
-                                        <constraint firstItem="QaC-3D-spg" firstAttribute="height" secondItem="Pud-MQ-eQG" secondAttribute="height" multiplier="0.5" id="M7F-tI-rlX"/>
-                                        <constraint firstAttribute="bottom" secondItem="GIh-tI-g2A" secondAttribute="bottom" constant="4" id="Nwg-tX-jPZ"/>
-                                        <constraint firstItem="GIh-tI-g2A" firstAttribute="leading" secondItem="PIR-dJ-YFK" secondAttribute="leading" constant="8" id="e8Y-v9-nrM"/>
-                                        <constraint firstItem="KLO-xJ-8KG" firstAttribute="height" secondItem="Pud-MQ-eQG" secondAttribute="height" multiplier="0.5" id="k52-Xe-Nhp"/>
+                                        <constraint firstAttribute="trailing" secondItem="To5-1Z-gYM" secondAttribute="trailing" constant="8" id="m4y-r8-hgU"/>
+                                        <constraint firstItem="To5-1Z-gYM" firstAttribute="centerY" secondItem="PIR-dJ-YFK" secondAttribute="centerY" id="tIU-xv-1Fn"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="KLO-xJ-8KG" firstAttribute="leading" secondItem="UKK-0S-gTj" secondAttribute="leading" constant="8" id="MsS-mT-hXO"/>
+                                    <constraint firstItem="KLO-xJ-8KG" firstAttribute="centerY" secondItem="UKK-0S-gTj" secondAttribute="centerY" id="R5s-5D-AUk"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="imageWinner" destination="To5-1Z-gYM" id="hqL-hG-XVg"/>
-                                    <outlet property="labelDate" destination="rAD-71-Avb" id="XEz-Ah-tor"/>
-                                    <outlet property="labelPlayer1" destination="KLO-xJ-8KG" id="5oX-NE-TsS"/>
-                                    <outlet property="labelPlayer2" destination="QaC-3D-spg" id="rVG-5w-2BT"/>
+                                    <outlet property="labelCharacters" destination="KLO-xJ-8KG" id="5oX-NE-TsS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

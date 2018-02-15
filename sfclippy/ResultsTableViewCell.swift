@@ -9,9 +9,7 @@
 import UIKit
 
 class ResultsTableViewCell: UITableViewCell {
-    @IBOutlet weak var labelPlayer1: UILabel!
-    @IBOutlet weak var labelPlayer2: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelCharacters: UILabel!
     @IBOutlet weak var imageWinner: UIImageView!
     
     override func awakeFromNib() {
