@@ -36,11 +36,34 @@ class CharactersTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func comparePrefs( a : CharacterPref, b : CharacterPref, extractScore: (CharacterPref) -> Int ) -> Bool {
+        var diff = extractScore(a) - extractScore(b)
+        if ( 0 == diff ) {
+            diff = b.name.compare(a.name).rawValue
+        }
+        return diff > 0
+    }
+    
     func characterAdded( snapshot : DataSnapshot ) {
         if let map = snapshot.value as? [String:Any],
             let charPref = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
             debugPrint("retrieved character",charPref,snapshot.key)
             characters.append( charPref )
+            
+            if 0 == playerId {
+                characters = characters.sorted(by: { (prefa, prefb) -> Bool in
+                    return comparePrefs(a: prefa, b: prefb, extractScore: { (pref) -> Int in
+                        return pref.p1Rating
+                    })
+                })
+            } else {
+                characters = characters.sorted(by: { (prefa, prefb) -> Bool in
+                    return comparePrefs(a: prefa, b: prefb, extractScore: { (pref) -> Int in
+                        return pref.p2Rating
+                    })
+                })
+            }
+            
             tableView.reloadData();
         }
     }
