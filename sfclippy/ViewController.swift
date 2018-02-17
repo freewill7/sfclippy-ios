@@ -31,6 +31,7 @@ class ViewController: UIViewController, DragToSelectObserver {
         // Do any additional setup after loading the view, typically from a nib.
         database = Database.database()
         selectionView.enabled = false
+        selectionView.isHidden = true
         selectionView.observer = self
         
         updateHint()

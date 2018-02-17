@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,34 +23,32 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsV-CK-7yi" userLabel="MoveableView">
-                    <rect key="frame" x="0.0" y="222" width="375" height="222"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsV-CK-7yi" userLabel="DragToSelectView">
+                    <rect key="frame" x="8" y="218" width="359" height="230"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ppN-jn-E5M">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="222"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="222" translatesAutoresizingMaskIntoConstraints="NO" id="aox-Zc-3pg">
-                                    <rect key="frame" x="0.0" y="0.0" width="122.5" height="222"/>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="222" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ">
-                                    <rect key="frame" x="130.5" y="0.0" width="244.5" height="222"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="222" translatesAutoresizingMaskIntoConstraints="NO" id="aox-Zc-3pg">
+                            <rect key="frame" x="4" y="4" width="96" height="222"/>
                             <constraints>
-                                <constraint firstItem="tFx-yI-OFQ" firstAttribute="width" secondItem="aox-Zc-3pg" secondAttribute="width" multiplier="2" id="etC-c6-OeS"/>
+                                <constraint firstAttribute="width" constant="96" id="Bxy-Bb-9Pb"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="96" id="TNJ-eC-D6i"/>
                             </constraints>
-                        </stackView>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="222" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ">
+                            <rect key="frame" x="4" y="4" width="351" height="222"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.79183104110000002" green="0.64415645109999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="ppN-jn-E5M" secondAttribute="trailing" identifier="content_right" id="eZC-HL-Ol8"/>
-                        <constraint firstAttribute="bottom" secondItem="ppN-jn-E5M" secondAttribute="bottom" identifier="content_bottom" id="iq0-NU-JJV" userLabel="bottom = Stack View.bottom"/>
-                        <constraint firstItem="ppN-jn-E5M" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" identifier="content_left" id="kHu-fJ-bA0" userLabel="Stack View.leading = leading"/>
-                        <constraint firstItem="ppN-jn-E5M" firstAttribute="top" secondItem="jsV-CK-7yi" secondAttribute="top" identifier="content_top" id="u6K-Wq-HNq" userLabel="Stack View.top = top"/>
+                        <constraint firstItem="tFx-yI-OFQ" firstAttribute="centerY" secondItem="jsV-CK-7yi" secondAttribute="centerY" id="6b6-Sj-q7f"/>
+                        <constraint firstItem="aox-Zc-3pg" firstAttribute="top" secondItem="jsV-CK-7yi" secondAttribute="top" constant="4" id="Kyi-bZ-yTt"/>
+                        <constraint firstItem="tFx-yI-OFQ" firstAttribute="leading" secondItem="aox-Zc-3pg" secondAttribute="trailing" constant="8" id="YC3-v1-H33"/>
+                        <constraint firstItem="aox-Zc-3pg" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" constant="4" id="gW1-y8-QLC"/>
+                        <constraint firstAttribute="trailing" secondItem="tFx-yI-OFQ" secondAttribute="trailing" constant="4" id="u6M-e7-ged"/>
+                        <constraint firstAttribute="bottom" secondItem="aox-Zc-3pg" secondAttribute="bottom" constant="4" id="z8F-nJ-eSN"/>
                     </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="uYZ-yI-xwp" appends="YES" id="o0b-2x-4e7"/>
@@ -60,10 +56,9 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" identifier="move_left" id="GdX-QV-C8X"/>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" identifier="move_middle" id="bLh-bE-DNA"/>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1:3" identifier="move_height" id="dQX-Of-HT0"/>
-                <constraint firstItem="jsV-CK-7yi" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" identifier="move_right" id="twJ-8d-kOr"/>
+                <constraint firstAttribute="trailing" secondItem="jsV-CK-7yi" secondAttribute="trailing" constant="8" id="KjE-Wi-wyJ"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="N5J-wo-p0h"/>
+                <constraint firstItem="jsV-CK-7yi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="emF-19-6O0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

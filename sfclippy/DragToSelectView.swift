@@ -40,9 +40,8 @@ class DragToSelectView: UIView {
     
     var enabled : Bool = true {
         didSet {
-            let alpha = (CGFloat) (enabled ? 1.0 : 0.1)
-            self.labelMessage.alpha = alpha
-            self.imageAssistant.alpha = alpha
+            /*let alpha = (CGFloat) (enabled ? 1.0 : 0.1)
+            self.moveableView.alpha = alpha WRL */
         }
     }
     
@@ -72,7 +71,10 @@ class DragToSelectView: UIView {
         contentView.frame = self.bounds
         
         self.labelMessage.text = message
-        
+        self.labelMessage.textColor = self.backgroundColor
+        self.imageAssistant.tintColor = self.backgroundColor
+        self.viewMoveable.backgroundColor = self.tintColor
+
     }
     
     override init( frame : CGRect ) {

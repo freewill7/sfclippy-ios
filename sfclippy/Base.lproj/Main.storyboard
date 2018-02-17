@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +36,7 @@
             </objects>
             <point key="canvasLocation" x="-1524" y="19"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Battle-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,49 +44,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Ct-pw4">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDA-mq-0Lv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
-                                        <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Player 1 Character" image="icon_48_p1">
-                                            <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="urN-eq-mWK" kind="show" identifier="selectP1Character" id="FdB-2V-eOp"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfq-zh-MHp" customClass="DragToSelectView" customModule="sfclippy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="48" width="375" height="458"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="sfclippy_48"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-eJ-bev">
-                                        <rect key="frame" x="0.0" y="506" width="375" height="48"/>
-                                        <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Player 2 Character" image="icon_48_p2">
-                                            <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="urN-eq-mWK" kind="show" identifier="selectP2Character" id="Dma-vb-hM3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDA-mq-0Lv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="2ed-jg-7vR"/>
+                                </constraints>
+                                <color key="tintColor" name="color_primary"/>
+                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Player 1 Character" image="icon_48_p1">
+                                    <color key="titleColor" name="color_primary"/>
+                                </state>
+                                <connections>
+                                    <segue destination="urN-eq-mWK" kind="show" identifier="selectP1Character" id="FdB-2V-eOp"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfq-zh-MHp" customClass="DragToSelectView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="144" width="375" height="394"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="color_accent"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="sfclippy_48"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="message" value="Placeholder"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-eJ-bev">
+                                <rect key="frame" x="0.0" y="538" width="375" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Ghb-F0-Jgs"/>
+                                </constraints>
+                                <color key="tintColor" name="color_primary"/>
+                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Player 2 Character" image="icon_48_p2">
+                                    <color key="titleColor" name="color_primary"/>
+                                </state>
+                                <connections>
+                                    <segue destination="urN-eq-mWK" kind="show" identifier="selectP2Character" id="Dma-vb-hM3"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <accessibility key="accessibilityConfiguration" identifier="ViewController"/>
                         <constraints>
-                            <constraint firstItem="Yga-Ct-pw4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XQJ-HE-ozx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Yga-Ct-pw4" secondAttribute="bottom" id="aL5-sf-KSP"/>
-                            <constraint firstItem="Yga-Ct-pw4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uaf-T9-tpi"/>
-                            <constraint firstAttribute="trailing" secondItem="Yga-Ct-pw4" secondAttribute="trailing" id="xXk-Rp-P6u"/>
+                            <constraint firstItem="YDA-mq-0Lv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0L8-0A-W5i"/>
+                            <constraint firstItem="YDA-mq-0Lv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9xu-bU-NJF"/>
+                            <constraint firstItem="zfq-zh-MHp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CrJ-f7-oJe"/>
+                            <constraint firstItem="zfq-zh-MHp" firstAttribute="bottom" secondItem="1QD-eJ-bev" secondAttribute="top" id="FEU-Nr-Gv3"/>
+                            <constraint firstItem="1QD-eJ-bev" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NJA-GR-C8b"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YDA-mq-0Lv" secondAttribute="trailing" id="Xh7-pz-gfP"/>
+                            <constraint firstItem="zfq-zh-MHp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZYQ-O2-GK4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1QD-eJ-bev" secondAttribute="bottom" id="cx5-Nb-Zc0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1QD-eJ-bev" secondAttribute="trailing" id="gDf-KM-t7Y"/>
+                            <constraint firstItem="zfq-zh-MHp" firstAttribute="top" secondItem="YDA-mq-0Lv" secondAttribute="bottom" id="tMS-RP-8xo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cui-LF-JFi"/>
+                    <navigationItem key="navigationItem" title="Record Battle" id="cui-LF-JFi"/>
                     <connections>
                         <outlet property="btnChooseP1" destination="YDA-mq-0Lv" id="HW3-gb-VYA"/>
                         <outlet property="btnChooseP2" destination="1QD-eJ-bev" id="7gz-ix-FTk"/>
@@ -121,6 +134,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOz-gU-UjG" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
                                             <rect key="frame" x="247" y="-0.5" width="120" height="64.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" name="color_primary"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="S1L-Ng-7yg"/>
                                                 <constraint firstAttribute="height" constant="64" id="ao2-Y8-utH"/>
@@ -156,6 +170,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQX-Ce-Ykn" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
                                             <rect key="frame" x="214" y="-0.5" width="120" height="64.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" name="color_primary"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="1r0-RA-2YG"/>
                                                 <constraint firstAttribute="width" constant="120" id="eWu-e9-lSu"/>
@@ -163,6 +178,7 @@
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_24_right" translatesAutoresizingMaskIntoConstraints="NO" id="FHG-eO-cNR">
                                             <rect key="frame" x="343" y="20" width="24" height="24"/>
+                                            <color key="tintColor" name="color_primary"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
@@ -187,13 +203,15 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem systemItem="add" id="jCx-54-xW4">
+                            <color key="tintColor" name="color_primary"/>
                             <connections>
                                 <segue destination="OAC-YW-Fgx" kind="show" identifier="createCharacter" id="LMi-yO-Ttb"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Title" id="0Sb-bM-erk">
+                    <navigationItem key="navigationItem" title="Characters" id="0Sb-bM-erk">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="67L-Z4-fV9">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="clickEditCancel:" destination="urN-eq-mWK" id="Phk-eS-N4y"/>
                             </connections>
@@ -237,6 +255,7 @@
                                 <rect key="frame" x="53" y="147" width="268" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="color_primary"/>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dOs-hD-KHs">
                                 <rect key="frame" x="91" y="76" width="268" height="30"/>
@@ -259,6 +278,7 @@
                                 <rect key="frame" x="53" y="312" width="268" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="color_primary"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -266,6 +286,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Character" id="KZK-lU-j84">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="sas-U9-EzV">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="Jnm-Wy-hi2" kind="unwind" unwindAction="unwindToCharactersWithUnwindSegue:" id="M5E-yW-6Cf"/>
                             </connections>
@@ -291,6 +312,14 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rnX-lQ-aIR">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="color_primary"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="uZG-gP-sfU" kind="relationship" relationship="rootViewController" id="8f6-m5-ae7"/>
@@ -403,7 +432,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-02-03 00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-zV-czK" userLabel="DateVal">
-                                <rect key="frame" x="108" y="72" width="170" height="21"/>
+                                <rect key="frame" x="108" y="72" width="259" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -432,6 +461,7 @@
                             <constraint firstItem="vyg-ix-s28" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="8" id="2A6-ad-2Sv"/>
                             <constraint firstItem="5xd-zV-czK" firstAttribute="centerY" secondItem="U3v-rV-hph" secondAttribute="centerY" id="7FF-1Y-xvR"/>
                             <constraint firstItem="crf-Gk-Cws" firstAttribute="leading" secondItem="vyg-ix-s28" secondAttribute="trailing" constant="20" id="DZ0-9H-FAq"/>
+                            <constraint firstItem="PB2-jI-oh8" firstAttribute="trailing" secondItem="5xd-zV-czK" secondAttribute="trailing" constant="8" id="E9n-d2-AWk"/>
                             <constraint firstItem="cCS-a8-fXh" firstAttribute="leading" secondItem="fSC-dn-dwS" secondAttribute="trailing" constant="20" id="Et0-nk-HzK"/>
                             <constraint firstItem="okE-ih-5X9" firstAttribute="leading" secondItem="p2c-OF-XSK" secondAttribute="trailing" constant="20" id="F9R-RW-hGC"/>
                             <constraint firstItem="fSC-dn-dwS" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="8" id="GBn-e1-Jtk"/>
@@ -468,6 +498,14 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nII-U3-KTp">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="color_primary"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pJS-8Z-MEd">
@@ -488,7 +526,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c1L-t4-s3l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="color_primary"/>
+                        <color key="selectedImageTintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="mre-pW-ksM" kind="relationship" relationship="viewControllers" id="KJ9-Pp-FlS"/>
@@ -508,6 +547,15 @@
         <image name="icon_48_p1" width="48" height="48"/>
         <image name="icon_48_p2" width="48" height="48"/>
         <image name="sfclippy_48" width="48" height="48"/>
+        <namedColor name="color_accent">
+            <color red="0.61176470588235299" green="0.15294117647058825" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_primary">
+            <color red="0.0" green="0.73725490196078436" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_primary">
+            <color red="0.0" green="0.73725490196078436" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LMi-yO-Ttb"/>

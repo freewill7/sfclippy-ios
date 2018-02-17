@@ -119,8 +119,10 @@ class ResultsTableViewController: UITableViewController {
         cell.labelCharacters.text = "\(p1Name) vs \(p2Name)"
         if result.p1Won {
             cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win1")
+            cell.imageWinner.tintColor = UIColor(named: "color_primary")
         } else {
             cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win2")
+            cell.imageWinner.tintColor = UIColor(named: "color_accent")
         }
         
         return cell
@@ -128,6 +130,12 @@ class ResultsTableViewController: UITableViewController {
     
     override func tableView(_ tableView : UITableView, titleForHeaderInSection section: Int) -> String? {
         return resultsArr[section].key
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.tintColor = UIColor(named: "color_primary_1")
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.white
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
