@@ -31,6 +31,8 @@
 		BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */; };
 		BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */; };
 		BE4247571FC2DD0F003E08A8 /* CharactersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */; };
+		BE95BF27203A28E10094A70B /* SfHeadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE95BF26203A28E10094A70B /* SfHeadingView.xib */; };
+		BE95BF29203A29F80094A70B /* SfHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95BF28203A29F80094A70B /* SfHeadingView.swift */; };
 		BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */; };
 		BE985F901FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */; };
 		BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEACF71B20364B51001A8A6D /* ResultViewController.swift */; };
@@ -85,6 +87,8 @@
 		BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 		BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersUITests.swift; sourceTree = "<group>"; };
+		BE95BF26203A28E10094A70B /* SfHeadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SfHeadingView.xib; sourceTree = "<group>"; };
+		BE95BF28203A29F80094A70B /* SfHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfHeadingView.swift; sourceTree = "<group>"; };
 		BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanism.swift; sourceTree = "<group>"; };
 		BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanismTests.swift; sourceTree = "<group>"; };
 		BEACF71B20364B51001A8A6D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 				BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */,
 				BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */,
 				BEACF71B20364B51001A8A6D /* ResultViewController.swift */,
+				BE95BF26203A28E10094A70B /* SfHeadingView.xib */,
+				BE95BF28203A29F80094A70B /* SfHeadingView.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 			files = (
 				BE2169351FD35D75009F0703 /* DragToSelectView.xib in Resources */,
 				BE1F24021FBE11E500CD6447 /* LaunchScreen.storyboard in Resources */,
+				BE95BF27203A28E10094A70B /* SfHeadingView.xib in Resources */,
 				BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */,
 				BE1F23FF1FBE11E500CD6447 /* Assets.xcassets in Resources */,
 				BE1F23FD1FBE11E500CD6447 /* Main.storyboard in Resources */,
@@ -543,6 +550,7 @@
 				BE325912203221A5004509C2 /* EditCharactersTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
+				BE95BF29203A29F80094A70B /* SfHeadingView.swift in Sources */,
 				BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

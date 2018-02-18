@@ -52,7 +52,7 @@
                                 <color key="tintColor" name="color_primary"/>
                                 <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Player 1 Character" image="icon_48_p1">
-                                    <color key="titleColor" name="color_primary"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <segue destination="urN-eq-mWK" kind="show" identifier="selectP1Character" id="FdB-2V-eOp"/>
@@ -75,7 +75,7 @@
                                 <color key="tintColor" name="color_primary"/>
                                 <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Player 2 Character" image="icon_48_p2">
-                                    <color key="titleColor" name="color_primary"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <segue destination="urN-eq-mWK" kind="show" identifier="selectP2Character" id="Dma-vb-hM3"/>
@@ -395,62 +395,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3v-rV-hph">
-                                <rect key="frame" x="8" y="72" width="80" height="21"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="onT-ep-2hD" userLabel="Date:" customClass="SfHeadingView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="32"/>
+                                <color key="backgroundColor" name="color_primary_1"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="8Ql-dR-mOO"/>
+                                    <constraint firstAttribute="height" constant="32" id="Qc3-db-mlv"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="message" value="Date:"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-02-03 00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-zV-czK" userLabel="DateVal">
+                                <rect key="frame" x="4" y="96" width="371" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="5hc-aO-NI1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-ix-s28">
-                                <rect key="frame" x="8" y="101" width="80" height="21"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocX-w8-oxc" userLabel="Player1:" customClass="SfHeadingView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="128" width="375" height="32"/>
+                                <color key="backgroundColor" name="color_primary_1"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="tlB-kj-Hy5"/>
+                                    <constraint firstAttribute="height" constant="32" id="a9y-14-cI4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSC-dn-dwS">
-                                <rect key="frame" x="8" y="130" width="80" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="7Uv-Qp-ZBF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2c-OF-XSK">
-                                <rect key="frame" x="8" y="159" width="80" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="elA-hH-TRV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-02-03 00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-zV-czK" userLabel="DateVal">
-                                <rect key="frame" x="108" y="72" width="259" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="message" value="Player 1:"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crf-Gk-Cws" userLabel="P1Char">
-                                <rect key="frame" x="108" y="101" width="29.5" height="21"/>
+                                <rect key="frame" x="4" y="160" width="371" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="qLt-DF-gn6"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue0-4f-7yc" userLabel="Player2:" customClass="SfHeadingView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="192" width="375" height="32"/>
+                                <color key="backgroundColor" name="color_primary_1"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="hOu-8R-2aK"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="message" value="Player 2:"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCS-a8-fXh" userLabel="P2Char">
-                                <rect key="frame" x="108" y="130" width="29" height="21"/>
+                                <rect key="frame" x="4" y="224" width="371" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="9kv-fU-2lq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khB-va-yNG" userLabel="Winner:" customClass="SfHeadingView" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="256" width="375" height="32"/>
+                                <color key="backgroundColor" name="color_primary_1"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Erg-wn-faU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="message" value="Winner:"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okE-ih-5X9" userLabel="WinnerId">
-                                <rect key="frame" x="108" y="159" width="54.5" height="21"/>
+                                <rect key="frame" x="4" y="288" width="371" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -458,23 +487,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vyg-ix-s28" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="8" id="2A6-ad-2Sv"/>
-                            <constraint firstItem="5xd-zV-czK" firstAttribute="centerY" secondItem="U3v-rV-hph" secondAttribute="centerY" id="7FF-1Y-xvR"/>
-                            <constraint firstItem="crf-Gk-Cws" firstAttribute="leading" secondItem="vyg-ix-s28" secondAttribute="trailing" constant="20" id="DZ0-9H-FAq"/>
-                            <constraint firstItem="PB2-jI-oh8" firstAttribute="trailing" secondItem="5xd-zV-czK" secondAttribute="trailing" constant="8" id="E9n-d2-AWk"/>
-                            <constraint firstItem="cCS-a8-fXh" firstAttribute="leading" secondItem="fSC-dn-dwS" secondAttribute="trailing" constant="20" id="Et0-nk-HzK"/>
-                            <constraint firstItem="okE-ih-5X9" firstAttribute="leading" secondItem="p2c-OF-XSK" secondAttribute="trailing" constant="20" id="F9R-RW-hGC"/>
-                            <constraint firstItem="fSC-dn-dwS" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="8" id="GBn-e1-Jtk"/>
-                            <constraint firstItem="okE-ih-5X9" firstAttribute="centerY" secondItem="p2c-OF-XSK" secondAttribute="centerY" id="MTS-mk-yyD"/>
-                            <constraint firstItem="p2c-OF-XSK" firstAttribute="top" secondItem="fSC-dn-dwS" secondAttribute="bottom" constant="8" id="T91-Eb-Q4L"/>
-                            <constraint firstItem="p2c-OF-XSK" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="8" id="UqY-4h-NuO"/>
-                            <constraint firstItem="U3v-rV-hph" firstAttribute="top" secondItem="PB2-jI-oh8" secondAttribute="top" constant="8" id="WLk-Ig-SuP"/>
-                            <constraint firstItem="5xd-zV-czK" firstAttribute="leading" secondItem="U3v-rV-hph" secondAttribute="trailing" constant="20" id="ZiH-Z4-Nhi"/>
-                            <constraint firstItem="vyg-ix-s28" firstAttribute="top" secondItem="U3v-rV-hph" secondAttribute="bottom" constant="8" id="fWz-IC-H1I"/>
-                            <constraint firstItem="cCS-a8-fXh" firstAttribute="centerY" secondItem="fSC-dn-dwS" secondAttribute="centerY" id="jTB-CX-OVP"/>
-                            <constraint firstItem="crf-Gk-Cws" firstAttribute="centerY" secondItem="vyg-ix-s28" secondAttribute="centerY" id="kTU-dP-azA"/>
-                            <constraint firstItem="fSC-dn-dwS" firstAttribute="top" secondItem="vyg-ix-s28" secondAttribute="bottom" constant="8" id="vqT-AD-sD9"/>
-                            <constraint firstItem="U3v-rV-hph" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="8" id="yPN-uF-HwX"/>
+                            <constraint firstItem="khB-va-yNG" firstAttribute="top" secondItem="cCS-a8-fXh" secondAttribute="bottom" id="4kU-TN-IeA"/>
+                            <constraint firstItem="cCS-a8-fXh" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="4" id="59o-hy-nP6"/>
+                            <constraint firstItem="onT-ep-2hD" firstAttribute="top" secondItem="PB2-jI-oh8" secondAttribute="top" id="5En-8K-gvu"/>
+                            <constraint firstAttribute="trailing" secondItem="ocX-w8-oxc" secondAttribute="trailing" id="7I4-xg-bCo"/>
+                            <constraint firstItem="khB-va-yNG" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" id="B6i-L3-jYu"/>
+                            <constraint firstItem="khB-va-yNG" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="Cnq-ah-b50"/>
+                            <constraint firstItem="Ue0-4f-7yc" firstAttribute="top" secondItem="crf-Gk-Cws" secondAttribute="bottom" id="FGP-Et-i8w"/>
+                            <constraint firstItem="cCS-a8-fXh" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="JcN-I6-yBJ"/>
+                            <constraint firstItem="ocX-w8-oxc" firstAttribute="top" secondItem="5xd-zV-czK" secondAttribute="bottom" id="L0y-dk-Ziq"/>
+                            <constraint firstItem="crf-Gk-Cws" firstAttribute="top" secondItem="ocX-w8-oxc" secondAttribute="bottom" id="QM2-BR-gAg"/>
+                            <constraint firstItem="onT-ep-2hD" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" id="VDT-4Z-SNX"/>
+                            <constraint firstItem="5xd-zV-czK" firstAttribute="top" secondItem="onT-ep-2hD" secondAttribute="bottom" id="VGh-gr-NdV"/>
+                            <constraint firstItem="okE-ih-5X9" firstAttribute="top" secondItem="khB-va-yNG" secondAttribute="bottom" id="YCX-bf-spP"/>
+                            <constraint firstItem="Ue0-4f-7yc" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" id="ZEF-PA-dEJ"/>
+                            <constraint firstItem="okE-ih-5X9" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="aMT-HZ-Ijb"/>
+                            <constraint firstItem="cCS-a8-fXh" firstAttribute="top" secondItem="Ue0-4f-7yc" secondAttribute="bottom" id="dDb-pi-fUN"/>
+                            <constraint firstItem="onT-ep-2hD" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="fM0-Rn-pIU"/>
+                            <constraint firstItem="5xd-zV-czK" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="4" id="myG-aG-gqP"/>
+                            <constraint firstItem="Ue0-4f-7yc" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="nRW-5Q-2bY"/>
+                            <constraint firstItem="ocX-w8-oxc" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" id="oHo-mU-rrf"/>
+                            <constraint firstItem="okE-ih-5X9" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="4" id="rnE-QU-wRK"/>
+                            <constraint firstItem="crf-Gk-Cws" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="s52-jG-tpY"/>
+                            <constraint firstItem="5xd-zV-czK" firstAttribute="trailing" secondItem="PB2-jI-oh8" secondAttribute="trailing" id="sbo-ss-GGa"/>
+                            <constraint firstItem="crf-Gk-Cws" firstAttribute="leading" secondItem="PB2-jI-oh8" secondAttribute="leading" constant="4" id="uq4-OJ-Jwy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PB2-jI-oh8"/>
                     </view>
@@ -551,10 +587,10 @@
             <color red="0.61176470588235299" green="0.15294117647058825" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_primary">
-            <color red="0.0" green="0.73725490196078436" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.67450980392156867" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="color_primary">
-            <color red="0.0" green="0.73725490196078436" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="color_primary_1">
+            <color red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
