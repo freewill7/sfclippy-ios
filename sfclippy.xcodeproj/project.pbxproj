@@ -23,6 +23,8 @@
 		BE2169351FD35D75009F0703 /* DragToSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2169341FD35D75009F0703 /* DragToSelectView.xib */; };
 		BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2169321FD350B2009F0703 /* DragToSelectView.swift */; };
 		BE325912203221A5004509C2 /* EditCharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */; };
+		BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */; };
+		BE3E651E203B7A5A00961A29 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */; };
 		BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474C1FC056F3003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
 		BE42474D1FC056F4003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
@@ -31,11 +33,15 @@
 		BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */; };
 		BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */; };
 		BE4247571FC2DD0F003E08A8 /* CharactersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */; };
+		BE4F225A20420D8B00900013 /* StatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F225920420D8B00900013 /* StatisticsTableViewController.swift */; };
+		BE4F225C20420E7200900013 /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F225B20420E7200900013 /* StatisticsTableViewCell.swift */; };
 		BE95BF27203A28E10094A70B /* SfHeadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE95BF26203A28E10094A70B /* SfHeadingView.xib */; };
 		BE95BF29203A29F80094A70B /* SfHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95BF28203A29F80094A70B /* SfHeadingView.swift */; };
 		BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */; };
 		BE985F901FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */; };
 		BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEACF71B20364B51001A8A6D /* ResultViewController.swift */; };
+		BEC74F55204952F00081820B /* SfButtonWithDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC74F54204952F00081820B /* SfButtonWithDescription.xib */; };
+		BEC74F57204954A60081820B /* SfButtonWithDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC74F56204954A60081820B /* SfButtonWithDescription.swift */; };
 		BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,17 +87,23 @@
 		BE2169321FD350B2009F0703 /* DragToSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToSelectView.swift; sourceTree = "<group>"; };
 		BE2169341FD35D75009F0703 /* DragToSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragToSelectView.xib; sourceTree = "<group>"; };
 		BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCharactersTableViewCell.swift; sourceTree = "<group>"; };
+		BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247491FC05641003E08A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE42474E1FC070C3003E08A8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		BE4247501FC1D3B0003E08A8 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		BE4247521FC1E661003E08A8 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 		BE4247541FC1E717003E08A8 /* CharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247561FC2DD0F003E08A8 /* CharactersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersUITests.swift; sourceTree = "<group>"; };
+		BE4F225920420D8B00900013 /* StatisticsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewController.swift; sourceTree = "<group>"; };
+		BE4F225B20420E7200900013 /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		BE95BF26203A28E10094A70B /* SfHeadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SfHeadingView.xib; sourceTree = "<group>"; };
 		BE95BF28203A29F80094A70B /* SfHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfHeadingView.swift; sourceTree = "<group>"; };
 		BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanism.swift; sourceTree = "<group>"; };
 		BE985F8F1FEEC1EB00AA1BF0 /* SelectionMechanismTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMechanismTests.swift; sourceTree = "<group>"; };
 		BEACF71B20364B51001A8A6D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		BEC74F54204952F00081820B /* SfButtonWithDescription.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SfButtonWithDescription.xib; sourceTree = "<group>"; };
+		BEC74F56204954A60081820B /* SfButtonWithDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfButtonWithDescription.swift; sourceTree = "<group>"; };
 		C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.release.xcconfig"; sourceTree = "<group>"; };
 		C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +199,12 @@
 				BEACF71B20364B51001A8A6D /* ResultViewController.swift */,
 				BE95BF26203A28E10094A70B /* SfHeadingView.xib */,
 				BE95BF28203A29F80094A70B /* SfHeadingView.swift */,
+				BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */,
+				BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */,
+				BE4F225920420D8B00900013 /* StatisticsTableViewController.swift */,
+				BE4F225B20420E7200900013 /* StatisticsTableViewCell.swift */,
+				BEC74F54204952F00081820B /* SfButtonWithDescription.xib */,
+				BEC74F56204954A60081820B /* SfButtonWithDescription.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -342,6 +360,7 @@
 				BE95BF27203A28E10094A70B /* SfHeadingView.xib in Resources */,
 				BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */,
 				BE1F23FF1FBE11E500CD6447 /* Assets.xcassets in Resources */,
+				BEC74F55204952F00081820B /* SfButtonWithDescription.xib in Resources */,
 				BE1F23FD1FBE11E500CD6447 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,7 +531,6 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f0850809/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -521,7 +539,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -548,9 +565,14 @@
 				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
 				BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */,
 				BE325912203221A5004509C2 /* EditCharactersTableViewCell.swift in Sources */,
+				BE3E651E203B7A5A00961A29 /* SettingsTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
+				BEC74F57204954A60081820B /* SfButtonWithDescription.swift in Sources */,
+				BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */,
+				BE4F225A20420D8B00900013 /* StatisticsTableViewController.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
 				BE95BF29203A29F80094A70B /* SfHeadingView.swift in Sources */,
+				BE4F225C20420E7200900013 /* StatisticsTableViewCell.swift in Sources */,
 				BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

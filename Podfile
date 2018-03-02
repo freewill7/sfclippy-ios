@@ -11,9 +11,6 @@ target 'sfclippy' do
   pod 'FirebaseDatabase'
   pod 'GoogleSignIn'
 
-  # Pods for toast
-  pod 'Toast-Swift', '~> 3.0.1'
-
   target 'sfclippyTests' do
     inherit! :search_paths
     # Pods for testing

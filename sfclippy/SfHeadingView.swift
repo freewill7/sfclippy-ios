@@ -35,13 +35,6 @@ class SfHeadingView: UIView {
         contentView.frame = self.bounds
         
         contentView.backgroundColor = self.backgroundColor
-        /*
-        self.labelMessage.text = message
-        self.labelMessage.textColor = self.backgroundColor
-        self.imageAssistant.tintColor = self.backgroundColor
-        self.viewMoveable.backgroundColor = self.tintColor
- */
-        
     }
     
     override init( frame : CGRect ) {

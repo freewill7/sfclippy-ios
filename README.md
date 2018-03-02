@@ -32,13 +32,19 @@ $CHARACTERS/XXY
  - name: "Ryu"
  - p1Rating: 3
  - p2Rating: 5
+ - p1Statistics: {...}
+ - p2Statistics: {...}
 $CHARACTERS/XXZ
  - name: "Ken"
  - p1Rating: 1
  - p2Rating: 3
+ - p1Statistics: {...}
+ - p2Statistics: {...}
 ```
 
 In the above example the `XXY` character has a name of "Ryu", the first local player has given him a score of `3` (out of 5) while the second local player has given him a score of `5` (out of 5).
+
+The `statistics` member is discussed later.
 
 ### results
 The `results` section stores the results of battles for the user.
@@ -63,4 +69,37 @@ In the above example we see that `ZZA` describes a battle that took place on 18t
 The second result `ZZB` described a battle between "XXY" ("Ryu") and XXY ("Ryu") with the winner being the second local player ( `p1Won: false`).
 
 ### statistics
-(not yet implemented)
+The recommendation from Firebase is to design data schemas for efficient fetching at the cost of redundancy. With this is mind we cache statistics throughout the app and can regenerate them through processing the contents of the `results` section.
+
+The schema for a statistic is
+
+```json
+{
+  "qtyBattles" : 2,
+  "qtyWins" : 1,
+  "lastBattle" : "2018-02-24 21:00:00",
+  "lastWin" : "2018-02-20 09:00:00"
+}
+```
+
+We store the following statistics
+
+- Globally
+- Per character
+- Per character combination
+
+### Globally
+
+We cache the overall statistics for battles from the perspective of player 1 in `$STATISTICS/p1Statistics/overall`.
+
+### Per character
+
+We cache the overall statistics for player 1 usage of a character with the character info (`$CHARACTERS/$CHARACTER_ID/p1Statistics`).
+
+The overall statistics for player 2 usage of a character is also stored with the character info (`$CHARACTERS/$CHARACTER_ID/p2Statistics  `).
+
+### Per character combination
+
+We cache statistics for a given player 1/player 2 character combination in `$STATISTICS/p1Statistics/character/$P1_ID/$P2_ID`.
+
+The equivalent for player 2/player 1 is `$STATISTICS/p2Statistics/character/$P2_ID/$P1_ID`.

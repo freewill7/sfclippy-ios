@@ -35,6 +35,7 @@ class DragToSelectView: UIView {
     @IBOutlet weak var viewCustom: UIView!
     @IBOutlet var gesturePan: UIPanGestureRecognizer!
     @IBOutlet weak var labelMessage: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var imageAssistant: UIImageView!
     @IBOutlet var observer : DragToSelectObserver?
     
@@ -50,8 +51,16 @@ class DragToSelectView: UIView {
     */
     @IBInspectable var message : String? {
         didSet {
-            debugPrint("Changed message")
             self.labelMessage.text = message
+        }
+    }
+    
+    /**
+    More information to show in view.
+    */
+    @IBInspectable var subMessage : String? {
+        didSet {
+            self.labelDescription.text = subMessage
         }
     }
     
@@ -72,6 +81,7 @@ class DragToSelectView: UIView {
         
         self.labelMessage.text = message
         self.labelMessage.textColor = self.backgroundColor
+        self.labelDescription.textColor = self.backgroundColor
         self.imageAssistant.tintColor = self.backgroundColor
         self.viewMoveable.backgroundColor = self.tintColor
 
@@ -85,10 +95,6 @@ class DragToSelectView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-    }
-    
-    override func didAddSubview(_ subview: UIView) {
-        viewCustom = subview
     }
     
     /*

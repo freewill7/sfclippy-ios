@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SfButtonWithDescription" customModule="sfclippy" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="YJM-OE-aw9"/>
+                <outlet property="imageView" destination="L1m-8s-0tV" id="XIq-e5-aoT"/>
+                <outlet property="labelDescription" destination="nTv-JQ-8OG" id="Qid-hk-SzK"/>
+                <outlet property="labelMain" destination="Ziw-GF-hDd" id="5gD-DS-aW5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z14-mJ-xCI">
+                    <rect key="frame" x="62" y="314.5" width="251" height="58.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L1m-8s-0tV">
+                            <rect key="frame" x="0.0" y="5" width="48" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="48" id="jsc-UC-asZ"/>
+                                <constraint firstAttribute="height" constant="48" id="p2u-91-g1i"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeW-kQ-6c0" userLabel="TextLabels">
+                            <rect key="frame" x="56" y="0.0" width="187" height="58.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziw-GF-hDd">
+                                    <rect key="frame" x="0.0" y="8" width="187" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTv-JQ-8OG">
+                                    <rect key="frame" x="0.0" y="36" width="187" height="14.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="nTv-JQ-8OG" firstAttribute="top" secondItem="Ziw-GF-hDd" secondAttribute="bottom" constant="4" id="8ca-y3-baW"/>
+                                <constraint firstItem="Ziw-GF-hDd" firstAttribute="leading" secondItem="WeW-kQ-6c0" secondAttribute="leading" id="bb4-Mk-7t5"/>
+                                <constraint firstItem="nTv-JQ-8OG" firstAttribute="leading" secondItem="WeW-kQ-6c0" secondAttribute="leading" id="kLj-w8-gu4"/>
+                                <constraint firstAttribute="trailing" secondItem="nTv-JQ-8OG" secondAttribute="trailing" id="q5j-iE-0sP"/>
+                                <constraint firstItem="Ziw-GF-hDd" firstAttribute="top" secondItem="WeW-kQ-6c0" secondAttribute="topMargin" id="sH2-2l-R6v"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="nTv-JQ-8OG" secondAttribute="bottom" id="sZt-Qg-hw6"/>
+                                <constraint firstAttribute="trailing" secondItem="Ziw-GF-hDd" secondAttribute="trailing" id="wGS-qQ-x4b"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="L1m-8s-0tV" firstAttribute="centerY" secondItem="Z14-mJ-xCI" secondAttribute="centerY" id="33W-BE-j9S"/>
+                        <constraint firstAttribute="bottom" secondItem="WeW-kQ-6c0" secondAttribute="bottom" id="Iif-2G-8oW"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="WeW-kQ-6c0" secondAttribute="trailing" id="Kav-4K-BKU"/>
+                        <constraint firstItem="WeW-kQ-6c0" firstAttribute="top" secondItem="Z14-mJ-xCI" secondAttribute="top" id="eqf-n6-di8"/>
+                        <constraint firstItem="L1m-8s-0tV" firstAttribute="leading" secondItem="Z14-mJ-xCI" secondAttribute="leading" id="hr4-p8-Ur4"/>
+                        <constraint firstItem="WeW-kQ-6c0" firstAttribute="leading" secondItem="L1m-8s-0tV" secondAttribute="trailingMargin" constant="16" id="swi-tY-oEf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <accessibility key="accessibilityConfiguration">
+                <accessibilityTraits key="traits" button="YES"/>
+            </accessibility>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="Z14-mJ-xCI" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="9yI-o7-8H3"/>
+                <constraint firstItem="Z14-mJ-xCI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="2:3" constant="1" id="J3e-sl-Pd2"/>
+                <constraint firstItem="Z14-mJ-xCI" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="cQp-RJ-3rQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="chL-gm-6mc" appends="YES" id="E00-FV-aMU"/>
+            </connections>
+        </view>
+        <tapGestureRecognizer id="chL-gm-6mc">
+            <connections>
+                <action selector="selectAction:" destination="-1" id="tt1-4V-j92"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

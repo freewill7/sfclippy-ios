@@ -11,10 +11,37 @@ import FirebaseDatabase
 
 class CharactersTableViewCell: UITableViewCell, RatingObserver {
     @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var viewRating: RatingView!
     var imageEdit: UIImageView?
     var character : CharacterPref?
     var isP1Rating : Bool?
+    static let DAY = 24 * 60 * 60 as TimeInterval
+    static let HOUR = 60 * 60 as TimeInterval
+    
+    func generateDescription( _ optStat: UsageStatistic? ) -> String {
+        if let stat = optStat,
+            let lastBattle = stat.lastBattle {
+            
+            let now = Date()
+            let diff = now.timeIntervalSince(lastBattle)
+            var timeDescription = ""
+            if ( diff < CharactersTableViewCell.DAY ) {
+                timeDescription = "today"
+            } else {
+                let days = Int(diff / CharactersTableViewCell.DAY)
+                if ( 1 == days ) {
+                    timeDescription = "yesterday"
+                } else {
+                    timeDescription = "\(days) days ago"
+                }
+            }
+            
+            return "used \(timeDescription), wins \(stat.qtyWins) / \(stat.qtyBattles)"
+        } else {
+            return "never used"
+        }
+    }
     
     func setCharacter( character : CharacterPref, isP1 : Bool ) {
         self.character = character
@@ -22,8 +49,10 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
         labelName.text = character.name
         if isP1 {
             viewRating.rating = character.p1Rating
+            labelDescription.text = generateDescription(character.p1Statistics)
         } else {
             viewRating.rating = character.p2Rating
+            labelDescription.text = generateDescription(character.p2Statistics)
         }
     }
     

@@ -9,20 +9,22 @@
 import UIKit
 import FirebaseDatabase
 import AudioToolbox
-import Toast_Swift
 
-class ViewController: UIViewController, DragToSelectObserver {
+class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserver {
     var database : Database?
     var p1Name : String?
+    var p1Stat : String?
     var optP1Id : String?
     var p2Name : String?
+    var p2Stat : String?
     var optP2Id : String?
     var initialCenter = CGPoint()
     var feedbackGenerator : UINotificationFeedbackGenerator? = nil
     var hadBattle = false
+    var versusStat : String?
     
-    @IBOutlet weak var btnChooseP1: UIButton!
-    @IBOutlet weak var btnChooseP2: UIButton!
+    @IBOutlet weak var btnChooseP1: SfButtonWithDescription!
+    @IBOutlet weak var btnChooseP2: SfButtonWithDescription!
     
     @IBOutlet weak var selectionView: DragToSelectView!
     
@@ -33,6 +35,15 @@ class ViewController: UIViewController, DragToSelectObserver {
         selectionView.enabled = false
         selectionView.isHidden = true
         selectionView.observer = self
+        btnChooseP1.id = 101
+        btnChooseP1.clickObserver = self
+        btnChooseP2.id = 102
+        btnChooseP2.clickObserver = self
+        debugPrint("set click observer \(self)")
+        
+        refreshButton(p1: true)
+        refreshButton(p1: false)
+        refreshSliderMessage()
         
         updateHint()
     }
@@ -63,6 +74,53 @@ class ViewController: UIViewController, DragToSelectObserver {
         }
     }
     
+    func updateStatWithBattle( snapshot: DataSnapshot, date: Date, won: Bool ) -> UsageStatistic {
+        var stat = UsageStatistic()
+        if let map = snapshot.value as? [String:Any],
+            let prev = UsageStatistic.initFromMap(fromMap: map) {
+            debugPrint("updating statistic \(snapshot.key)")
+            stat = prev
+        } else {
+            debugPrint("initialising statistic from empty \(snapshot.key)")
+        }
+        stat.addResult(won: won, date: date)
+        snapshot.ref.setValue(stat.toMap())
+        return stat
+    }
+    
+    func updateStats( db: Database, date: Date, p1Id: String, p2Id: String, p1Won: Bool ) {
+        let overallStat = overallStatisticsRef(database: db)
+        overallStat?.observeSingleEvent(of: .value, with: { (snapshot) in
+            _ = self.updateStatWithBattle( snapshot: snapshot, date: date, won: p1Won )
+        })
+        
+        let p1CharStat = p1CharacterStatisticsRef(database: db, characterId: p1Id)
+        p1CharStat?.observeSingleEvent(of: .value, with: { (snapshot) in
+            let stat = self.updateStatWithBattle(snapshot: snapshot, date: date, won: p1Won)
+            self.p1Stat = self.generateStat(statistic: stat)
+            self.updateP1Info()
+        })
+        
+        let p2CharStat = p2CharacterStatisticsRef(database: db, characterId: p2Id)
+        p2CharStat?.observeSingleEvent(of: .value, with: { (snapshot) in
+            let stat = self.updateStatWithBattle(snapshot: snapshot, date: date, won: !p1Won)
+            self.p2Stat = self.generateStat(statistic: stat)
+            self.updateP2Info()
+        })
+        
+        let p1CharMap = p1VsStatisticsRef(database: db, p1Id: p1Id, p2Id: p2Id)
+        p1CharMap?.observeSingleEvent(of: .value, with: { (snapshot) in
+            let stat = self.updateStatWithBattle(snapshot: snapshot, date: date, won: p1Won)
+            self.versusStat = self.generateVersusStat(statistic: stat)
+            self.updateHint()
+        })
+        
+        let p2CharMap = p2VsStatisticsRef(database: db, p2Id: p2Id, p1Id: p1Id)
+        p2CharMap?.observeSingleEvent(of: .value, with: { (snapshot) in
+            _ = self.updateStatWithBattle(snapshot: snapshot, date: date, won: !p1Won)
+        })
+    }
+    
     func recordBattle( p1Won: Bool ) {
         if let db = database,
             let dir = userResultsRef(database: db),
@@ -70,15 +128,19 @@ class ViewController: UIViewController, DragToSelectObserver {
             let p2Id = optP2Id {
             debugPrint("non null values")
             
-            let result = BattleResult(date: Date(), p1Id: p1Id, p2Id: p2Id, p1Won: p1Won)
+            let date = Date()
+            let result = BattleResult(date: date, p1Id: p1Id, p2Id: p2Id, p1Won: p1Won)
 
             let ref = dir.childByAutoId()
             ref.setValue(result.toMap())
+
+            updateStats( db: db, date: date, p1Id: p1Id, p2Id: p2Id, p1Won: p1Won )
             
             // feed back
             hadBattle = true
+            updateP1Info()
+            updateP2Info()
             updateHint()
-            self.view.makeToast("Result recorded")
         } else {
             debugPrint("record battle called with empty values")
         }
@@ -100,36 +162,120 @@ class ViewController: UIViewController, DragToSelectObserver {
         recordBattle(p1Won: false)
     }
     
-    func updateHint( ) {
-        if p1Name == nil {
-            btnChooseP1.setImage(#imageLiteral(resourceName: "sfclippy_48"), for: UIControlState.normal)
-            btnChooseP1.setTitle("Choose a character for Player 1", for: UIControlState.normal)
+    /**
+     Implementation for ButtonClickObserver.
+    */
+    func buttonClicked(sender: Any) {
+        if btnChooseP1 == sender as? SfButtonWithDescription  {
+            debugPrint("transition to P1 choice")
+            performSegue(withIdentifier: "selectP1Character", sender: self)
+        } else if btnChooseP2 == sender as? SfButtonWithDescription {
+            debugPrint("transition to P2 choice")
+            performSegue(withIdentifier: "selectP2Character", sender: self)
         } else {
-            btnChooseP1.setTitle(p1Name, for: UIControlState.normal)
-            btnChooseP1.setImage(#imageLiteral(resourceName: "icon_48_p1"), for: UIControlState.normal)
+            debugPrint("button click event from unknown")
         }
+    }
+    
+    func refreshButton( p1: Bool ) {
+        let button = p1 ? btnChooseP1 : btnChooseP2
         
-        if p2Name == nil {
-            btnChooseP2.setImage(#imageLiteral(resourceName: "sfclippy_48"), for: UIControlState.normal)
-            btnChooseP2.setTitle("Choose a character for Player 2", for: UIControlState.normal)
-            //selectionView.message = "Zzz... (waiting for Player 1 selection)"
+        let optName = p1 ? p1Name : p2Name
+        let optStat = p1 ? p1Stat : p2Stat
+        let image = p1 ? #imageLiteral(resourceName: "icon_48_p1") : #imageLiteral(resourceName: "icon_48_p2")
+        
+        if let name = optName {
+            button?.message = name
+            button?.subMessage = optStat
+            button?.image = image
         } else {
-            btnChooseP2.setTitle(p2Name, for: UIControlState.normal)
-            btnChooseP2.setImage(#imageLiteral(resourceName: "icon_48_p2"), for: UIControlState.normal)
+            button?.message = "Select character"
+            button?.subMessage = nil
+            button?.image = #imageLiteral(resourceName: "sfclippy_48")
         }
-        
+    }
+    
+    func refreshSliderMessage() {
         if nil != p1Name && nil != p2Name {
             selectionView.isHidden = false
             selectionView.enabled = true
-            if ( hadBattle ) {
-                selectionView.message = "Result recorded"
+            let message = hadBattle ? "Result recorded" : "Drag me to the winner"
+            if let stat = versusStat {
+                selectionView.message = message
+                selectionView.subMessage = stat
             } else {
-                selectionView.message = "Drag me to the winner"
+                selectionView.message = message
+                selectionView.subMessage = nil
             }
         } else {
             selectionView.isHidden = true
             selectionView.enabled = false
         }
+    }
+    
+    func generateStat( statistic: UsageStatistic ) -> String {
+        let winPercent = (statistic.qtyWins * 100) / statistic.qtyBattles
+        return  "wins \(winPercent)% of battles"
+    }
+    
+    func generateStat( snapshot : DataSnapshot ) -> String? {
+        if let map = snapshot.value as? [String:Any],
+            let stat = UsageStatistic.initFromMap(fromMap: map) {
+            return generateStat( statistic: stat )
+        }
+        return nil
+    }
+    
+    func generateVersusStat( statistic: UsageStatistic ) -> String {
+        return "Player 1 has won matchup \(statistic.qtyWins) / \(statistic.qtyBattles) times"
+    }
+    func fetchVersusStat( snapshot : DataSnapshot ) {
+        debugPrint("processing versus stat")
+        if let map = snapshot.value as? [String:Any],
+            let stat = UsageStatistic.initFromMap(fromMap: map) {
+            versusStat = generateVersusStat(statistic: stat)
+        } else {
+            versusStat = nil
+        }
+        refreshSliderMessage()
+    }
+    
+    func updateHint( ) {
+        if let id1 = optP1Id,
+            let id2 = optP2Id {
+            debugPrint("fetching battle stat")
+            p1VsStatisticsRef(database: database!, p1Id: id1, p2Id: id2)?.observeSingleEvent(of: .value, with: { (snapshot) in
+                self.fetchVersusStat( snapshot: snapshot )
+            })
+        }
+    }
+    
+    func fetchP1Stat( snapshot: DataSnapshot ) {
+        debugPrint("processing p1Stat")
+        p1Stat = generateStat(snapshot: snapshot)
+        refreshButton(p1: true)
+    }
+    
+    func fetchP2Stat( snapshot : DataSnapshot ) {
+        debugPrint("processing p2Stat")
+        p2Stat = generateStat(snapshot: snapshot)
+        refreshButton(p1: false)
+    }
+    
+    func updateP1Info( ) {
+        debugPrint("fetching p1Info")
+        p1CharacterStatisticsRef(database: database!, characterId: optP1Id!)?.observeSingleEvent(of: .value, with: { (snapshot) in
+            debugPrint("updating p1Stat")
+            self.fetchP1Stat(snapshot: snapshot)
+        })
+    }
+    
+    func updateP2Info( ) {
+        debugPrint("fetching p2Info")
+        p2CharacterStatisticsRef(database: database!, characterId: optP2Id!)?.observeSingleEvent(of: .value, with: { (snapshot) in
+            debugPrint("updating p2Stat")
+            self.fetchP2Stat(snapshot:snapshot)
+        })
     }
     
     @IBAction func unwindToBattle(unwindSegue: UIStoryboardSegue) {
@@ -139,12 +285,14 @@ class ViewController: UIViewController, DragToSelectObserver {
         if let tblController = unwindSegue.source as? CharactersTableViewController {
             if ( 0 == tblController.playerId ) {
                 p1Name = tblController.selectedName
+                p1Stat = ""
                 optP1Id = tblController.selectedId
-                btnChooseP1.setTitle(p1Name, for: UIControlState.normal)
+                updateP1Info()
             } else if ( 1 == tblController.playerId ) {
                 p2Name = tblController.selectedName
+                p2Stat = ""
                 optP2Id = tblController.selectedId
-                btnChooseP2.setTitle(p2Name, for: UIControlState.normal)
+                updateP2Info()
             }
             hadBattle = false
             updateHint()

@@ -13,6 +13,7 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var labelP1: UILabel!
     @IBOutlet weak var labelP2: UILabel!
     @IBOutlet weak var labelWinner: UILabel!
+    
     var result : BattleResult?
     var characterMap : [String:CharacterPref]?
     
