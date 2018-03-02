@@ -84,6 +84,9 @@ class DragToSelectView: UIView {
         self.labelDescription.textColor = self.backgroundColor
         self.imageAssistant.tintColor = self.backgroundColor
         self.viewMoveable.backgroundColor = self.tintColor
+        
+        // round the edges
+        self.viewMoveable.layer.cornerRadius = 16;
 
     }
     
