@@ -38,6 +38,7 @@ class DragToSelectView: UIView {
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var imageAssistant: UIImageView!
     @IBOutlet var observer : DragToSelectObserver?
+    var feedbackGenerator : UINotificationFeedbackGenerator?
     
     var enabled : Bool = true {
         didSet {
@@ -122,8 +123,8 @@ class DragToSelectView: UIView {
             self.initialCenter = piece.center
             
             // Instantiate feedback generator
-            //self.feedbackGenerator = UINotificationFeedbackGenerator()
-            //feedbackGenerator?.prepare()
+            self.feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator?.prepare()
         }
         // Update the position for the .began, .changed, and .ended states
         if gesturePan.state == .changed {
@@ -134,8 +135,8 @@ class DragToSelectView: UIView {
                 debugPrint("top")
                 
                 if #available(iOS 10,*) {
-                //feedbackGenerator?.notificationOccurred(UINotificationFeedbackType.success)
-                    //feedbackGenerator?.prepare()
+                    feedbackGenerator?.notificationOccurred(UINotificationFeedbackType.success)
+                    feedbackGenerator?.prepare()
                 }
                 
                 // reset movement
@@ -152,8 +153,8 @@ class DragToSelectView: UIView {
                 debugPrint("bottom")
                 
                 if #available(iOS 10,*) {
-                    //feedbackGenerator?.notificationOccurred(UINotificationFeedbackType.success)
-                    //feedbackGenerator?.prepare()
+                    feedbackGenerator?.notificationOccurred(UINotificationFeedbackType.success)
+                    feedbackGenerator?.prepare()
                 }
                 
                 // reset movement
@@ -172,7 +173,7 @@ class DragToSelectView: UIView {
             // On cancellation, return the piece to its original location.
             debugPrint("cancelled with velocity", gesturePan.velocity(in: piece.superview))
             piece.center = initialCenter
-            //feedbackGenerator = nil
+            feedbackGenerator = nil
         }
     }
 

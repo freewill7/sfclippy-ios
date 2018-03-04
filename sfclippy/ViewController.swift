@@ -227,8 +227,9 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
     }
     
     func generateVersusStat( statistic: UsageStatistic ) -> String {
-        return "Player 1 has won matchup \(statistic.qtyWins) / \(statistic.qtyBattles) times"
+        return "Player 1 wins matchup \(statistic.qtyWins) / \(statistic.qtyBattles) times"
     }
+    
     func fetchVersusStat( snapshot : DataSnapshot ) {
         debugPrint("processing versus stat")
         if let map = snapshot.value as? [String:Any],

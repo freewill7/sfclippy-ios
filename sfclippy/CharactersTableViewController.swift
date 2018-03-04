@@ -177,15 +177,14 @@ class CharactersTableViewController: UITableViewController {
         
         let isP1 = (0==playerId)
         
-        if editMode {
+        /*if editMode {
             let cell = tableView.dequeueReusableCell(withIdentifier: "editCharacterCell", for: indexPath) as! EditCharactersTableViewCell
             cell.setCharacter( character: characters[indexPath.row], isP1: isP1 )
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
-            cell.setCharacter( character: characters[indexPath.row], isP1: isP1 )
-            return cell
-        }
+        } */
+        let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
+            cell.setCharacter( character: characters[indexPath.row], isP1: isP1, isEdit: editMode )
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {

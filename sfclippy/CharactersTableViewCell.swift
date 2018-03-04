@@ -13,7 +13,7 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var viewRating: RatingView!
-    var imageEdit: UIImageView?
+    @IBOutlet weak var imageRight: UIImageView!
     var character : CharacterPref?
     var isP1Rating : Bool?
     static let DAY = 24 * 60 * 60 as TimeInterval
@@ -32,27 +32,38 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
                 let days = Int(diff / CharactersTableViewCell.DAY)
                 if ( 1 == days ) {
                     timeDescription = "yesterday"
+                } else if ( days > 28 ){
+                    timeDescription = "\(days/28) months ago"
                 } else {
                     timeDescription = "\(days) days ago"
                 }
             }
             
-            return "used \(timeDescription), wins \(stat.qtyWins) / \(stat.qtyBattles)"
+            return "\(timeDescription), wins \(stat.qtyWins) / \(stat.qtyBattles)"
         } else {
             return "never used"
         }
     }
     
-    func setCharacter( character : CharacterPref, isP1 : Bool ) {
+    func setCharacter( character : CharacterPref, isP1 : Bool, isEdit: Bool ) {
         self.character = character
         self.isP1Rating = isP1
         labelName.text = character.name
-        if isP1 {
-            viewRating.rating = character.p1Rating
-            labelDescription.text = generateDescription(character.p1Statistics)
+        
+        if isEdit {
+            imageRight.isHidden = false
+            viewRating.isHidden = true
         } else {
-            viewRating.rating = character.p2Rating
-            labelDescription.text = generateDescription(character.p2Statistics)
+            imageRight.isHidden = true
+            viewRating.isHidden = false
+
+            if isP1 {
+                viewRating.rating = character.p1Rating
+                labelDescription.text = generateDescription(character.p1Statistics)
+            } else {
+                viewRating.rating = character.p2Rating
+                labelDescription.text = generateDescription(character.p2Statistics)
+            }
         }
     }
     

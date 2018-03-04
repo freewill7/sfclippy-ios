@@ -10,7 +10,8 @@ import UIKit
 import GoogleSignIn
 
 class SignInViewController: UIViewController, GIDSignInUIDelegate {
-
+    var signedIn = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,8 +23,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // move into main app
-        performSegue(withIdentifier: "segueEnter", sender: self)
+        if signedIn {
+            self.performSegue(withIdentifier: "segueEnter", sender: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {

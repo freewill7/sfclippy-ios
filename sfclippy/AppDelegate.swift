@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 return
             }
             // User is signed in
-            // ...
+            self.window?.rootViewController?.performSegue(withIdentifier: "segueEnter", sender: self)
         }
     }
     

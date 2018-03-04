@@ -26,26 +26,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsV-CK-7yi" userLabel="DragToSelectView">
-                    <rect key="frame" x="8" y="218" width="359" height="230"/>
+                    <rect key="frame" x="8" y="293" width="359" height="80"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="222" translatesAutoresizingMaskIntoConstraints="NO" id="aox-Zc-3pg">
-                            <rect key="frame" x="4" y="4" width="96" height="222"/>
+                            <rect key="frame" x="8" y="16" width="48" height="48"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="96" id="Bxy-Bb-9Pb"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="96" id="TNJ-eC-D6i"/>
+                                <constraint firstAttribute="width" constant="48" id="Bxy-Bb-9Pb"/>
+                                <constraint firstAttribute="height" constant="48" id="TNJ-eC-D6i"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzV-sI-lXi">
-                            <rect key="frame" x="108" y="51" width="243" height="128"/>
+                            <rect key="frame" x="64" y="-24" width="291" height="128"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9h-rC-PJM" userLabel="Label Message">
-                                    <rect key="frame" x="0.0" y="39.5" width="243" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="39.5" width="291" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="222" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ" userLabel="Label Description">
-                                    <rect key="frame" x="0.0" y="68" width="243" height="222"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="222" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-yI-OFQ" userLabel="Label Description">
+                                    <rect key="frame" x="0.0" y="68" width="291" height="222"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -67,10 +67,10 @@
                     <constraints>
                         <constraint firstItem="vzV-sI-lXi" firstAttribute="leading" secondItem="aox-Zc-3pg" secondAttribute="trailing" constant="8" id="1Pg-hR-NMt"/>
                         <constraint firstItem="vzV-sI-lXi" firstAttribute="centerY" secondItem="jsV-CK-7yi" secondAttribute="centerY" id="9BS-p8-tnB"/>
-                        <constraint firstAttribute="trailing" secondItem="vzV-sI-lXi" secondAttribute="trailing" constant="8" id="EUe-Ct-iVK"/>
-                        <constraint firstItem="aox-Zc-3pg" firstAttribute="top" secondItem="jsV-CK-7yi" secondAttribute="top" constant="4" id="Kyi-bZ-yTt"/>
-                        <constraint firstItem="aox-Zc-3pg" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" constant="4" id="gW1-y8-QLC"/>
-                        <constraint firstAttribute="bottom" secondItem="aox-Zc-3pg" secondAttribute="bottom" constant="4" id="z8F-nJ-eSN"/>
+                        <constraint firstAttribute="trailing" secondItem="vzV-sI-lXi" secondAttribute="trailing" constant="4" id="EUe-Ct-iVK"/>
+                        <constraint firstItem="aox-Zc-3pg" firstAttribute="top" secondItem="jsV-CK-7yi" secondAttribute="top" constant="16" id="Kyi-bZ-yTt"/>
+                        <constraint firstItem="aox-Zc-3pg" firstAttribute="leading" secondItem="jsV-CK-7yi" secondAttribute="leading" constant="8" id="gW1-y8-QLC"/>
+                        <constraint firstAttribute="bottom" secondItem="aox-Zc-3pg" secondAttribute="bottom" constant="16" id="z8F-nJ-eSN"/>
                     </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="uYZ-yI-xwp" appends="YES" id="o0b-2x-4e7"/>

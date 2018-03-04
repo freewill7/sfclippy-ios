@@ -2,25 +2,22 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "sfclippy48_1x.png",
+      "filename" : "sfclippy96w_1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "sfclippy48_2x.png",
+      "filename" : "sfclippy96w_2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "sfclippy48_3x.png",
+      "filename" : "sfclippy96w_3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }
