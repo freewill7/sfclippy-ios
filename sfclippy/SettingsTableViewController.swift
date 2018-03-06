@@ -62,85 +62,6 @@ class SettingsTableViewController: UITableViewController {
 
         return cell
     }
-
-    func updateStatisticsMap( map: inout [String:UsageStatistic], key: String, won: Bool, date: Date ) {
-        let statistic = map[key, default: UsageStatistic()]
-        statistic.addResult(won: won, date:date)
-        map[key] = statistic
-    }
-    
-    func updateStatisticsMapMap( map: inout [String:[String:UsageStatistic]], key1: String, key2: String, won: Bool, date: Date) {
-        var statsMap = map[key1, default: [String:UsageStatistic]()]
-        updateStatisticsMap(map: &statsMap, key: key2, won: won, date: date)
-        map[key1] = statsMap
-    }
-    
-    func regenerateStatistics(snapshot : DataSnapshot) {
-        debugPrint("regenerate stats called")
-        
-        let overall = UsageStatistic()
-        var p1CharOverall = [String:UsageStatistic]()
-        var p2CharOverall = [String:UsageStatistic]()
-        var p1CharMap = [String:[String:UsageStatistic]]()
-        var p2CharMap = [String:[String:UsageStatistic]]()
-        
-        // generate statistics
-        if let results = snapshot.value as? [String:[String:Any]] {
-            for pair in results {
-                if let result = BattleResult.initFromMap(fromMap: pair.value) {
-                    let date = result.date
-                    let p1Id = result.p1Id
-                    let p2Id = result.p2Id
-                    let p1Won = result.p1Won
-                    
-                    overall.addResult(won: p1Won, date: date)
-                    
-                    updateStatisticsMap(map: &p1CharOverall, key: p1Id, won: p1Won, date: date)
-                    updateStatisticsMap(map: &p2CharOverall, key: p2Id, won: !p1Won, date: date)
-                    
-                    updateStatisticsMapMap(map: &p1CharMap, key1: p1Id, key2: p2Id, won: p1Won, date: date)
-                    updateStatisticsMapMap(map: &p2CharMap, key1: p2Id, key2: p1Id, won: !p1Won, date: date)
-                }
-            }
-        }
-        
-        // store statistics
-        if let refOverall = overallStatisticsRef(database: database) {
-            refOverall.setValue(overall.toMap())
-        }
-        
-        for kv in p1CharOverall {
-            if let ref = p1CharacterStatisticsRef(database: database, characterId: kv.key) {
-                ref.setValue(kv.value.toMap())
-            }
-        }
-        
-        for kv in p2CharOverall {
-            if let ref = p2CharacterStatisticsRef(database: database, characterId: kv.key) {
-                ref.setValue(kv.value.toMap())
-            }
-        }
-        
-        for kkv in p1CharMap {
-            for kv in kkv.value {
-                if let ref = p1VsStatisticsRef(database: database, p1Id: kkv.key, p2Id: kv.key) {
-                    ref.setValue(kv.value.toMap())
-                }
-            }
-        }
-        
-        for kkv in p2CharMap {
-            for kv in kkv.value {
-                if let ref = p2VsStatisticsRef(database: database, p2Id: kkv.key, p1Id: kv.key) {
-                    ref.setValue(kv.value.toMap())
-                }
-            }
-        }
-        
-        debugPrint("results = \(overall.qtyWins) / \(overall.qtyBattles)")
-        regeneratingStats = false
-        tableView.reloadData()
-    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
         debugPrint("selected row at \(indexPath.row)")
@@ -154,10 +75,12 @@ class SettingsTableViewController: UITableViewController {
                 regeneratingStats = true
                 tableView.reloadData()
 
-                let resultsRef = userResultsRef(database: database)
+                let resultsRef = userResultsDirRef(database: database)
                 resultsRef?.queryOrdered(byChild: BattleResult.keyDate).observeSingleEvent(of: .value, with: {
                     (snapshot) in
-                    self.regenerateStatistics(snapshot: snapshot)
+                    regenerateStatistics(database: self.database, snapshot: snapshot)
+                    self.regeneratingStats = false
+                    self.tableView.reloadData()
                     })
             }
         }

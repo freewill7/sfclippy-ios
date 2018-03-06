@@ -37,7 +37,7 @@ class ResultsTableViewController: UITableViewController {
     
     func observeAddResult( snapshot : DataSnapshot ) {
         if let map = snapshot.value as? [String:Any],
-            let result = BattleResult.initFromMap(fromMap: map) {
+            let result = BattleResult.initFromMap(fromMap: map, withId: snapshot.key) {
             addToResults(result)
             tableView.reloadData()
         } else {
@@ -60,7 +60,7 @@ class ResultsTableViewController: UITableViewController {
 
         self.database = Database.database()
         if let db = database {
-            let resultsRef = userResultsRef(database: db)
+            let resultsRef = userResultsDirRef(database: db)
             resultsRef?.queryOrdered(byChild: BattleResult.keyDate).observe(DataEventType.childAdded, with: { (snapshot : DataSnapshot) in
                 self.observeAddResult(snapshot: snapshot)
             })
@@ -142,25 +142,51 @@ class ResultsTableViewController: UITableViewController {
         performSegue(withIdentifier: "showResult", sender: self)
     }
     
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            
+            // identify value to delete
+            let section = indexPath.section
+            let val = resultsArr[section].value[indexPath.row]
+            
+            // delete from firebase
+            if let db = database,
+                let resultId = val.id,
+                let ref = userResultsRecordRef(database: db, id: resultId ) {
+                ref.removeValue()
+            }
+            
+            // remove row
+            resultsArr[section].value.remove(at: indexPath.row)
+            
+            // delete animation
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+
+            // regenerate statistics in background
+            if let db = database,
+                let ref = userResultsDirRef(database: db) {
+                
+                ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                    regenerateStatistics(database: db, snapshot: snapshot, p1CharId: val.p1Id, p2CharId: val.p2Id)
+                })
+            }
+
+            // TODO  remove section... causes crash atm >:-(
+            /* if resultsArr[section].value.count == 0 {
+                resultsArr.remove(at: section)
+                let section = IndexSet(integer: section)
+                tableView.deleteSections(section, with: .fade)
+            } */
+            
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.

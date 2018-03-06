@@ -85,6 +85,7 @@ class BattleResult {
     var p1Id : String
     var p2Id : String
     var p1Won : Bool
+    var id : String?
     
     static let keyDate = "date"
     static let keyP1 = "p1Character"
@@ -93,11 +94,12 @@ class BattleResult {
     static let valueTrue = "true"
     static let valueFalse = "false"
     
-    init( date: Date, p1Id : String, p2Id : String, p1Won : Bool) {
+    init( date: Date, p1Id : String, p2Id : String, p1Won : Bool, id: String?) {
         self.date = date
         self.p1Id = p1Id
         self.p2Id = p2Id
         self.p1Won = p1Won
+        self.id = id
     }
     
     func toMap( ) -> [String:Any] {
@@ -111,7 +113,7 @@ class BattleResult {
 
     }
     
-    static func initFromMap( fromMap map: [String:Any] ) -> BattleResult? {
+    static func initFromMap( fromMap map: [String:Any], withId id: String ) -> BattleResult? {
         if let pDate = map[keyDate] as? String,
             let pP1Id = map[keyP1] as? String,
             let pP2Id = map[keyP2] as? String,
@@ -120,7 +122,7 @@ class BattleResult {
             let formatter = getFormatter()
  
             if let date = formatter.date(from: pDate) {
-                return BattleResult(date: date, p1Id: pP1Id, p2Id: pP2Id, p1Won: pP1Won)
+                return BattleResult(date: date, p1Id: pP1Id, p2Id: pP2Id, p1Won: pP1Won, id: id)
             } else {
                 debugPrint("Bad date")
                 return nil
@@ -232,10 +234,17 @@ func userCharactersPref( database : Database, characterId : String ) -> Database
     return nil
 }
 
-func userResultsRef( database : Database ) -> DatabaseReference? {
+func userResultsDirRef( database : Database ) -> DatabaseReference? {
     if let userHome = userDir() {
         let path = userHome + "/results"
         return database.reference(withPath: path)
+    }
+    return nil
+}
+
+func userResultsRecordRef( database : Database, id: String ) -> DatabaseReference? {
+    if let resDir = userResultsDirRef(database: database) {
+        return resDir.child(id)
     }
     return nil
 }
@@ -270,4 +279,90 @@ func p2VsStatisticsRef( database: Database, p2Id: String, p1Id: String ) -> Data
         return database.reference(withPath: path)
     }
     return nil
+}
+
+private func updateStatisticsMap( map: inout [String:UsageStatistic], key: String, won: Bool, date: Date ) {
+    let statistic = map[key, default: UsageStatistic()]
+    statistic.addResult(won: won, date:date)
+    map[key] = statistic
+}
+
+private func updateStatisticsMapMap( map: inout [String:[String:UsageStatistic]], key1: String, key2: String, won: Bool, date: Date) {
+    var statsMap = map[key1, default: [String:UsageStatistic]()]
+    updateStatisticsMap(map: &statsMap, key: key2, won: won, date: date)
+    map[key1] = statsMap
+}
+
+func regenerateStatistics( database: Database, snapshot: DataSnapshot, p1CharId : String? = nil, p2CharId : String? = nil) {
+    
+    let overall = UsageStatistic()
+    var p1CharOverall = [String:UsageStatistic]()
+    var p2CharOverall = [String:UsageStatistic]()
+    var p1CharMap = [String:[String:UsageStatistic]]()
+    var p2CharMap = [String:[String:UsageStatistic]]()
+    
+    // generate statistics
+    if let results = snapshot.value as? [String:[String:Any]] {
+        for pair in results {
+            if let result = BattleResult.initFromMap(fromMap: pair.value, withId: pair.key) {
+                let date = result.date
+                let p1Id = result.p1Id
+                let p2Id = result.p2Id
+                let p1Won = result.p1Won
+                
+                overall.addResult(won: p1Won, date: date)
+                
+                updateStatisticsMap(map: &p1CharOverall, key: p1Id, won: p1Won, date: date)
+                updateStatisticsMap(map: &p2CharOverall, key: p2Id, won: !p1Won, date: date)
+                
+                updateStatisticsMapMap(map: &p1CharMap, key1: p1Id, key2: p2Id, won: p1Won, date: date)
+                updateStatisticsMapMap(map: &p2CharMap, key1: p2Id, key2: p1Id, won: !p1Won, date: date)
+            }
+        }
+    }
+    
+    // store statistics
+    if let refOverall = overallStatisticsRef(database: database) {
+        refOverall.setValue(overall.toMap())
+    }
+    
+    // store overall p1 results
+    for kv in p1CharOverall {
+        if let ref = p1CharacterStatisticsRef(database: database, characterId: kv.key) {
+            ref.setValue(kv.value.toMap())
+        }
+    }
+    
+    // store overall p2 results
+    for kv in p2CharOverall {
+        if let ref = p2CharacterStatisticsRef(database: database, characterId: kv.key) {
+            ref.setValue(kv.value.toMap())
+        }
+    }
+    
+    // store per character p1 stats
+    for kkv in p1CharMap {
+        if nil == p1CharId || kkv.key == p1CharId {
+            for kv in kkv.value {
+                if nil == p2CharId || kv.key == p2CharId {
+                    if let ref = p1VsStatisticsRef(database: database, p1Id: kkv.key, p2Id: kv.key) {
+                        ref.setValue(kv.value.toMap())
+                    }
+                }
+            }
+        }
+    }
+    
+    // store per character p2 stats
+    for kkv in p2CharMap {
+        if nil == p2CharId || kkv.key == p2CharId {
+            for kv in kkv.value {
+                if nil == p1CharId || kv.key == p1CharId {
+                    if let ref = p2VsStatisticsRef(database: database, p2Id: kkv.key, p1Id: kv.key) {
+                        ref.setValue(kv.value.toMap())
+                    }
+                }
+            }
+        }
+    }
 }

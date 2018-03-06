@@ -22,7 +22,6 @@
 		BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */; };
 		BE2169351FD35D75009F0703 /* DragToSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2169341FD35D75009F0703 /* DragToSelectView.xib */; };
 		BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2169321FD350B2009F0703 /* DragToSelectView.swift */; };
-		BE325912203221A5004509C2 /* EditCharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */; };
 		BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */; };
 		BE3E651E203B7A5A00961A29 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */; };
 		BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
@@ -86,7 +85,6 @@
 		BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
 		BE2169321FD350B2009F0703 /* DragToSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToSelectView.swift; sourceTree = "<group>"; };
 		BE2169341FD35D75009F0703 /* DragToSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragToSelectView.xib; sourceTree = "<group>"; };
-		BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCharactersTableViewCell.swift; sourceTree = "<group>"; };
 		BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247491FC05641003E08A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 				BE2169341FD35D75009F0703 /* DragToSelectView.xib */,
 				BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */,
 				BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */,
-				BE325911203221A5004509C2 /* EditCharactersTableViewCell.swift */,
 				BEACF71B20364B51001A8A6D /* ResultViewController.swift */,
 				BE95BF26203A28E10094A70B /* SfHeadingView.xib */,
 				BE95BF28203A29F80094A70B /* SfHeadingView.swift */,
@@ -564,7 +561,6 @@
 				BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */,
 				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
 				BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */,
-				BE325912203221A5004509C2 /* EditCharactersTableViewCell.swift in Sources */,
 				BE3E651E203B7A5A00961A29 /* SettingsTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
 				BEC74F57204954A60081820B /* SfButtonWithDescription.swift in Sources */,

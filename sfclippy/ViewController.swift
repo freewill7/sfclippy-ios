@@ -123,13 +123,13 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
     
     func recordBattle( p1Won: Bool ) {
         if let db = database,
-            let dir = userResultsRef(database: db),
+            let dir = userResultsDirRef(database: db),
             let p1Id = optP1Id,
             let p2Id = optP2Id {
             debugPrint("non null values")
             
             let date = Date()
-            let result = BattleResult(date: date, p1Id: p1Id, p2Id: p2Id, p1Won: p1Won)
+            let result = BattleResult(date: date, p1Id: p1Id, p2Id: p2Id, p1Won: p1Won, id: nil)
 
             let ref = dir.childByAutoId()
             ref.setValue(result.toMap())
