@@ -41,6 +41,7 @@
 		BEACF71C20364B51001A8A6D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEACF71B20364B51001A8A6D /* ResultViewController.swift */; };
 		BEC74F55204952F00081820B /* SfButtonWithDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC74F54204952F00081820B /* SfButtonWithDescription.xib */; };
 		BEC74F57204954A60081820B /* SfButtonWithDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC74F56204954A60081820B /* SfButtonWithDescription.swift */; };
+		BECC1D29205096FE00A93900 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECC1D28205096FE00A93900 /* ConfirmViewController.swift */; };
 		BF68B1EE9A7C4887663DDB2E /* Pods_sfclippy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3CB2A0D3F6042DF5799D95 /* Pods_sfclippy.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		BEACF71B20364B51001A8A6D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		BEC74F54204952F00081820B /* SfButtonWithDescription.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SfButtonWithDescription.xib; sourceTree = "<group>"; };
 		BEC74F56204954A60081820B /* SfButtonWithDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SfButtonWithDescription.swift; sourceTree = "<group>"; };
+		BECC1D28205096FE00A93900 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.release.xcconfig"; sourceTree = "<group>"; };
 		C5C023FF1C1723FFE0B6C4BA /* Pods-sfclippyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD3FEF6BBF37F476E1ECBC77 /* Pods-sfclippyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyUITests/Pods-sfclippyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				BE4F225B20420E7200900013 /* StatisticsTableViewCell.swift */,
 				BEC74F54204952F00081820B /* SfButtonWithDescription.xib */,
 				BEC74F56204954A60081820B /* SfButtonWithDescription.swift */,
+				BECC1D28205096FE00A93900 /* ConfirmViewController.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				BEC74F57204954A60081820B /* SfButtonWithDescription.swift in Sources */,
 				BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */,
 				BE4F225A20420D8B00900013 /* StatisticsTableViewController.swift in Sources */,
+				BECC1D29205096FE00A93900 /* ConfirmViewController.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,
 				BE95BF29203A29F80094A70B /* SfHeadingView.swift in Sources */,
 				BE4F225C20420E7200900013 /* StatisticsTableViewCell.swift in Sources */,

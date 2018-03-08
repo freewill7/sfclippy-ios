@@ -9,16 +9,23 @@
 import UIKit
 import FirebaseDatabase
 
-enum Options
-{
+enum SettingsOperation {
     case RegenerateStatistics
+    case DeleteEverything
 };
+
+enum SettingsOperationType {
+    case Harmless
+    case Destructive
+}
 
 class SettingsTableViewController: UITableViewController {
     
     let database = Database.database()
-    let options = [ (Options.RegenerateStatistics, "Regenerate Statistics") ]
+    let options = [ (SettingsOperation.RegenerateStatistics, "Regenerate Statistics", SettingsOperationType.Harmless),
+                    (SettingsOperation.DeleteEverything, "Delete Everything", SettingsOperationType.Destructive) ]
     var regeneratingStats = false
+    var operation : SettingsOperation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +57,17 @@ class SettingsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
         if let settings = cell as? SettingsTableViewCell {
+            // update label
             settings.labelSetting.text = options[indexPath.row].1
-            if regeneratingStats {
-                debugPrint("disabling setting")
-                settings.labelSetting.textColor = UIColor.gray
+            
+            // update color
+            if .Destructive == options[indexPath.row].2 {
+                settings.labelSetting.textColor = UIColor.red
             } else {
-                debugPrint("enabling setting")
                 settings.labelSetting.textColor = UIColor(named: "color_primary_1")
             }
+        } else {
+            debugPrint("mystery cell")
         }
 
         return cell
@@ -67,6 +77,7 @@ class SettingsTableViewController: UITableViewController {
         debugPrint("selected row at \(indexPath.row)")
         
         let setting = options[indexPath.row]
+        self.operation = setting.0
         switch ( setting.0 ) {
         case .RegenerateStatistics:
             //
@@ -83,9 +94,18 @@ class SettingsTableViewController: UITableViewController {
                     self.tableView.reloadData()
                     })
             }
+        case .DeleteEverything:
+            //
+            debugPrint("deleteEverything clicked")
+            performSegue(withIdentifier: "confirmAction", sender: self)
+            //deleteEverything()
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    @IBAction func unwindToSettings(unwindSegue: UIStoryboardSegue) {
+        debugPrint("unwound to characters")
     }
     
     /*
@@ -123,14 +143,17 @@ class SettingsTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
+        if let dst = segue.destination as? ConfirmViewController {
+            dst.operation = operation
+        }
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }

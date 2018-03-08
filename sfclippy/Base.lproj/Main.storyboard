@@ -389,7 +389,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yep-6M-uwH">
                                             <rect key="frame" x="24" y="19" width="327" height="6"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" name="color_primary_1"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -413,10 +413,82 @@
                     <navigationItem key="navigationItem" title="Settings" id="eU9-wW-dhZ">
                         <barButtonItem key="backBarButtonItem" title="Back" id="3NJ-Hj-mUC"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="PAV-Hx-rwf" kind="show" identifier="confirmAction" id="yj6-4e-wOd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wNl-hf-Qb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1054" y="1530"/>
+        </scene>
+        <!--Confirm-->
+        <scene sceneID="inY-lK-J71">
+            <objects>
+                <viewController title="Confirm" id="PAV-Hx-rwf" customClass="ConfirmViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="49C-wc-mU1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ALG-Zv-scC">
+                                <rect key="frame" x="32" y="174" width="311" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textValueEdited:" destination="PAV-Hx-rwf" eventType="editingChanged" id="Vxe-zc-Wnv"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0B9-oi-RPq">
+                                <rect key="frame" x="126.5" y="236" width="122" height="30"/>
+                                <state key="normal" title="Delete Everything"/>
+                                <connections>
+                                    <action selector="performAction:" destination="PAV-Hx-rwf" eventType="touchUpInside" id="ePC-PS-3Gb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm you wish to proceed by entering &quot;Edmond&quot; into the text field below" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zrs-UW-K83">
+                                <rect key="frame" x="16" y="117" width="343" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WARNING: This is a destructive operation!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7g-3D-ULb">
+                                <rect key="frame" x="16" y="80" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Zrs-UW-K83" firstAttribute="leading" secondItem="hGa-7M-Ehn" secondAttribute="leading" constant="16" id="2VT-Wm-xmT"/>
+                            <constraint firstItem="ALG-Zv-scC" firstAttribute="leading" secondItem="hGa-7M-Ehn" secondAttribute="leading" constant="32" id="6Ol-Jc-8us"/>
+                            <constraint firstItem="hGa-7M-Ehn" firstAttribute="trailing" secondItem="q7g-3D-ULb" secondAttribute="trailing" constant="16" id="8gv-C0-Uxn"/>
+                            <constraint firstItem="Zrs-UW-K83" firstAttribute="trailing" secondItem="hGa-7M-Ehn" secondAttribute="trailing" constant="-16" id="Bo6-II-731"/>
+                            <constraint firstItem="q7g-3D-ULb" firstAttribute="top" secondItem="hGa-7M-Ehn" secondAttribute="top" constant="16" id="GXR-hc-xb1"/>
+                            <constraint firstItem="hGa-7M-Ehn" firstAttribute="trailing" secondItem="ALG-Zv-scC" secondAttribute="trailing" constant="32" id="Oa4-rv-Tp2"/>
+                            <constraint firstItem="Zrs-UW-K83" firstAttribute="top" secondItem="q7g-3D-ULb" secondAttribute="bottom" constant="16" id="Pcm-l7-3kf"/>
+                            <constraint firstItem="ALG-Zv-scC" firstAttribute="top" secondItem="Zrs-UW-K83" secondAttribute="bottom" constant="16" id="igY-Op-C0l"/>
+                            <constraint firstItem="q7g-3D-ULb" firstAttribute="leading" secondItem="hGa-7M-Ehn" secondAttribute="leading" constant="16" id="jyL-7K-hWv"/>
+                            <constraint firstItem="0B9-oi-RPq" firstAttribute="centerX" secondItem="hGa-7M-Ehn" secondAttribute="centerX" id="l30-2P-6ad"/>
+                            <constraint firstItem="0B9-oi-RPq" firstAttribute="top" secondItem="ALG-Zv-scC" secondAttribute="bottom" constant="32" id="zUu-EL-gad"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hGa-7M-Ehn"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Confirm" id="2Yv-pQ-5Xf">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="x7m-Lt-Q7y"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonDelete" destination="0B9-oi-RPq" id="we4-pv-wPx"/>
+                        <outlet property="labelExplanation" destination="Zrs-UW-K83" id="6Ow-R1-MFI"/>
+                        <outlet property="textConfirm" destination="ALG-Zv-scC" id="YZ4-Q1-RF0"/>
+                        <segue destination="A3g-m2-K2M" kind="unwind" identifier="segueUnwindToSettings" unwindAction="unwindToSettingsWithUnwindSegue:" id="m4x-gZ-2GO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B4T-Ax-eQo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="A3g-m2-K2M" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1885.5999999999999" y="1537.7811094452775"/>
         </scene>
         <!--Statistics-->
         <scene sceneID="5CK-kd-fpl">
@@ -803,6 +875,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LMi-yO-Ttb"/>
-        <segue reference="imD-Ch-oqH"/>
+        <segue reference="Ico-AI-s2f"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
