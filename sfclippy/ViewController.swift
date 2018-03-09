@@ -151,6 +151,7 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
      */
     func selectedFirstOption() {
         debugPrint("selected top item")
+        btnChooseP1.backgroundColor = UIColor.clear
         recordBattle(p1Won: true)
     }
     
@@ -159,7 +160,23 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
      */
     func selectedSecondOption() {
         debugPrint("selected bottom item")
+        btnChooseP2.backgroundColor = UIColor.clear
         recordBattle(p1Won: false)
+    }
+    
+    /**
+    Implementation for DragSelectObserver.
+    */
+    func movedTowards(option: Int, percent: Int) {
+        let accent = UIColor(named: "color_accent")
+        let adjusted = accent?.withAlphaComponent( 0.2 * CGFloat(Float(percent) / 100))
+        if ( 0 == option ) {
+            btnChooseP1.backgroundColor = adjusted
+            btnChooseP2.backgroundColor = UIColor.clear
+        } else if ( 1 == option ) {
+            btnChooseP1.backgroundColor = UIColor.clear
+            btnChooseP2.backgroundColor = adjusted
+        }
     }
     
     /**
@@ -183,13 +200,14 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         let optName = p1 ? p1Name : p2Name
         let optStat = p1 ? p1Stat : p2Stat
         let image = p1 ? #imageLiteral(resourceName: "icon_48_p1") : #imageLiteral(resourceName: "icon_48_p2")
+        let optPlayerName = p1 ? "P1" : "P2"
         
         if let name = optName {
             button?.message = name
             button?.subMessage = optStat
             button?.image = image
         } else {
-            button?.message = "Select character"
+            button?.message = "Choose \(optPlayerName) character"
             button?.subMessage = nil
             button?.image = #imageLiteral(resourceName: "sfclippy_48")
         }

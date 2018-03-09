@@ -13,6 +13,11 @@ import UIKit
  */
 @objc protocol DragToSelectObserver {
     /**
+     * Inform consumer that we've moved towards an object.
+     */
+    func movedTowards( option : Int, percent : Int );
+    
+    /**
      User selected the first option in the DragToSelectView.
      */
     func selectedFirstOption();
@@ -168,12 +173,29 @@ class DragToSelectView: UIView {
                 }
             } else {
                 piece.center = newCenter
+                
+                if let obs = observer {
+                    if piece.center.y < initialCenter.y {
+                        let toZero = initialCenter.y
+                        let percent = (100 * (initialCenter.y - piece.center.y)) / toZero
+                        obs.movedTowards( option: 0, percent: Int(percent))
+                    } else {
+                        let toEnd = piece.superview!.bounds.maxY - initialCenter.y
+                        let percent = (100 * (piece.center.y - initialCenter.y)) / toEnd
+                        obs.movedTowards( option: 1, percent: Int(percent))
+                    }
+                }
             }
         } else if gesturePan.state == .ended || gesturePan.state == .cancelled {
             // On cancellation, return the piece to its original location.
             debugPrint("cancelled with velocity", gesturePan.velocity(in: piece.superview))
             piece.center = initialCenter
             feedbackGenerator = nil
+            
+            
+            if let obs = observer {
+                obs.movedTowards( option: 0, percent: 0)
+            }
         }
     }
 

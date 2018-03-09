@@ -45,6 +45,15 @@ class SfButtonWithDescription: UIView {
         }
     }
     
+    override var backgroundColor: UIColor? {
+        didSet {
+            if let col = backgroundColor,
+                let content = self.contentView {
+                content.backgroundColor = col
+            }
+        }
+    }
+    
     /**
      The description to display in the draggable view.
      */

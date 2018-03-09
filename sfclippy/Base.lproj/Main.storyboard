@@ -563,7 +563,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Char1 vs Char2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-xJ-8KG" userLabel="Label Characters">
-                                            <rect key="frame" x="24" y="12" width="295" height="20.5"/>
+                                            <rect key="frame" x="24" y="16" width="295" height="11.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -577,11 +577,12 @@
                                         </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="KLO-xJ-8KG" secondAttribute="bottom" constant="16" id="0f9-FR-EpX"/>
                                         <constraint firstItem="KLO-xJ-8KG" firstAttribute="leading" secondItem="PIR-dJ-YFK" secondAttribute="leadingMargin" constant="8" id="3AU-IR-aS6"/>
+                                        <constraint firstItem="KLO-xJ-8KG" firstAttribute="top" secondItem="PIR-dJ-YFK" secondAttribute="top" constant="16" id="3ov-PD-IeV"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="To5-1Z-gYM" secondAttribute="trailing" constant="8" id="47K-JW-fGn"/>
                                         <constraint firstItem="To5-1Z-gYM" firstAttribute="centerY" secondItem="PIR-dJ-YFK" secondAttribute="centerY" id="FZT-CN-TYp"/>
                                         <constraint firstItem="KLO-xJ-8KG" firstAttribute="trailing" secondItem="To5-1Z-gYM" secondAttribute="leading" constant="-8" id="IEP-Au-yfG"/>
-                                        <constraint firstItem="KLO-xJ-8KG" firstAttribute="centerY" secondItem="PIR-dJ-YFK" secondAttribute="centerY" id="mcr-TA-GLW"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
