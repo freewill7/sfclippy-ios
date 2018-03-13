@@ -451,7 +451,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WARNING: This is a destructive operation!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7g-3D-ULb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a destructive operation!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7g-3D-ULb">
                                 <rect key="frame" x="16" y="80" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -475,7 +475,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hGa-7M-Ehn"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Confirm" id="2Yv-pQ-5Xf">
+                    <navigationItem key="navigationItem" title="Warning" id="2Yv-pQ-5Xf">
                         <barButtonItem key="backBarButtonItem" title="Back" id="x7m-Lt-Q7y"/>
                     </navigationItem>
                     <connections>

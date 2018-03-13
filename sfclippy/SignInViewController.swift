@@ -24,7 +24,10 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         if signedIn {
+            debugPrint("signed in... continuing")
             self.performSegue(withIdentifier: "segueEnter", sender: self)
+        } else {
+            debugPrint("failed to sign in")
         }
     }
 

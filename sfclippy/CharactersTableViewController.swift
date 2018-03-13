@@ -107,7 +107,7 @@ class CharactersTableViewController: UITableViewController {
     func welcomeUser( characterDir : DatabaseReference ) {
         debugPrint("welcoming user")
         let message = "You haven't set up any characters yet." +
-        "\n\nCharacters can be added individually with (+) or taken from a sample list"
+        "\n\nCharacters can be added individually through \"Edit\" or taken from a sample list"
         let alert = UIAlertController( title: "Welcome", message: message, preferredStyle: .alert)
         alert.addAction( UIAlertAction(title: NSLocalizedString("Use sample", comment: "Use sample"),
                                        style: .default,
