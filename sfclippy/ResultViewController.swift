@@ -15,7 +15,6 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var labelWinner: UILabel!
     
     var result : BattleResult?
-    var characterMap : [String:CharacterPref]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +22,10 @@ class ResultViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm"
         
-        if let res = result,
-            let chars = characterMap {
+        if let res = result {
                 labelDate.text = dateFormatter.string(from: res.date)
-                labelP1.text = chars[res.p1Id]?.name
-                labelP2.text = chars[res.p2Id]?.name
+                labelP1.text = res.p1Name
+                labelP2.text = res.p2Name
                 labelWinner.text = res.p1Won ? "Player 1" : "Player 2"
         }
 

@@ -54,8 +54,10 @@ Each result has a unique identifier.
 ```
 $RESULTS/ZZA
  - date: "2017-11-18 20:45:30"
- - p1Character: XXY
- - p2Character: XXZ
+ - p1Id: XXY
+ - p1Name: "Ryu"
+ - p2Id: XXZ
+ - p2Name : "Ken"
  - p1Won: true
 $RESULTS/ZZB
  - date: "2017-11-18 20:49:10"
@@ -64,7 +66,9 @@ $RESULTS/ZZB
  - p1Won: false
 ```
 
-In the above example we see that `ZZA` describes a battle that took place on 18th November (ISO 8601 format), between character id "XXY" ("Ryu") and "XXZ" ("Ken"), with the winner being the first local player ( `p1Won: true` ).
+In the above example we see that `ZZA` describes a battle that took place on 18th November (ISO 8601 format), between character id "XXY" (name "Ryu") and "XXZ" (name "Ken"), with the winner being the first local player ( `p1Won: true` ).
+
+The important parts of the result are the character identifiers (`p1Id`, `p2Id`) which should never change. Conversely the `p1Name` and `p2Name` are simply convenience fields that have been included to simplify the application. These could be updated if a user decides to rename a character.
 
 The second result `ZZB` described a battle between "XXY" ("Ryu") and XXY ("Ryu") with the winner being the second local player ( `p1Won: false`).
 

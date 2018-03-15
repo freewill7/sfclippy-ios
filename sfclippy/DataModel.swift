@@ -83,21 +83,27 @@ class UsageStatistic {
 class BattleResult {
     var date : Date
     var p1Id : String
+    var p1Name : String
     var p2Id : String
+    var p2Name : String
     var p1Won : Bool
     var id : String?
     
     static let keyDate = "date"
-    static let keyP1 = "p1Character"
-    static let keyP2 = "p2Character"
+    static let keyP1Id = "p1Id"
+    static let keyP1Name = "p1Name"
+    static let keyP2Id = "p2Id"
+    static let keyP2Name = "p2Name"
     static let keyP1Won = "p1Won"
     static let valueTrue = "true"
     static let valueFalse = "false"
     
-    init( date: Date, p1Id : String, p2Id : String, p1Won : Bool, id: String?) {
+    init( date: Date, p1Id : String, p1Name: String, p2Id : String, p2Name: String, p1Won : Bool, id: String?) {
         self.date = date
         self.p1Id = p1Id
+        self.p1Name = p1Name
         self.p2Id = p2Id
+        self.p2Name = p2Name
         self.p1Won = p1Won
         self.id = id
     }
@@ -106,8 +112,10 @@ class BattleResult {
         let dateFormatter = getFormatter()
         let strDate = dateFormatter.string(from: date)
         
-        return [ BattleResult.keyP1 : p1Id,
-                 BattleResult.keyP2 : p2Id,
+        return [ BattleResult.keyP1Id : p1Id,
+                 BattleResult.keyP1Name : p1Name,
+                 BattleResult.keyP2Id : p2Id,
+                 BattleResult.keyP2Name : p2Name,
                  BattleResult.keyDate : strDate,
                  BattleResult.keyP1Won : p1Won ]
 
@@ -115,14 +123,16 @@ class BattleResult {
     
     static func initFromMap( fromMap map: [String:Any], withId id: String ) -> BattleResult? {
         if let pDate = map[keyDate] as? String,
-            let pP1Id = map[keyP1] as? String,
-            let pP2Id = map[keyP2] as? String,
+            let pP1Id = map[keyP1Id] as? String,
+            let pP1Name = map[keyP1Name] as? String,
+            let pP2Id = map[keyP2Id] as? String,
+            let pP2Name = map[keyP2Name] as? String,
             let pP1Won = map[keyP1Won] as? Bool {
             
             let formatter = getFormatter()
  
             if let date = formatter.date(from: pDate) {
-                return BattleResult(date: date, p1Id: pP1Id, p2Id: pP2Id, p1Won: pP1Won, id: id)
+                return BattleResult(date: date, p1Id: pP1Id, p1Name: pP1Name, p2Id: pP2Id, p2Name: pP2Name, p1Won: pP1Won, id: id)
             } else {
                 debugPrint("Bad date")
                 return nil

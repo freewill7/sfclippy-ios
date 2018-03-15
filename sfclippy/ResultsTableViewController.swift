@@ -11,10 +11,13 @@ import FirebaseDatabase
 
 class ResultsTableViewController: UITableViewController {
     var database : Database?
+    
+    var refResults : DatabaseReference?
+    var observerResults : UInt?
+    
     var results = [String:[BattleResult]]()
     // array representation to allow sorting
     var resultsArr = [(key: String,value: [BattleResult])]()
-    var characterLookup = [String:CharacterPref]()
     
     func addToResults( _ res : BattleResult ) {
         let dateFormatter = DateFormatter()
@@ -45,34 +48,35 @@ class ResultsTableViewController: UITableViewController {
         }
     }
     
-    func observeAddCharacter( snapshot : DataSnapshot ) {
-        if let map = snapshot.value as? [String:Any],
-            let character = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
-            characterLookup[snapshot.key] = character
-            tableView.reloadData()
-        } else {
-            debugPrint("failed to decode character",snapshot.value!)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.database = Database.database()
-        if let db = database {
-            let resultsRef = userResultsDirRef(database: db)
-            resultsRef?.queryOrdered(byChild: BattleResult.keyDate).observe(DataEventType.childAdded, with: { (snapshot : DataSnapshot) in
-                self.observeAddResult(snapshot: snapshot)
-            })
-            
-            let prefsRef = userCharactersDir(database: db)
-            prefsRef?.observe(DataEventType.childAdded, with: { (snapshot : DataSnapshot) in
-                self.observeAddCharacter(snapshot: snapshot)
-            })
-        }
+        self.refResults = userResultsDirRef(database: database!)
  
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let ref = refResults {
+            observerResults = ref.observe(.childAdded, with: observeAddResult)
+            tableView.reloadData()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let ref = refResults,
+            let obs = observerResults {
+            ref.removeObserver(withHandle: obs)
+        }
+        
+        results.removeAll(keepingCapacity: false)
+        resultsArr.removeAll(keepingCapacity: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,15 +112,10 @@ class ResultsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultsTableViewCell
         let result = resultForIndex( indexPath )
         
-        let p1Lookup = characterLookup[result.p1Id]
-        let p2Lookup = characterLookup[result.p2Id]
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         
-        let p1Name = nameOrDefault( optPref:p1Lookup, def:"unknown")
-        let p2Name = nameOrDefault( optPref:p2Lookup, def:"unknown")
-        cell.labelCharacters.text = "\(p1Name) vs \(p2Name)"
+        cell.labelCharacters.text = "\(result.p1Name) vs \(result.p2Name)"
         if result.p1Won {
             cell.imageWinner.image = #imageLiteral(resourceName: "icon_24_win1")
             cell.imageWinner.tintColor = UIColor(named: "color_primary")
@@ -211,7 +210,6 @@ class ResultsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if let dest = segue.destination as? ResultViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-            dest.characterMap = characterLookup
             dest.result = resultForIndex(indexPath)
         }
     }

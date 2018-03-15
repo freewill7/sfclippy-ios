@@ -25,6 +25,10 @@ class StatisticsTableViewController: UITableViewController {
     var entries = [StatisticGroup?]()
     let p1Image = #imageLiteral(resourceName: "icon_24_win1")
     let p2Image = #imageLiteral(resourceName: "icon_24_win2")
+    var refOverall : DatabaseReference?
+    var refCharacters : DatabaseReference?
+    var observerOverall : UInt?
+    var observerCharacters: UInt?
     
     enum StatIndices : Int {
         case OverallIdx = 0
@@ -169,21 +173,48 @@ class StatisticsTableViewController: UITableViewController {
         }
         
         let database = Database.database()
-        let overallRef = overallStatisticsRef(database: database)
-        overallRef?.observe(.value, with: { (snapshot) in
-            self.updateOverall(snapshot: snapshot)
-        })
-        
-        let charactersRef = userCharactersDir( database : database )
-        charactersRef?.observe(.value, with: { (snapshot) in
-            self.updateCharacters(snapshot: snapshot)
-        })
+        refOverall = overallStatisticsRef(database: database)
+        refCharacters = userCharactersDir( database : database )
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let overall = refOverall {
+            observerOverall = overall.observe(.value, with: updateOverall)
+        }
+        
+        if let chars = refCharacters {
+            observerCharacters = chars.observe(.value, with: updateCharacters)
+        }
+        
+        tableView.reloadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let overall = refOverall,
+            let overallObs = observerOverall {
+            overall.removeObserver(withHandle: overallObs)
+        }
+        
+        if let chars = refCharacters,
+            let charsObs = observerCharacters {
+            chars.removeObserver(withHandle: charsObs)
+        }
+        
+        // clear all statistics
+        let qtyEntries = entries.count
+        for idx in 0...(qtyEntries-1) {
+            entries[idx] = nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
