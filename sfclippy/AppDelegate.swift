@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // ...
         if let error = error {
             debugPrint("error reported by sign",error)
+            self.window?.rootViewController?.performSegue(withIdentifier: "segueError", sender: self)
             return
         }
         
@@ -76,10 +77,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
                 debugPrint("error signing in",error)
+                self.window?.rootViewController?.performSegue(withIdentifier: "segueError", sender: self)
                 return
+            } else {
+                // User is signed in
+                debugPrint("succesfully signed in")
+                self.window?.rootViewController?.performSegue(withIdentifier: "segueEnter", sender: self)
             }
-            // User is signed in
-            self.window?.rootViewController?.performSegue(withIdentifier: "segueEnter", sender: self)
         }
     }
     
