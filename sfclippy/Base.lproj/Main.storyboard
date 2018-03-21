@@ -12,6 +12,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Sign In View Controller-->
         <scene sceneID="LDI-pR-hOf">
@@ -44,17 +49,17 @@
                     </view>
                     <connections>
                         <segue destination="Pq4-ec-Bpk" kind="show" identifier="segueEnter" id="Ioe-Uy-ifo"/>
-                        <segue destination="Pse-Ec-7GK" kind="show" identifier="segueError" id="tde-MQ-lGG"/>
+                        <segue destination="Pse-Ec-7GK" kind="show" identifier="segueError" id="mA6-ao-shz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lh7-xJ-AVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1524" y="19"/>
         </scene>
-        <!--View Controller-->
+        <!--Error Sign In View Controller-->
         <scene sceneID="FYU-xn-FpA">
             <objects>
-                <viewController id="Pse-Ec-7GK" sceneMemberID="viewController">
+                <viewController id="Pse-Ec-7GK" customClass="ErrorSignInViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h3x-Pt-Zez">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,28 +72,35 @@
                                     <constraint firstAttribute="width" constant="96" id="2Bu-tE-u1u"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxx-nt-Za5" customClass="GIDSignInButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhY-r4-5iC">
                                 <rect key="frame" x="72" y="423.5" width="230" height="48"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="4ET-V2-jUG"/>
-                                    <constraint firstAttribute="width" constant="230" id="xU7-cZ-N3E"/>
+                                    <constraint firstAttribute="width" constant="230" id="6cX-VP-Ye8"/>
+                                    <constraint firstAttribute="height" constant="48" id="x4u-Su-Bjc"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Sign In" backgroundImage="google_sign_in">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInAgain:" destination="Pse-Ec-7GK" eventType="touchUpInside" id="06a-H4-6p8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="color_primary"/>
                         <constraints>
-                            <constraint firstItem="Rxx-nt-Za5" firstAttribute="top" secondItem="5rE-za-v3Y" secondAttribute="bottom" constant="32" id="Hku-W7-xXk"/>
                             <constraint firstItem="5rE-za-v3Y" firstAttribute="centerY" secondItem="I79-vP-tPa" secondAttribute="centerY" id="Hv1-gn-qTa"/>
-                            <constraint firstItem="Rxx-nt-Za5" firstAttribute="centerX" secondItem="I79-vP-tPa" secondAttribute="centerX" id="bit-8M-HbL"/>
+                            <constraint firstItem="OhY-r4-5iC" firstAttribute="centerX" secondItem="I79-vP-tPa" secondAttribute="centerX" id="Syr-e2-BMM"/>
                             <constraint firstItem="5rE-za-v3Y" firstAttribute="centerX" secondItem="I79-vP-tPa" secondAttribute="centerX" id="iJH-vW-scr"/>
+                            <constraint firstItem="OhY-r4-5iC" firstAttribute="top" secondItem="5rE-za-v3Y" secondAttribute="bottom" constant="32" id="s9U-65-vFv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I79-vP-tPa"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2EN-n7-WNP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1524" y="753"/>
+            <point key="canvasLocation" x="-1524" y="752.47376311844084"/>
         </scene>
         <!--Record Battle-->
         <scene sceneID="tne-QT-ifu">
@@ -882,6 +894,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="google_sign_in" width="39" height="48"/>
         <image name="icon_24_poll" width="24" height="24"/>
         <image name="icon_24_record" width="24" height="24"/>
         <image name="icon_24_right" width="24" height="24"/>

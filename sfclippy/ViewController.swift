@@ -34,6 +34,7 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         database = Database.database()
+
         refPreferences = userCharactersDir(database: database!)
 
         selectionView.enabled = false

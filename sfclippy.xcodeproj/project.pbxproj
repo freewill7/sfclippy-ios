@@ -22,6 +22,7 @@
 		BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */; };
 		BE2169351FD35D75009F0703 /* DragToSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2169341FD35D75009F0703 /* DragToSelectView.xib */; };
 		BE2169361FD364DE009F0703 /* DragToSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2169321FD350B2009F0703 /* DragToSelectView.swift */; };
+		BE26C20B205AB437007B6409 /* ErrorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE26C20A205AB437007B6409 /* ErrorSignInViewController.swift */; };
 		BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */; };
 		BE3E651E203B7A5A00961A29 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */; };
 		BE42474A1FC05642003E08A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4247491FC05641003E08A8 /* GoogleService-Info.plist */; };
@@ -86,6 +87,8 @@
 		BE21692E1FD31F27009F0703 /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
 		BE2169321FD350B2009F0703 /* DragToSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToSelectView.swift; sourceTree = "<group>"; };
 		BE2169341FD35D75009F0703 /* DragToSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragToSelectView.xib; sourceTree = "<group>"; };
+		BE26C20A205AB437007B6409 /* ErrorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSignInViewController.swift; sourceTree = "<group>"; };
+		BE26C20E205AD0FC007B6409 /* sfclippy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sfclippy.entitlements; sourceTree = "<group>"; };
 		BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		BE4247491FC05641003E08A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		BE1F23F61FBE11E500CD6447 /* sfclippy */ = {
 			isa = PBXGroup;
 			children = (
+				BE26C20E205AD0FC007B6409 /* sfclippy.entitlements */,
 				BE1C9E6F201CBD5C00776B78 /* RatingView.swift */,
 				BE4247491FC05641003E08A8 /* GoogleService-Info.plist */,
 				BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */,
@@ -205,6 +209,7 @@
 				BEC74F54204952F00081820B /* SfButtonWithDescription.xib */,
 				BEC74F56204954A60081820B /* SfButtonWithDescription.swift */,
 				BECC1D28205096FE00A93900 /* ConfirmViewController.swift */,
+				BE26C20A205AB437007B6409 /* ErrorSignInViewController.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -317,6 +322,11 @@
 					BE1F23F31FBE11E500CD6447 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					BE1F24071FBE11E500CD6447 = {
 						CreatedOnToolsVersion = 9.1;
@@ -557,6 +567,7 @@
 				BE1C9E72201CCFC800776B78 /* AddCharacterViewController.swift in Sources */,
 				BE1C9E70201CBD5C00776B78 /* RatingView.swift in Sources */,
 				BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */,
+				BE26C20B205AB437007B6409 /* ErrorSignInViewController.swift in Sources */,
 				BE21692D1FD1FFD1009F0703 /* ResultsTableViewController.swift in Sources */,
 				BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */,
 				BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */,
@@ -742,11 +753,12 @@
 			baseConfigurationReference = 9F1F74618B7CB5D1E17E94A0 /* Pods-sfclippy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = sfclippy/sfclippy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HBVM76ZV6V;
 				INFOPLIST_FILE = sfclippy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.sfclippy;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.freewill7.sfclippy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -758,11 +770,12 @@
 			baseConfigurationReference = C2D7947990E76F125BD45DC1 /* Pods-sfclippy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = sfclippy/sfclippy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HBVM76ZV6V;
 				INFOPLIST_FILE = sfclippy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.sfclippy;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.freewill7.sfclippy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

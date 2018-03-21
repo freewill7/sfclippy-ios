@@ -1,28 +1,25 @@
 //
-//  SignInViewController.swift
+//  ErrorSignInViewController.swift
 //  sfclippy
 //
-//  Created by William Lee on 18/11/2017.
-//  Copyright © 2017 William Lee. All rights reserved.
+//  Created by William Lee on 15/03/2018.
+//  Copyright © 2018 William Lee. All rights reserved.
 //
 
 import UIKit
 import GoogleSignIn
 
-class SignInViewController: UIViewController, GIDSignInUIDelegate {
-    var signedIn = false
-    
+class ErrorSignInViewController: UIViewController, GIDSignInUIDelegate {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO(developer) Configure the sign-in button look/feel
-        // ...
+
+        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,8 +27,13 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func segueUnwindToSignIn(unwindSegue: UIStoryboardSegue) {
+
+    @IBAction func signInAgain(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        //performSegue(withIdentifier: "segueUnwindToSignIn", sender: self)
     }
+    
+    
     /*
     // MARK: - Navigation
 
