@@ -89,4 +89,37 @@ class SelectionMechanismTests: XCTestCase {
         XCTAssertEqual(p2Sum, p2Generator.recordedMaxes.last!)
     }
     
+    func testLeastRecentlyUsed() {
+        // no p1 usage, youngest p2 usage
+        let char1 = CharacterPref( name: "ryu", p1Rating: 1, p2Rating: 1 )
+        char1.p2Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 5000), lastWin: nil)
+        
+        // oldest p1 usage, no p2 usage
+        let char2 = CharacterPref( name: "ken", p1Rating: 1, p2Rating: 1 )
+        char2.p1Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 1000), lastWin: nil)
+        
+        // youngest p1 usage, oldest p2 usage
+        let char3 = CharacterPref(name: "juri", p1Rating: 1, p2Rating: 1)
+        char3.p1Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 2000), lastWin: nil)
+        char3.p2Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 4000), lastWin: nil)
+        
+        let chars = [char1, char2, char3]
+        
+        // test p1 mechanism
+        let p1Randoms = [2,1,0] // juri, ken, ryu
+        let p1Generator = ArrayRandomGenerator(p1Randoms)
+        let p1Selector = SelectionMechanism(p1Generator)
+        XCTAssertEqual( char3, p1Selector.leastRecentlyUsed(chars, playerId: 0) )
+        XCTAssertEqual( char2, p1Selector.leastRecentlyUsed(chars, playerId: 0) )
+        XCTAssertEqual( char1, p1Selector.leastRecentlyUsed(chars, playerId: 0) )
+
+        // test p2 mechanism
+        let p2Randoms = [0,1,2] // ken, juri, ryu
+        let p2Generator = ArrayRandomGenerator(p2Randoms)
+        let p2Selector = SelectionMechanism(p2Generator)
+        XCTAssertEqual( char2, p2Selector.leastRecentlyUsed(chars, playerId: 1) )
+        XCTAssertEqual( char3, p2Selector.leastRecentlyUsed(chars, playerId: 1) )
+        XCTAssertEqual( char1, p2Selector.leastRecentlyUsed(chars, playerId: 1) )
+    }
+    
 }

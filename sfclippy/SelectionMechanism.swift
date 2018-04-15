@@ -44,4 +44,45 @@ class SelectionMechanism {
         }
         return ret
     }
+    
+    private func isUsageOlder( optA : UsageStatistic?, optB : UsageStatistic? ) -> Bool {
+        if let prefA = optA,
+            let prefB = optB {
+            
+            if let battleA = prefA.lastBattle,
+                let battleB = prefB.lastBattle {
+                return battleA < battleB
+            } else if nil == prefA.lastBattle {
+                return true
+            } else {
+                //nil == prefB.lastBattle
+                return false
+            }
+        } else if nil == optA {
+            return true
+        } else {
+            // nil == optB
+            return false
+        }
+    }
+    
+    func leastRecentlyUsed( _ preferences: [CharacterPref], playerId: Int ) -> CharacterPref {
+        
+        var extract = { (pref : CharacterPref ) -> UsageStatistic? in return pref.p1Statistics }
+        if ( playerId == 1 ) {
+            extract = { (pref : CharacterPref) -> UsageStatistic? in return pref.p2Statistics }
+        }
+        
+        // sort
+        let sorted = preferences.sorted { (prefa, prefb) -> Bool in return self.isUsageOlder(optA: extract(prefa), optB: extract(prefb) )
+        }
+        /*debugPrint("playerId \(playerId)")
+        for a in sorted {
+            debugPrint("\(a)")
+        }*/
+        
+        let sampleSize = min(5, sorted.count)
+        let random = generator.randomInteger(sampleSize)
+        return sorted[random]
+    }
 }

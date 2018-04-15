@@ -24,7 +24,10 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
     var versusStat : String?
     var refPreferences : DatabaseReference?
     var observerPreferences : UInt?
+    var preferences = [CharacterPref]()
+    var selector = SelectionMechanism( ArcRandomGenerator() )
     
+    @IBOutlet weak var btnHistorical: UIBarButtonItem!
     @IBOutlet weak var btnChooseP1: SfButtonWithDescription!
     @IBOutlet weak var btnChooseP2: SfButtonWithDescription!
     
@@ -72,12 +75,29 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         refreshButton(p1: false)
         refreshSliderMessage()
         updateHint()
+        
+        if preferences.count > 0 {
+            btnHistorical.isEnabled = true
+        } else {
+            btnHistorical.isEnabled = false
+        }
     }
     
     func handleCharactersChange( _ snapshot : DataSnapshot ) {
         // if we have no characters then clear
         // current battle settings
-        if !snapshot.hasChildren() {
+        if snapshot.hasChildren() {
+            debugPrint("handling characters change \(snapshot.childrenCount)")
+            var prefs = [CharacterPref]()
+            for kv in snapshot.children {
+                if let snap = kv as? DataSnapshot,
+                    let value = snap.value as? [String:Any],
+                    let pref = CharacterPref.initFromMap(fromMap: value, withId: snap.key) {
+                    prefs.append(pref)
+                }
+            }
+            self.preferences = prefs
+        } else {
             optP1Name = nil
             p1Stat = nil
             optP2Name = nil
@@ -336,6 +356,19 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
             debugPrint("updating p2Stat")
             self.fetchP2Stat(snapshot:snapshot)
         })
+    }
+    
+    @IBAction func chooseHistorical(_ sender: Any) {
+        
+        let p1Choice = selector.leastRecentlyUsed(preferences, playerId: 0)
+        let p2Choice = selector.leastRecentlyUsed(preferences, playerId: 1)
+
+        self.optP1Id = p1Choice.id
+        self.optP1Name = p1Choice.name
+        self.optP2Id = p2Choice.id
+        self.optP2Name = p2Choice.name
+        
+        refreshControls()
     }
     
     @IBAction func unwindToBattle(unwindSegue: UIStoryboardSegue) {
