@@ -22,6 +22,8 @@ class CharactersTableViewController: UITableViewController {
     var selectedId = ""
     var selector = SelectionMechanism( ArcRandomGenerator() )
     var editMode = false
+    var observerPreferences : UInt?
+    var refPreferences : DatabaseReference?
     @IBOutlet weak var buttonEditCancel: UIBarButtonItem!
     
     @IBAction func clickEditCancel(_ sender: Any) {
@@ -42,30 +44,6 @@ class CharactersTableViewController: UITableViewController {
             diff = b.name.compare(a.name).rawValue
         }
         return diff > 0
-    }
-    
-    func characterAdded( snapshot : DataSnapshot ) {
-        if let map = snapshot.value as? [String:Any],
-            let charPref = CharacterPref.initFromMap(fromMap: map, withId: snapshot.key) {
-            debugPrint("retrieved character",charPref,snapshot.key)
-            characters.append( charPref )
-            
-            if 0 == playerId {
-                characters = characters.sorted(by: { (prefa, prefb) -> Bool in
-                    return comparePrefs(a: prefa, b: prefb, extractScore: { (pref) -> Int in
-                        return pref.p1Rating
-                    })
-                })
-            } else {
-                characters = characters.sorted(by: { (prefa, prefb) -> Bool in
-                    return comparePrefs(a: prefa, b: prefb, extractScore: { (pref) -> Int in
-                        return pref.p2Rating
-                    })
-                })
-            }
-            
-            tableView.reloadData();
-        }
     }
     
     func populateCharacter( characterDir : DatabaseReference, characterName : String, p1Rating : Int, p2Rating : Int ) {
@@ -123,6 +101,34 @@ class CharactersTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func handlePreferencesChange( snapshot: DataSnapshot ) {
+        if ( snapshot.hasChildren() ) {
+            debugPrint("already bootstrapped")
+ 
+            var prefs = [CharacterPref]()
+            for kv in snapshot.children {
+                if let snap = kv as? DataSnapshot,
+                    let value = snap.value as? [String:Any],
+                    let pref = CharacterPref.initFromMap(fromMap: value, withId: snap.key) {
+                    prefs.append(pref)
+                }
+            }
+            
+            var extractScore = { (pref : CharacterPref) -> Int in return pref.p1Rating }
+            if self.playerId == 1 {
+                extractScore = { (pref : CharacterPref) -> Int in return pref.p2Rating }
+            }
+            
+            self.characters = prefs.sorted(by: { (prefa, prefb) -> Bool in
+                return self.comparePrefs(a: prefa, b: prefb, extractScore: extractScore)
+            })
+            tableView.reloadData()
+        } else {
+            debugPrint("bootstrap required...")
+            self.welcomeUser(characterDir: snapshot.ref);
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -133,29 +139,28 @@ class CharactersTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         let database = Database.database()
-        let ref = userCharactersDir(database: database)
+        self.refPreferences = userCharactersDir(database: database)
         
         self.title = "Player \(playerId+1)"
-        
-        // set up handler to allow for bootstrap
-        debugPrint("checking to see if we need to bootstrap")
-        ref?.observeSingleEvent(of: DataEventType.value, with: { (snapshot : DataSnapshot) in
-            if ( snapshot.hasChildren() ) {
-                debugPrint("already bootstrapped")
-            } else {
-                debugPrint("bootstrap required...")
-                self.welcomeUser(characterDir: ref!);
-            }
-        })
-        
-        ref?.observe(DataEventType.childAdded, with: { (sn : DataSnapshot) -> Void in
-            self.characterAdded(snapshot: sn)
-            })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.setToolbarHidden(!editMode, animated: false)
+        
+        if let ref = refPreferences {
+            observerPreferences = ref.observe(.value, with: handlePreferencesChange)
+        }
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let ref = refPreferences,
+            let obs = observerPreferences {
+            ref.removeObserver(withHandle: obs)
+        }
     }
 
     override func didReceiveMemoryWarning() {
