@@ -17,6 +17,7 @@ class ArcRandomGenerator : RandomGenerator {
 
 class CharactersTableViewController: UITableViewController {
     var characters = [CharacterPref]()
+    var filteredCharacters = [CharacterPref]()
     var playerId = 0
     var selectedName = ""
     var selectedId = ""
@@ -24,6 +25,7 @@ class CharactersTableViewController: UITableViewController {
     var editMode = false
     var observerPreferences : UInt?
     var refPreferences : DatabaseReference?
+    let searchController = UISearchController(searchResultsController: nil)
     @IBOutlet weak var buttonEditCancel: UIBarButtonItem!
     
     @IBAction func clickEditCancel(_ sender: Any) {
@@ -142,6 +144,17 @@ class CharactersTableViewController: UITableViewController {
         self.refPreferences = userCharactersDir(database: database)
         
         self.title = "Player \(playerId+1)"
+        
+        // Setup the search controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search characters"
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        self.tableView.tableHeaderView = searchController.searchBar
+
+        definesPresentationContext = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -175,9 +188,13 @@ class CharactersTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count
+        return isFiltering() ? filteredCharacters.count : characters.count
     }
 
+    func characterForIndex(_ path : IndexPath) -> CharacterPref {
+        return isFiltering() ? filteredCharacters[path.row] : characters[path.row]
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let isP1 = (0==playerId)
@@ -188,20 +205,30 @@ class CharactersTableViewController: UITableViewController {
             return cell
         } */
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
-            cell.setCharacter( character: characters[indexPath.row], isP1: isP1, isEdit: editMode )
+        let character = characterForIndex(indexPath)
+        cell.setCharacter( character: character, isP1: isP1, isEdit: editMode )
+        
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
         debugPrint("selected row at \(indexPath.row)")
-        let character = characters[indexPath.row]
+        
+        let character = characterForIndex(indexPath)
         if editMode {
             performSegue(withIdentifier: "editCharacter", sender: self)
         } else {
             if let id = character.id {
                 self.selectedName = character.name
                 self.selectedId = id
-                performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+                
+                if isFiltering() {
+                    self.searchController.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+                    })
+                } else {
+                    self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
+                }
             }
         }
     }
@@ -247,6 +274,22 @@ class CharactersTableViewController: UITableViewController {
 
     }
     
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty of nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All" ) {
+        filteredCharacters = characters.filter({ (prefa) -> Bool in
+            return prefa.name.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -290,13 +333,20 @@ class CharactersTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         if let dest = segue.destination as? AddCharacterViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
-                dest.characterId = characters[indexPath.row].id
-                dest.characterName = characters[indexPath.row].name
-                dest.p1Rating = characters[indexPath.row].p1Rating
-                dest.p2Rating = characters[indexPath.row].p2Rating
+                let character = characterForIndex(indexPath)
+                dest.characterId = character.id
+                dest.characterName = character.name
+                dest.p1Rating = character.p1Rating
+                dest.p2Rating = character.p2Rating
             }
         }
         // Pass the selected object to the new view controller.
     }
 
+}
+
+extension CharactersTableViewController : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }
