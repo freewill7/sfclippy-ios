@@ -15,37 +15,51 @@ class ResultsTableViewController: UITableViewController {
     var refResults : DatabaseReference?
     var observerResults : UInt?
     
-    var results = [String:[BattleResult]]()
-    // array representation to allow sorting
-    var resultsArr = [(key: String,value: [BattleResult])]()
+    var allResults = [BattleResult]()
+    var allGroupedResults = [(key: String, value:[BattleResult])]()
     
-    func addToResults( _ res : BattleResult ) {
+    func groupResults( _ results : [BattleResult] ) -> [(key: String, value: [BattleResult])] {
+        var grouped = [String:[BattleResult]]()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
-        let key = dateFormatter.string(from: res.date)
         
-        // append to results for that date (and sort descending)
-        var val = results[ key, default: [BattleResult]() ]
-        val.append(res)
-        val = val.sorted(by: { (resulta, resultb) -> Bool in
-            return resulta.date > resultb.date
-        })
+        for result in results {
+            let key = dateFormatter.string(from: result.date)
+            
+            // add to group
+            var group = grouped[key, default: [BattleResult]() ]
+            group.append(result)
+            
+            // sort group descending
+            group = group.sorted(by: { (resulta, resultb) -> Bool in
+                return resulta.date > resultb.date
+            })
+            
+            grouped[key] = group
+        }
         
-        // update map and sort cached version
-        results[key] = val
-        resultsArr = results.sorted { (kv1, kv2) -> Bool in
+        var ret = [(key: String, value: [BattleResult])]()
+        ret = grouped.sorted { (kv1, kv2) -> Bool in
             return kv1.key > kv2.key
         }
+        
+        return ret
     }
     
-    func observeAddResult( snapshot : DataSnapshot ) {
-        if let map = snapshot.value as? [String:Any],
-            let result = BattleResult.initFromMap(fromMap: map, withId: snapshot.key) {
-            addToResults(result)
-            tableView.reloadData()
-        } else {
-            debugPrint("failed to decode result",snapshot.value!)
+    func observeResults( snapshot : DataSnapshot ) {
+        var all = [BattleResult]()
+        for kv in snapshot.children {
+            if let snap = kv as? DataSnapshot,
+                let value = snap.value as? [String:Any],
+                let result = BattleResult.initFromMap(fromMap: value, withId: snap.key) {
+                    all.append(result)
+            }
         }
+    
+        self.allResults = all
+        self.allGroupedResults = groupResults(all)
+    
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -62,7 +76,7 @@ class ResultsTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         if let ref = refResults {
-            observerResults = ref.observe(.childAdded, with: observeAddResult)
+            observerResults = ref.observe(.value, with: observeResults)
             tableView.reloadData()
         }
     }
@@ -75,8 +89,8 @@ class ResultsTableViewController: UITableViewController {
             ref.removeObserver(withHandle: obs)
         }
         
-        results.removeAll(keepingCapacity: false)
-        resultsArr.removeAll(keepingCapacity: false)
+        allResults.removeAll(keepingCapacity: false)
+        allGroupedResults.removeAll(keepingCapacity: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,11 +102,11 @@ class ResultsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         //return 1
-        return results.count
+        return allGroupedResults.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resultsArr[section].value.count
+        return allGroupedResults[section].value.count
     }
 
     func nameOrDefault( optPref: CharacterPref?, def : String ) -> String {
@@ -104,7 +118,7 @@ class ResultsTableViewController: UITableViewController {
     }
     
     func resultForIndex( _ indexPath: IndexPath ) -> BattleResult {
-        return resultsArr[indexPath.section].value[indexPath.row]
+        return allGroupedResults[indexPath.section].value[indexPath.row]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,7 +142,7 @@ class ResultsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView : UITableView, titleForHeaderInSection section: Int) -> String? {
-        return resultsArr[section].key
+        return allGroupedResults[section].key
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
@@ -153,7 +167,7 @@ class ResultsTableViewController: UITableViewController {
             
             // identify value to delete
             let section = indexPath.section
-            let val = resultsArr[section].value[indexPath.row]
+            let val = allGroupedResults[section].value[indexPath.row]
             
             // delete from firebase
             if let db = database,
@@ -163,7 +177,7 @@ class ResultsTableViewController: UITableViewController {
             }
             
             // remove row
-            resultsArr[section].value.remove(at: indexPath.row)
+            allGroupedResults[section].value.remove(at: indexPath.row)
             
             // delete animation
             tableView.deleteRows(at: [indexPath], with: .fade)
