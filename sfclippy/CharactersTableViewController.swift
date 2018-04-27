@@ -150,9 +150,7 @@ class CharactersTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search characters"
         searchController.hidesNavigationBarDuringPresentation = false
-        
         self.tableView.tableHeaderView = searchController.searchBar
-
         definesPresentationContext = true
         
     }

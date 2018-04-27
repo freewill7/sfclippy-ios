@@ -14,9 +14,16 @@ class ResultsTableViewController: UITableViewController {
     
     var refResults : DatabaseReference?
     var observerResults : UInt?
+    let searchController = UISearchController(searchResultsController: nil)
     
     var allResults = [BattleResult]()
     var allGroupedResults = [(key: String, value:[BattleResult])]()
+    var filteredResults = [BattleResult]()
+    var filteredGroupedResults = [(key: String, value:[BattleResult])]()
+    
+    static let matchAll = "All"
+    static let matchP1 = "Player 1"
+    static let matchP2 = "Player 2"
     
     func groupResults( _ results : [BattleResult] ) -> [(key: String, value: [BattleResult])] {
         var grouped = [String:[BattleResult]]()
@@ -70,6 +77,28 @@ class ResultsTableViewController: UITableViewController {
  
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search result"
+        searchController.searchBar.scopeButtonTitles = [ResultsTableViewController.matchAll,
+                                                        ResultsTableViewController.matchP1,
+                                                        ResultsTableViewController.matchP2]
+        searchController.searchBar.tintColor = UIColor(named: "color_white")
+
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
+        /*
+        searchController.hidesNavigationBarDuringPresentation = false
+
+
+        
+        navigationItem.searchController = searchController
+
+        definesPresentationContext = true
+ */
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,12 +130,19 @@ class ResultsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        //return 1
-        return allGroupedResults.count
+        return isFiltering() ? filteredGroupedResults.count : allGroupedResults.count
     }
 
+    func getGroup( _ section : Int ) -> (key:String,value:[BattleResult]) {
+        if isFiltering() {
+            return filteredGroupedResults[section]
+        } else {
+            return allGroupedResults[section]
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allGroupedResults[section].value.count
+        return getGroup(section).value.count
     }
 
     func nameOrDefault( optPref: CharacterPref?, def : String ) -> String {
@@ -118,7 +154,7 @@ class ResultsTableViewController: UITableViewController {
     }
     
     func resultForIndex( _ indexPath: IndexPath ) -> BattleResult {
-        return allGroupedResults[indexPath.section].value[indexPath.row]
+        return getGroup(indexPath.section).value[indexPath.row]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,7 +178,7 @@ class ResultsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView : UITableView, titleForHeaderInSection section: Int) -> String? {
-        return allGroupedResults[section].key
+        return getGroup(section).key
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
@@ -167,7 +203,7 @@ class ResultsTableViewController: UITableViewController {
             
             // identify value to delete
             let section = indexPath.section
-            let val = allGroupedResults[section].value[indexPath.row]
+            let val = getGroup(section).value[indexPath.row]
             
             // delete from firebase
             if let db = database,
@@ -177,7 +213,11 @@ class ResultsTableViewController: UITableViewController {
             }
             
             // remove row
-            allGroupedResults[section].value.remove(at: indexPath.row)
+            if ( isFiltering() ) {
+                filteredGroupedResults[section].value.remove(at: indexPath.row)
+            } else {
+                allGroupedResults[section].value.remove(at: indexPath.row)
+            }
             
             // delete animation
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -215,7 +255,32 @@ class ResultsTableViewController: UITableViewController {
         return true
     }
     */
-
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty of nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = matchAll ) {
+        filteredResults = allResults.filter({ (result) -> Bool in
+            let searchTerm = searchText.lowercased()
+            var match = false
+            if scope == ResultsTableViewController.matchP1 || scope == ResultsTableViewController.matchAll {
+                match = match || result.p1Name.lowercased().contains(searchTerm)
+            }
+            if scope == ResultsTableViewController.matchP2 || scope == ResultsTableViewController.matchAll {
+                match = match || result.p2Name.lowercased().contains(searchTerm)
+            }
+            return match
+        })
+        filteredGroupedResults = groupResults(filteredResults)
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -228,4 +293,17 @@ class ResultsTableViewController: UITableViewController {
         }
     }
 
+}
+
+extension ResultsTableViewController : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
+extension ResultsTableViewController : UISearchBarDelegate {
+    // MARK: - UISearchBar Delegate
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
 }
