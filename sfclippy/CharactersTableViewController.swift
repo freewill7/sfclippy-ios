@@ -19,8 +19,7 @@ class CharactersTableViewController: UITableViewController {
     var characters = [CharacterPref]()
     var filteredCharacters = [CharacterPref]()
     var playerId = 0
-    var selectedName = ""
-    var selectedId = ""
+    var selected : CharacterPref?
     var selector = SelectionMechanism( ArcRandomGenerator() )
     var editMode = false
     var observerPreferences : UInt?
@@ -216,17 +215,14 @@ class CharactersTableViewController: UITableViewController {
         if editMode {
             performSegue(withIdentifier: "editCharacter", sender: self)
         } else {
-            if let id = character.id {
-                self.selectedName = character.name
-                self.selectedId = id
+            self.selected = character
                 
-                if isFiltering() {
-                    self.searchController.dismiss(animated: true, completion: {
-                        self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
-                    })
-                } else {
+            if isFiltering() {
+                self.searchController.dismiss(animated: true, completion: {
                     self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
-                }
+                })
+            } else {
+                self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
             }
         }
     }

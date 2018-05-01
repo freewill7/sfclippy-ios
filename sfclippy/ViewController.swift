@@ -96,6 +96,21 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
                     prefs.append(pref)
                 }
             }
+            
+            if let p1Id = optP1Id {
+                let p1Chars = prefs.filter({ (pref) -> Bool in return (p1Id == pref.id) })
+                if p1Chars.count > 0 {
+                    selectCharacter1(pref: p1Chars[0])
+                }
+            }
+            
+            if let p2Id = optP2Id {
+                let p2Chars = prefs.filter({ (pref) -> Bool in return (p2Id == pref.id) })
+                if p2Chars.count > 0 {
+                    selectCharacter2(pref: p2Chars[0])
+                }
+            }
+
             self.preferences = prefs
         } else {
             optP1Name = nil
@@ -155,16 +170,12 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         
         let p1CharStat = p1CharacterStatisticsRef(database: db, characterId: p1Id)
         p1CharStat?.observeSingleEvent(of: .value, with: { (snapshot) in
-            let stat = self.updateStatWithBattle(snapshot: snapshot, date: date, won: p1Won)
-            self.p1Stat = self.generateStat(statistic: stat)
-            self.updateP1Info()
+            _ = self.updateStatWithBattle(snapshot: snapshot, date: date, won: p1Won)
         })
         
         let p2CharStat = p2CharacterStatisticsRef(database: db, characterId: p2Id)
         p2CharStat?.observeSingleEvent(of: .value, with: { (snapshot) in
-            let stat = self.updateStatWithBattle(snapshot: snapshot, date: date, won: !p1Won)
-            self.p2Stat = self.generateStat(statistic: stat)
-            self.updateP2Info()
+            _ = self.updateStatWithBattle(snapshot: snapshot, date: date, won: !p1Won)
         })
         
         let p1CharMap = p1VsStatisticsRef(database: db, p1Id: p1Id, p2Id: p2Id)
@@ -199,9 +210,6 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
             
             // feed back
             hadBattle = true
-            updateP1Info()
-            updateP2Info()
-            updateHint()
         } else {
             debugPrint("record battle called with empty values")
         }
@@ -342,33 +350,37 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         refreshButton(p1: false)
     }
     
-    func updateP1Info( ) {
-        debugPrint("fetching p1Info")
-        p1CharacterStatisticsRef(database: database!, characterId: optP1Id!)?.observeSingleEvent(of: .value, with: { (snapshot) in
-            debugPrint("updating p1Stat")
-            self.fetchP1Stat(snapshot: snapshot)
-        })
-    }
-    
-    func updateP2Info( ) {
-        debugPrint("fetching p2Info")
-        p2CharacterStatisticsRef(database: database!, characterId: optP2Id!)?.observeSingleEvent(of: .value, with: { (snapshot) in
-            debugPrint("updating p2Stat")
-            self.fetchP2Stat(snapshot:snapshot)
-        })
-    }
-    
     @IBAction func chooseHistorical(_ sender: Any) {
         
         let p1Choice = selector.leastRecentlyUsed(preferences, playerId: 0)
         let p2Choice = selector.leastRecentlyUsed(preferences, playerId: 1)
 
-        self.optP1Id = p1Choice.id
-        self.optP1Name = p1Choice.name
-        self.optP2Id = p2Choice.id
-        self.optP2Name = p2Choice.name
+        selectCharacter1(pref: p1Choice)
+        selectCharacter2(pref: p2Choice)
+        
+        updateHint()
         
         refreshControls()
+    }
+    
+    func selectCharacter1( pref : CharacterPref ) {
+        optP1Name = pref.name
+        if let stat = pref.p1Statistics {
+            p1Stat = generateStat(statistic: stat)
+        } else {
+            p1Stat = ""
+        }
+        optP1Id = pref.id
+    }
+    
+    func selectCharacter2( pref : CharacterPref ) {
+        optP2Name = pref.name
+        if let stat = pref.p2Statistics {
+            p2Stat = generateStat(statistic: stat)
+        } else {
+            p2Stat = ""
+        }
+        optP2Id = pref.id
     }
     
     @IBAction func unwindToBattle(unwindSegue: UIStoryboardSegue) {
@@ -376,19 +388,15 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         
         // update settings
         if let tblController = unwindSegue.source as? CharactersTableViewController {
-            if ( 0 == tblController.playerId ) {
-                optP1Name = tblController.selectedName
-                p1Stat = ""
-                optP1Id = tblController.selectedId
-                updateP1Info()
-            } else if ( 1 == tblController.playerId ) {
-                optP2Name = tblController.selectedName
-                p2Stat = ""
-                optP2Id = tblController.selectedId
-                updateP2Info()
+            if let selected = tblController.selected {
+                if ( 0 == tblController.playerId ) {
+                    selectCharacter1(pref: selected)
+                } else if ( 1 == tblController.playerId ) {
+                    selectCharacter2(pref: selected)
+                }
+                hadBattle = false
+                updateHint()
             }
-            hadBattle = false
-            updateHint()
         }
     }
 }
