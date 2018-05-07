@@ -594,10 +594,84 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Statistics" id="B7D-Fz-dNt"/>
+                    <connections>
+                        <segue destination="LNX-CF-8v4" kind="show" identifier="showStatistic" id="KZQ-gP-tfV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syN-YH-EPg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1100" y="2239"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="0gE-78-kDj">
+            <objects>
+                <tableViewController id="LNX-CF-8v4" customClass="StatisticsDetailTableViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uFf-Q5-56r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="statisticsDetailCell" id="vee-Yb-1lC" customClass="StatisticsDetailTableViewCell" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vee-Yb-1lC" id="Ver-wN-HNG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90G-f5-mCp">
+                                            <rect key="frame" x="40" y="15.5" width="175" height="13.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistic" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVv-jR-w9O">
+                                            <rect key="frame" x="223" y="15.5" width="128" height="13.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="128" id="DbT-S7-C87"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="01e-He-UeF">
+                                            <rect key="frame" x="16" y="14" width="16" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="kUV-c6-xcl"/>
+                                                <constraint firstAttribute="height" constant="16" id="rwF-bw-g0Z"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="YVv-jR-w9O" firstAttribute="top" secondItem="Ver-wN-HNG" secondAttribute="topMargin" constant="4" id="Km8-nE-zHQ"/>
+                                        <constraint firstItem="01e-He-UeF" firstAttribute="centerY" secondItem="Ver-wN-HNG" secondAttribute="centerY" id="PlO-tN-NYa"/>
+                                        <constraint firstItem="90G-f5-mCp" firstAttribute="top" secondItem="Ver-wN-HNG" secondAttribute="topMargin" constant="4" id="ahX-Lt-PaL"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="YVv-jR-w9O" secondAttribute="bottom" constant="4" id="l50-xu-dcX"/>
+                                        <constraint firstItem="90G-f5-mCp" firstAttribute="leading" secondItem="01e-He-UeF" secondAttribute="trailing" constant="8" id="mty-fg-QXc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="YVv-jR-w9O" secondAttribute="trailing" constant="8" id="s6f-uT-b4f"/>
+                                        <constraint firstItem="01e-He-UeF" firstAttribute="leading" secondItem="Ver-wN-HNG" secondAttribute="leadingMargin" id="til-lB-idg"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="90G-f5-mCp" secondAttribute="bottom" constant="4" id="wcm-oM-Uo8"/>
+                                        <constraint firstItem="YVv-jR-w9O" firstAttribute="leading" secondItem="90G-f5-mCp" secondAttribute="trailing" constant="8" id="yUu-xP-sU1"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageTrend" destination="01e-He-UeF" id="UVU-Zd-nyF"/>
+                                    <outlet property="labelCharacter" destination="90G-f5-mCp" id="YxQ-Gm-1iP"/>
+                                    <outlet property="labelStatistic" destination="YVv-jR-w9O" id="VPY-KV-zrq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LNX-CF-8v4" id="OAg-UI-qKD"/>
+                            <outlet property="delegate" destination="LNX-CF-8v4" id="BIh-4O-TfA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="Uwm-fQ-XJV">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="INl-AS-x9A"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oNk-vh-Y0R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2038" y="2233"/>
         </scene>
         <!--Results-->
         <scene sceneID="Dh8-ij-THf">

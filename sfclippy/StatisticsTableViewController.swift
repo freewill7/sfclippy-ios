@@ -12,12 +12,16 @@ import FirebaseDatabase
 class StatisticGroup {
     let name : String
     let p1Desc : String
+    let p1Comp : StatisticsCompare
     let p2Desc : String
+    let p2Comp : StatisticsCompare
     
-    init( name: String, p1Desc: String, p2Desc: String ) {
+    init( name: String, p1Desc: String, p1Comp: StatisticsCompare, p2Desc: String, p2Comp : StatisticsCompare ) {
         self.name = name
         self.p1Desc = p1Desc
+        self.p1Comp = p1Comp
         self.p2Desc = p2Desc
+        self.p2Comp = p2Comp
     }
 }
 
@@ -29,13 +33,23 @@ class StatisticsTableViewController: UITableViewController {
     var refCharacters : DatabaseReference?
     var observerOverall : UInt?
     var observerCharacters: UInt?
+    var characters = [CharacterPref]()
+    let today = Date(timeIntervalSinceNow: 0)
+    let compareP1Wins = CompareQtyWins(isP1: true, today: Date(timeIntervalSinceNow: 0))
+    let compareP2Wins = CompareQtyWins(isP1: false, today: Date(timeIntervalSinceNow: 0))
+    let compareP1Popular = CompareQtyBattles(isP1: true, today: Date(timeIntervalSinceNow: 0))
+    let compareP2Popular = CompareQtyBattles(isP1: false, today: Date(timeIntervalSinceNow: 0))
+    let compareP1Percent = CompareWinPercent(isP1: true, today: Date(timeIntervalSinceNow: 0))
+    let compareP2Percent = CompareWinPercent(isP1: false, today: Date(timeIntervalSinceNow: 0))
+    let compareP1Mru = CompareRecentlyUsed(isP1: true, today: Date(timeIntervalSinceNow: 0))
+    let compareP2Mru = CompareRecentlyUsed(isP1: false, today: Date(timeIntervalSinceNow: 0))
+    var currentCompare : StatisticsCompare?
     
     enum StatIndices : Int {
         case OverallIdx = 0
         case PopularIdx = 1
-        case MostWins = 2
-        case WinRatio = 3
-        case LoseRatio = 4
+        case WinRatio = 2
+        case RecentlyUsed = 3
     }
 
     func getNthSection( index: Int ) -> StatisticGroup? {
@@ -56,7 +70,7 @@ class StatisticsTableViewController: UITableViewController {
             let val = UsageStatistic.initFromMap(fromMap: map) {
             let p1Wins = val.qtyWins
             let p2Wins = val.qtyBattles - val.qtyWins
-            entries[StatIndices.OverallIdx.rawValue] = StatisticGroup( name: "Overall Wins", p1Desc: "\(p1Wins)", p2Desc: "\(p2Wins)")
+            entries[StatIndices.OverallIdx.rawValue] = StatisticGroup( name: "Overall Wins", p1Desc: "\(p1Wins)", p1Comp: compareP1Wins, p2Desc: "\(p2Wins)", p2Comp : compareP2Wins)
             tableView.reloadData()
         }
     }
@@ -73,94 +87,36 @@ class StatisticsTableViewController: UITableViewController {
         }
     }
     
-    func minTuple( _ optionalFirst: (String,Int)?, _ second: (String,Int) ) -> (String,Int) {
-        if let first = optionalFirst {
-            if first.1 < second.1 {
-                return first
-            } else {
-                return second
-            }
-        } else {
-            return second
-        }
+    func generateStatisticGroup( title : String, prefs: [CharacterPref], p1Compare : StatisticsCompare, p2Compare : StatisticsCompare ) -> StatisticGroup {
+        let pop1 = characters.sorted { (prefa, prefb) -> Bool in return p1Compare.isGreater(prefa, prefb) }[0]
+        let pop2 = characters.sorted { (prefa, prefb) -> Bool in return p2Compare.isGreater(prefa, prefb) }[0]
+        
+        let p1Desc = "\(pop1.name) - \(p1Compare.getFormattedValue(pref: pop1))"
+        let p2Desc = "\(pop2.name) - \(p2Compare.getFormattedValue(pref: pop2))"
+        
+        return StatisticGroup( name: title, p1Desc: p1Desc, p1Comp: p1Compare, p2Desc: p2Desc, p2Comp : p2Compare)
     }
     
     func updateCharacters(snapshot: DataSnapshot) {
-        var popularP1 : (String,Int)?
-        var popularP2 : (String,Int)?
-        var winsP1: (String,Int)?
-        var winsP2: (String,Int)?
-        var ratioP1: (String,Int)?
-        var ratioP2: (String,Int)?
-        var badRatioP1: (String,Int)?
-        var badRatioP2: (String,Int)?
-        let minRatioBattles = 10
         
+        var tmpCharacters = [CharacterPref]()
         if let characterMap = snapshot.value as? [String:Any] {
             for kv in characterMap {
                 if let map = kv.value as? [String:Any],
                     let character = CharacterPref.initFromMap(fromMap: map, withId: kv.key) {
-                    
-                    if let p1Stat = character.p1Statistics {
-                        popularP1 = maxTuple( popularP1, (character.name, p1Stat.qtyBattles))
-                        debugPrint("p1Wins \(character.name) \(p1Stat.qtyWins)")
-                        winsP1 = maxTuple( winsP1, (character.name, p1Stat.qtyWins))
-                        
-                        if p1Stat.qtyBattles > minRatioBattles {
-                            let winPercent = (100*p1Stat.qtyWins)/p1Stat.qtyBattles
-                            ratioP1 = maxTuple(ratioP1, (character.name, winPercent))
-                            badRatioP1 = minTuple(badRatioP1, (character.name, winPercent))
-                        }
-                    }
-                    
-                    if let p2Stat = character.p2Statistics {
-                        popularP2 = maxTuple( popularP2, (character.name, p2Stat.qtyBattles))
-                        debugPrint("p2Wins \(character.name) \(p2Stat.qtyWins)")
-                        winsP2 = maxTuple( winsP2, (character.name, p2Stat.qtyWins))
-                        
-                        if p2Stat.qtyBattles > minRatioBattles {
-                            let winPercent = (100*p2Stat.qtyWins)/p2Stat.qtyBattles
-                            ratioP2 = maxTuple(ratioP2, (character.name, winPercent))
-                            badRatioP2 = minTuple(badRatioP2, (character.name, winPercent))
-                        }
-                    }
+                    tmpCharacters.append(character)
                 }
             }
         }
         
-        if let popP1 = popularP1,
-            let popP2 = popularP2 {
-            let p1Favourite = "\(popP1.0) (\(popP1.1))"
-            let p2Favourite = "\(popP2.0) (\(popP2.1))"
-            let grp = StatisticGroup( name: "Favourite Character", p1Desc: p1Favourite, p2Desc: p2Favourite )
-            entries[StatIndices.PopularIdx.rawValue] = grp
-            tableView.reloadData()
-        }
+        characters = tmpCharacters
         
-        if let win1 = winsP1,
-            let win2 = winsP2 {
-            let p1Winner = "\(win1.0) (\(win1.1))"
-            let p2Winner = "\(win2.0) (\(win2.1))"
-            let grp = StatisticGroup( name: "Most Wins", p1Desc: p1Winner, p2Desc: p2Winner )
-            entries[StatIndices.MostWins.rawValue] = grp
-            tableView.reloadData()
-        }
-        
-        if let ratio1 = ratioP1,
-            let ratio2 = ratioP2 {
-            let p1Ratio = "\(ratio1.0) (\(ratio1.1)%)"
-            let p2Ratio = "\(ratio2.0) (\(ratio2.1)%)"
-            let grp = StatisticGroup( name: "Best Win Ratio", p1Desc: p1Ratio, p2Desc: p2Ratio)
-            entries[StatIndices.WinRatio.rawValue] = grp
-            tableView.reloadData()
-        }
-        
-        if let badRatio1 = badRatioP1,
-            let badRatio2 = badRatioP2 {
-            let p1Ratio = "\(badRatio1.0) (\(badRatio1.1)%)"
-            let p2Ratio = "\(badRatio2.0) (\(badRatio2.1)%)"
-            let grp = StatisticGroup( name: "Worst Win Ratio", p1Desc: p1Ratio, p2Desc: p2Ratio)
-            entries[StatIndices.LoseRatio.rawValue] = grp
+        if characters.count > 0 {
+
+            entries[StatIndices.PopularIdx.rawValue] = generateStatisticGroup(title: "Favourite Character", prefs: characters, p1Compare: compareP1Popular, p2Compare: compareP2Popular)
+            entries[StatIndices.WinRatio.rawValue] = generateStatisticGroup(title: "Win Ratio", prefs: characters, p1Compare: compareP1Percent, p2Compare: compareP2Percent)
+            entries[StatIndices.RecentlyUsed.rawValue] = generateStatisticGroup(title: "Recently Used", prefs: characters, p1Compare: compareP1Mru, p2Compare: compareP2Mru)
+            
             tableView.reloadData()
         }
     }
@@ -271,6 +227,20 @@ class StatisticsTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
+        debugPrint("selected row at \(indexPath.row)")
+        
+        if let info = getNthSection(index: indexPath.section) {
+            if 0 == indexPath.row {
+                currentCompare = info.p1Comp
+            } else {
+                currentCompare = info.p2Comp
+            }
+
+            performSegue(withIdentifier: "showStatistic", sender: self)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -307,14 +277,17 @@ class StatisticsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let dest = segue.destination as? StatisticsDetailTableViewController,
+            let compare = currentCompare {
+            dest.compare = compare
+            dest.stats = characters
+        }
     }
-    */
 
 }
