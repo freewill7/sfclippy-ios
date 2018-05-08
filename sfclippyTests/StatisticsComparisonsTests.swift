@@ -58,14 +58,6 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("3", comparison2.getFormattedValue(pref: char2))
         XCTAssert( comparison2.isGreater(char1, char3) )
         XCTAssertEqual("0", comparison2.getFormattedValue(pref: char3))
-        
-        // both stats have had wins in the last month
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison1.trend(char1))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison2.trend(char1))
-        // no statistics
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison1.trend(char2))
-        // no wins recently
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison2.trend(char2))
     }
     
     func testCompareUsage() {
@@ -98,15 +90,6 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("9", comparison2.getFormattedValue(pref: char2))
         XCTAssert( comparison2.isGreater(char1, char3) )
         XCTAssertEqual("0", comparison2.getFormattedValue(pref: char3))
-        
-        // we've used the character in the past mont
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison1.trend(char1))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison2.trend(char1))
-        // never used the character
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison1.trend(char2))
-        // more than a month old
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison2.trend(char2))
-        
     }
     
     func testCompareWinPercent() {
@@ -139,11 +122,6 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("50% (4/8)", comparison2.getFormattedValue(pref: char2))
         XCTAssert( !comparison2.isGreater(char3, char1) )
         XCTAssertEqual("", comparison2.getFormattedValue(pref: char3))
-        
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison1.trend(char1))
-        XCTAssertEqual(StatisticsTrend.TrendingDown, comparison2.trend(char1))
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison1.trend(char2))
-        XCTAssertEqual(StatisticsTrend.TrendingDown, comparison2.trend(char2))
     }
     
     func testCompareMostRecent() {
@@ -188,17 +166,23 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssert( !comparison2.isGreater(laura, ibuki) )
         XCTAssertEqual("", comparison2.getFormattedValue(pref: laura))
         XCTAssert( !comparison2.isGreater(ibuki, ryu))
+    }
+    
+    func testTrends( ) {
+        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4)
+        char1.p1Statistics = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
+        char1.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
+        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5)
+        // missing p1Statistics
+        char2.p2Statistics = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: twoMonths, lastWin: twoMonths)
         
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison1.trend(ryu))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison2.trend(ryu))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison1.trend(ken))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison2.trend(ken))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison1.trend(laura))
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison2.trend(laura))
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison1.trend(ibuki))
-        XCTAssertEqual(StatisticsTrend.TrendingUp, comparison2.trend(ibuki))
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison1.trend(karin))
-        XCTAssertEqual(StatisticsTrend.NoTrend, comparison2.trend(karin))
+        // both stats have had wins in the last month
+        XCTAssertEqual(StatisticsTrend.TrendingUp, identifyCharacterTrend(pref: char1, isP1: true, today: now))
+        XCTAssertEqual(StatisticsTrend.TrendingDown, identifyCharacterTrend(pref: char1, isP1: false, today: now))
+        // no statistics
+        XCTAssertEqual(StatisticsTrend.NoTrend, identifyCharacterTrend(pref: char2, isP1: true, today: now))
+        // no wins recently
+        XCTAssertEqual(StatisticsTrend.NoTrend, identifyCharacterTrend(pref: char2, isP1: false, today: now))
     }
 }
 

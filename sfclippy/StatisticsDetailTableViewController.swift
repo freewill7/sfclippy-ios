@@ -9,6 +9,7 @@
 import UIKit
 
 class StatisticsDetailTableViewController: UITableViewController {
+    var optIsP1 : Bool?
     var compare : StatisticsCompare?
     var stats = [CharacterPref]()
     
@@ -52,16 +53,18 @@ class StatisticsDetailTableViewController: UITableViewController {
             detail.labelCharacter.text = pref.name
             detail.labelStatistic.text = comp.getFormattedValue(pref: pref)
             
-            let trend = comp.trend(pref)
-            if trend == StatisticsTrend.TrendingUp {
-                detail.imageTrend.image = #imageLiteral(resourceName: "icon_24_trending_up")
-                detail.imageTrend.tintColor = UIColor(named: "color_primary")
-            } else if trend == StatisticsTrend.TrendingDown {
-                detail.imageTrend.image = #imageLiteral(resourceName: "icon_24_trending_down")
-                detail.imageTrend.tintColor = UIColor(named: "color_accent")
-            } else {
-                detail.imageTrend.image = #imageLiteral(resourceName: "icon_24_trending_flat")
-                detail.imageTrend.tintColor = UIColor.black
+            if let isP1 = optIsP1 {
+                let trend = identifyCharacterTrend(pref: pref, isP1: isP1, today: Date(timeIntervalSinceNow: 0))
+                if trend == StatisticsTrend.TrendingUp {
+                    detail.imageTrend.image = #imageLiteral(resourceName: "icon_24_trending_up")
+                    detail.imageTrend.tintColor = UIColor(named: "color_primary")
+                } else if trend == StatisticsTrend.TrendingDown {
+                    detail.imageTrend.image = #imageLiteral(resourceName: "icon_24_trending_down")
+                    detail.imageTrend.tintColor = UIColor(named: "color_accent")
+                } else {
+                    detail.imageTrend.image = #imageLiteral(resourceName: "icon_24_trending_flat")
+                    detail.imageTrend.tintColor = UIColor.black
+                }
             }
         }
 

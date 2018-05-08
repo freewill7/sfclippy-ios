@@ -16,6 +16,31 @@ enum StatisticsTrend {
     case NoTrend;
 }
 
+private func extractStatistics( pref : CharacterPref, isP1 : Bool ) -> UsageStatistic? {
+    return isP1 ? pref.p1Statistics : pref.p2Statistics
+}
+
+func identifyCharacterTrend( pref : CharacterPref, isP1 : Bool, today : Date ) -> StatisticsTrend {
+    let ONE_MONTH = Double(28 * 24 * 60 * 60)
+    
+    if let stats = extractStatistics( pref: pref, isP1: isP1 ),
+        let lastBattle = stats.lastBattle {
+        if lastBattle.addingTimeInterval(ONE_MONTH) > today {
+            guard let lastWin = stats.lastWin else {
+                return StatisticsTrend.TrendingDown
+            }
+            
+            if lastWin < lastBattle {
+                return StatisticsTrend.TrendingDown
+            } else {
+                return StatisticsTrend.TrendingUp
+            }
+        }
+    }
+    
+    return StatisticsTrend.NoTrend
+}
+
 protocol StatisticsCompare {
     // Return a description of this statistical comparison
     func getDescription( ) -> String
@@ -23,15 +48,8 @@ protocol StatisticsCompare {
     // Compare two preferences
     func isGreater( _ pref1 : CharacterPref, _ pref2 : CharacterPref ) -> Bool
     
-    // Current trend for the character
-    func trend( _ pref1 : CharacterPref ) -> StatisticsTrend
-    
     // Return a user friendly representation of the statistic
     func getFormattedValue( pref : CharacterPref ) -> String
-}
-
-func extractStatistics( pref : CharacterPref, isP1 : Bool ) -> UsageStatistic? {
-    return isP1 ? pref.p1Statistics : pref.p2Statistics
 }
 
 func compareValueThenName<T: Comparable>( _ value1: T, _ value2: T, name1 : String, name2 : String ) -> Bool {
@@ -55,16 +73,6 @@ class CompareQtyWins : StatisticsCompare {
     
     func getDescription() -> String {
         return "\(isP1 ? "P1" : "P2") Wins"
-    }
-    
-    func trend( _ pref : CharacterPref ) -> StatisticsTrend {
-        if let stats = extractStatistics(pref: pref, isP1: isP1),
-            let lastWin = stats.lastWin {
-            if lastWin.addingTimeInterval(one_month) > today {
-                return StatisticsTrend.TrendingUp
-            }
-        }
-        return StatisticsTrend.NoTrend
     }
     
     func isGreater( _ pref1 : CharacterPref, _ pref2 : CharacterPref ) -> Bool {
@@ -102,16 +110,6 @@ class CompareQtyBattles : StatisticsCompare {
         return "\(isP1 ? "P1" : "P2") Usage"
     }
     
-    func trend(_ pref1: CharacterPref) -> StatisticsTrend {
-        if let stats = extractStatistics(pref: pref1, isP1: isP1),
-            let lastBattle = stats.lastBattle {
-            if lastBattle.addingTimeInterval(one_month) > today {
-                return StatisticsTrend.TrendingUp
-            }
-        }
-        return StatisticsTrend.NoTrend
-    }
-    
     func isGreater( _ pref1 : CharacterPref, _ pref2 : CharacterPref ) -> Bool {
         guard let stats1 = extractStatistics(pref: pref1, isP1: isP1) else {
             return false
@@ -145,24 +143,6 @@ class CompareWinPercent : StatisticsCompare {
     
     func getDescription() -> String {
         return "\(isP1 ? "P1" : "P2") Win Percentage"
-    }
-    
-    func trend(_ pref1: CharacterPref) -> StatisticsTrend {
-        if let stats = extractStatistics( pref: pref1, isP1: isP1 ),
-            let lastBattle = stats.lastBattle {
-            if lastBattle.addingTimeInterval(one_month) > today {
-                guard let lastWin = stats.lastWin else {
-                    return StatisticsTrend.TrendingDown
-                }
-                
-                if lastWin < lastBattle {
-                    return StatisticsTrend.TrendingDown
-                } else {
-                    return StatisticsTrend.TrendingUp
-                }
-            }
-        }
-        return StatisticsTrend.NoTrend
     }
 
     func isGreater( _ pref1 : CharacterPref, _ pref2 : CharacterPref ) -> Bool {
@@ -212,16 +192,6 @@ class CompareRecentlyUsed : StatisticsCompare {
     
     func getDescription() -> String {
         return "\(isP1 ? "P1" : "P2") Recent"
-    }
-    
-    func trend(_ pref1: CharacterPref) -> StatisticsTrend {
-        if let stats = extractStatistics(pref: pref1, isP1: isP1),
-            let lastUsed = stats.lastBattle {
-            if lastUsed.addingTimeInterval(one_month) > today {
-                return StatisticsTrend.TrendingUp
-            }
-        }
-        return StatisticsTrend.NoTrend
     }
     
     func isGreater( _ pref1 : CharacterPref, _ pref2 : CharacterPref ) -> Bool {

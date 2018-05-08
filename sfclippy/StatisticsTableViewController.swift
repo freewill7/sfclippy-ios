@@ -44,6 +44,7 @@ class StatisticsTableViewController: UITableViewController {
     let compareP1Mru = CompareRecentlyUsed(isP1: true, today: Date(timeIntervalSinceNow: 0))
     let compareP2Mru = CompareRecentlyUsed(isP1: false, today: Date(timeIntervalSinceNow: 0))
     var currentCompare : StatisticsCompare?
+    var currentIsP1 : Bool?
     
     enum StatIndices : Int {
         case OverallIdx = 0
@@ -234,8 +235,10 @@ class StatisticsTableViewController: UITableViewController {
         if let info = getNthSection(index: indexPath.section) {
             if 0 == indexPath.row {
                 currentCompare = info.p1Comp
+                currentIsP1 = true
             } else {
                 currentCompare = info.p2Comp
+                currentIsP1 = false
             }
 
             performSegue(withIdentifier: "showStatistic", sender: self)
@@ -285,6 +288,7 @@ class StatisticsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if let dest = segue.destination as? StatisticsDetailTableViewController,
             let compare = currentCompare {
+            dest.optIsP1 = currentIsP1
             dest.compare = compare
             dest.stats = characters
         }
