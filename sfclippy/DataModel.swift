@@ -17,6 +17,10 @@ func getFormatter( ) -> DateFormatter {
     return formatter
 }
 
+func simplifyName( _ name : String ) -> String {
+    return name.lowercased().replacingOccurrences(of: ".", with: "")
+}
+
 class UsageStatistic {
     var qtyBattles : Int
     var qtyWins : Int

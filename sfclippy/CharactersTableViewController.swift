@@ -275,7 +275,7 @@ class CharactersTableViewController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All" ) {
         filteredCharacters = characters.filter({ (prefa) -> Bool in
-            return prefa.name.lowercased().contains(searchText.lowercased())
+            return simplifyName(prefa.name).contains( simplifyName(searchText) )
         })
         tableView.reloadData()
     }

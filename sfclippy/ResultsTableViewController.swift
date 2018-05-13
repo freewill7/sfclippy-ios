@@ -263,13 +263,13 @@ class ResultsTableViewController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String, scope: String = matchAll ) {
         filteredResults = allResults.filter({ (result) -> Bool in
-            let searchTerm = searchText.lowercased()
+            let searchTerm = simplifyName(searchText)
             var match = false
             if scope == ResultsTableViewController.matchP1 || scope == ResultsTableViewController.matchAll {
-                match = match || result.p1Name.lowercased().contains(searchTerm)
+                match = match || simplifyName(result.p1Name).contains(searchTerm)
             }
             if scope == ResultsTableViewController.matchP2 || scope == ResultsTableViewController.matchAll {
-                match = match || result.p2Name.lowercased().contains(searchTerm)
+                match = match || simplifyName(result.p2Name).contains(searchTerm)
             }
             return match
         })
