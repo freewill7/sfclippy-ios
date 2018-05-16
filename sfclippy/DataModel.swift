@@ -148,17 +148,13 @@ class BattleResult {
     }
 }
 
-class CharacterPref : Equatable, CustomStringConvertible {
+class CharacterPref {
     var id : String?
     var name : String
     var p1Rating : Int
     var p2Rating: Int
     var p1Statistics : UsageStatistic?
     var p2Statistics : UsageStatistic?
-
-    var description: String {
-        return "CharacterPref(\(name),\(p1Rating),\(p2Rating))"
-    }
     
     static let keyName = "name"
     static let keyP1Rating = "p1Rating"
@@ -173,12 +169,6 @@ class CharacterPref : Equatable, CustomStringConvertible {
         self.id = id
         self.p1Statistics = p1Statistics
         self.p2Statistics = p2Statistics
-    }
-    
-    static func ==( lhs : CharacterPref, rhs : CharacterPref ) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.p1Rating == rhs.p1Rating &&
-            lhs.p2Rating == rhs.p2Rating
     }
     
     func toMap( ) -> [String:Any] {

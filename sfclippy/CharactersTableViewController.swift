@@ -229,7 +229,10 @@ class CharactersTableViewController: UITableViewController {
     
     @IBAction func selectRandom(_ sender: Any) {
         let elem = selector.randomCharacter(characters)
-        if let index = characters.index(of: elem) {
+        let optIndex = characters.index { (pref) -> Bool in
+            return elem.id == pref.id
+        }
+        if let index = optIndex {
             let path = IndexPath(row: index, section: 0)
             self.tableView.selectRow(at: path, animated: true, scrollPosition: .top)
         }
@@ -237,7 +240,10 @@ class CharactersTableViewController: UITableViewController {
     
     @IBAction func selectPreferred(_ sender: Any) {
         let elem = selector.preferredCharacter(characters, playerId: playerId)
-        if let index = characters.index(of: elem) {
+        let optIndex = characters.index(where: { (pref) -> Bool in
+            return elem.id == pref.id
+        })
+        if let index = optIndex {
             let path = IndexPath(row: index, section: 0)
             self.tableView.selectRow(at: path, animated: true, scrollPosition: .top)
         }
