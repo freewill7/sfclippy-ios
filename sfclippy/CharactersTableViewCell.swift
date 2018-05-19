@@ -13,7 +13,6 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var viewRating: RatingView!
-    @IBOutlet weak var imageRight: UIImageView!
     var character : CharacterPref?
     var isP1Rating : Bool?
     static let DAY = 24 * 60 * 60 as TimeInterval
@@ -50,20 +49,18 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
         self.isP1Rating = isP1
         labelName.text = character.name
         
+        if isP1 {
+            viewRating.rating = character.p1Rating
+            labelDescription.text = generateDescription(character.p1Statistics)
+        } else {
+            viewRating.rating = character.p2Rating
+            labelDescription.text = generateDescription(character.p2Statistics)
+        }
+        
         if isEdit {
-            imageRight.isHidden = false
             viewRating.isHidden = true
         } else {
-            imageRight.isHidden = true
             viewRating.isHidden = false
-
-            if isP1 {
-                viewRating.rating = character.p1Rating
-                labelDescription.text = generateDescription(character.p1Statistics)
-            } else {
-                viewRating.rating = character.p2Rating
-                labelDescription.text = generateDescription(character.p2Statistics)
-            }
         }
     }
     

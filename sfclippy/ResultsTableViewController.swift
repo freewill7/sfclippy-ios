@@ -21,6 +21,8 @@ class ResultsTableViewController: UITableViewController {
     var filteredResults = [BattleResult]()
     var filteredGroupedResults = [(key: String, value:[BattleResult])]()
     
+    @IBOutlet weak var barEditButton: UIBarButtonItem!
+    
     static let matchAll = "All"
     static let matchP1 = "Player 1"
     static let matchP2 = "Player 2"
@@ -194,7 +196,7 @@ class ResultsTableViewController: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return tableView.isEditing
     }
 
     // Override to support editing the table view.
@@ -293,6 +295,14 @@ class ResultsTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func clickBarButtonEdit(_ sender: Any) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        if tableView.isEditing {
+            barEditButton.title = "Cancel"
+        } else {
+            barEditButton.title = "Edit"
+        }
+    }
 }
 
 extension ResultsTableViewController : UISearchResultsUpdating {

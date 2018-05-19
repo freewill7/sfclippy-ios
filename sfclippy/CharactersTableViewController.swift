@@ -21,22 +21,65 @@ class CharactersTableViewController: UITableViewController {
     var playerId = 0
     var selected : CharacterPref?
     var selector = SelectionMechanism( ArcRandomGenerator() )
-    var editMode = false
     var observerPreferences : UInt?
     var refPreferences : DatabaseReference?
     let searchController = UISearchController(searchResultsController: nil)
     @IBOutlet weak var buttonEditCancel: UIBarButtonItem!
-    
+    let selectionMechanism = SelectionMechanism( ArcRandomGenerator() )
+
+    var buttonCreate : UIBarButtonItem?
+    var buttonRandom : UIBarButtonItem?
+    var buttonPreferred : UIBarButtonItem?
+    var buttonUnfamiliar : UIBarButtonItem?
+        
     @IBAction func clickEditCancel(_ sender: Any) {
-        editMode = !editMode
-        if editMode {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        if tableView.isEditing {
             buttonEditCancel.title = "Cancel"
-            navigationController?.setToolbarHidden(false, animated: true)
         } else {
             buttonEditCancel.title = "Edit"
-            navigationController?.setToolbarHidden(true, animated: true)
         }
+        updateToolbarButtons()
         tableView.reloadData()
+    }
+    
+    @IBAction func clickButtonCreate(_ sender: Any) {
+        debugPrint("create clicked")
+        performSegue(withIdentifier: "createCharacter", sender: self)
+    }
+    
+    func indexForCharacter( _ pref : CharacterPref ) -> IndexPath? {
+        let optIndex = characters.index(where: { (elem) -> Bool in
+            return elem.id == pref.id
+        })
+        if let index = optIndex {
+            return IndexPath(row: index, section: 0)
+        }
+        return nil
+    }
+    
+    @IBAction func clickButtonRandom(_ sender : Any) {
+        debugPrint("random clicked")
+        let character = selectionMechanism.randomCharacter(characters)
+        if let index = indexForCharacter(character) {
+            tableView.selectRow(at: index, animated: true, scrollPosition: .top)
+        }
+    }
+    
+    @IBAction func clickButtonPreferred(_ sender : Any) {
+        debugPrint("preferred click")
+        let character = selectionMechanism.preferredCharacter(characters, playerId: playerId)
+        if let index = indexForCharacter(character) {
+            tableView.selectRow(at: index, animated: true, scrollPosition: .top)
+        }
+    }
+    
+    @IBAction func clickButtonUnfamiliar(_ sender : Any) {
+        debugPrint("unfamiliar click")
+        let character = selectionMechanism.leastRecentlyUsed(characters, playerId: playerId)
+        if let index = indexForCharacter(character) {
+            tableView.selectRow(at: index, animated: true, scrollPosition: .top)
+        }
     }
     
     func comparePrefs( a : CharacterPref, b : CharacterPref, extractScore: (CharacterPref) -> Int ) -> Bool {
@@ -123,6 +166,8 @@ class CharactersTableViewController: UITableViewController {
             self.characters = prefs.sorted(by: { (prefa, prefb) -> Bool in
                 return self.comparePrefs(a: prefa, b: prefb, extractScore: extractScore)
             })
+            
+            
             tableView.reloadData()
         } else {
             debugPrint("bootstrap required...")
@@ -152,11 +197,30 @@ class CharactersTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
+        let tintColor = UIColor(named: "color_primary")
+        buttonCreate = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_24_create"), style: .plain, target: self, action: #selector(clickButtonCreate(_:)))
+        buttonCreate?.tintColor = tintColor
+        buttonRandom = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_24_shuffle"), style: .plain, target: self, action: #selector(clickButtonRandom(_:)))
+        buttonRandom?.tintColor = tintColor
+        buttonPreferred = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_24_assistant"), style: .plain, target: self, action: #selector(clickButtonPreferred(_:)))
+        buttonPreferred?.tintColor = tintColor
+        buttonUnfamiliar = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_24_access"), style: .plain, target: self, action: #selector(clickButtonUnfamiliar(_:)))
+        buttonUnfamiliar?.tintColor = tintColor
+    }
+    
+    func updateToolbarButtons() {
+        let spacing = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        if tableView.isEditing {
+            navigationController?.toolbar.items = [ spacing, buttonCreate!, spacing ]
+        } else {
+            navigationController?.toolbar.items = [ buttonRandom!, spacing, buttonPreferred!, spacing, buttonUnfamiliar! ]
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.setToolbarHidden(!editMode, animated: false)
+        navigationController?.setToolbarHidden(false, animated: true)
+        updateToolbarButtons()
         
         if let ref = refPreferences {
             observerPreferences = ref.observe(.value, with: handlePreferencesChange)
@@ -196,14 +260,9 @@ class CharactersTableViewController: UITableViewController {
         
         let isP1 = (0==playerId)
         
-        /*if editMode {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "editCharacterCell", for: indexPath) as! EditCharactersTableViewCell
-            cell.setCharacter( character: characters[indexPath.row], isP1: isP1 )
-            return cell
-        } */
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as! CharactersTableViewCell
         let character = characterForIndex(indexPath)
-        cell.setCharacter( character: character, isP1: isP1, isEdit: editMode )
+        cell.setCharacter( character: character, isP1: isP1, isEdit: tableView.isEditing )
         
         return cell
     }
@@ -212,7 +271,7 @@ class CharactersTableViewController: UITableViewController {
         debugPrint("selected row at \(indexPath.row)")
         
         let character = characterForIndex(indexPath)
-        if editMode {
+        if tableView.isEditing {
             performSegue(withIdentifier: "editCharacter", sender: self)
         } else {
             self.selected = character
@@ -224,28 +283,6 @@ class CharactersTableViewController: UITableViewController {
             } else {
                 self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
             }
-        }
-    }
-    
-    @IBAction func selectRandom(_ sender: Any) {
-        let elem = selector.randomCharacter(characters)
-        let optIndex = characters.index { (pref) -> Bool in
-            return elem.id == pref.id
-        }
-        if let index = optIndex {
-            let path = IndexPath(row: index, section: 0)
-            self.tableView.selectRow(at: path, animated: true, scrollPosition: .top)
-        }
-    }
-    
-    @IBAction func selectPreferred(_ sender: Any) {
-        let elem = selector.preferredCharacter(characters, playerId: playerId)
-        let optIndex = characters.index(where: { (pref) -> Bool in
-            return elem.id == pref.id
-        })
-        if let index = optIndex {
-            let path = IndexPath(row: index, section: 0)
-            self.tableView.selectRow(at: path, animated: true, scrollPosition: .top)
         }
     }
 
@@ -290,25 +327,35 @@ class CharactersTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty()
     }
     
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return tableView.isEditing
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let val = characterForIndex(indexPath)
+            
+            // Delete character from firebase
+            let db = Database.database()
+            if let characterId = val.id,
+                let ref = userCharactersPref(database: db, characterId: characterId) {
+                ref.removeValue()
+            }
+            
+            // Remove from local cache
+            if ( isFiltering() ) {
+                filteredCharacters.remove(at: indexPath.row)
+            } else {
+                characters.remove(at: indexPath.row)
+            }
+            
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -329,10 +376,16 @@ class CharactersTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        navigationController?.setToolbarHidden(true, animated: false)
-        // Get the new view controller using segue.destinationViewController.
-        if let dest = segue.destination as? AddCharacterViewController {
-            if let indexPath = tableView.indexPathForSelectedRow {
+        if segue.identifier == "createCharacter" {
+            if let dest = segue.destination as? AddCharacterViewController {
+                dest.characterId = nil
+                dest.characterName = ""
+                dest.p1Rating = 1
+                dest.p2Rating = 1
+            }
+        } else if segue.identifier == "editCharacter" {
+            if let dest = segue.destination as? AddCharacterViewController,
+                let indexPath = tableView.indexPathForSelectedRow {
                 let character = characterForIndex(indexPath)
                 dest.characterId = character.id
                 dest.characterName = character.name
@@ -340,7 +393,7 @@ class CharactersTableViewController: UITableViewController {
                 dest.p2Rating = character.p2Rating
             }
         }
-        // Pass the selected object to the new view controller.
+        navigationController?.setToolbarHidden(true, animated: false)
     }
 
 }
