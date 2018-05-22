@@ -80,7 +80,7 @@ class SfButtonWithDescription: UIView {
 
     private func commonInit( ) {
         debugPrint("SfButtonWithDescription\(id) common init")
-        let bundle = Bundle(for: SfHeadingView.self)
+        let bundle = Bundle(for: SfButtonWithDescription.self)
         bundle.loadNibNamed("SfButtonWithDescription", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
