@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		40D311CD3A24E63269CC1B75 /* Pods_sfclippyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBC2DD6A0A56665259737EA /* Pods_sfclippyUITests.framework */; };
 		4CE72719FF7147A4D1A51FD1 /* Pods_sfclippyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B546F4997AB21F61BE224771 /* Pods_sfclippyTests.framework */; };
+		BE1AF5B720B0B2770053163C /* ResultsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5B620B0B2770053163C /* ResultsDetailTableViewController.swift */; };
+		BE1AF5B920B0C1BA0053163C /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5B820B0C1BA0053163C /* LabelTableViewCell.swift */; };
+		BE1AF5BB20B0C1CA0053163C /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5BA20B0C1CA0053163C /* ButtonTableViewCell.swift */; };
+		BE1AF5BD20B0C1E50053163C /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5BC20B0C1E50053163C /* DatePickerTableViewCell.swift */; };
+		BE1AF5BF20B0C7930053163C /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5BE20B0C7930053163C /* PickerTableViewCell.swift */; };
 		BE1C9E70201CBD5C00776B78 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C9E6F201CBD5C00776B78 /* RatingView.swift */; };
 		BE1C9E72201CCFC800776B78 /* AddCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */; };
 		BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */; };
@@ -73,6 +78,11 @@
 		9F1F74618B7CB5D1E17E94A0 /* Pods-sfclippy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippy/Pods-sfclippy.debug.xcconfig"; sourceTree = "<group>"; };
 		A56E63742F27EC72439A5A05 /* Pods-sfclippyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sfclippyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sfclippyTests/Pods-sfclippyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B546F4997AB21F61BE224771 /* Pods_sfclippyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sfclippyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1AF5B620B0B2770053163C /* ResultsDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsDetailTableViewController.swift; sourceTree = "<group>"; };
+		BE1AF5B820B0C1BA0053163C /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		BE1AF5BA20B0C1CA0053163C /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		BE1AF5BC20B0C1E50053163C /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		BE1AF5BE20B0C7930053163C /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		BE1C9E6F201CBD5C00776B78 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCharacterViewController.swift; sourceTree = "<group>"; };
 		BE1F23F41FBE11E500CD6447 /* sfclippy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sfclippy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +233,11 @@
 				BE3F883E2096358500EE9849 /* StatisticsDetailTableViewController.swift */,
 				BE3F8840209635AA00EE9849 /* StatisticsDetailTableViewCell.swift */,
 				BE3F8842209A636200EE9849 /* StatisticsComparison.swift */,
+				BE1AF5B620B0B2770053163C /* ResultsDetailTableViewController.swift */,
+				BE1AF5B820B0C1BA0053163C /* LabelTableViewCell.swift */,
+				BE1AF5BA20B0C1CA0053163C /* ButtonTableViewCell.swift */,
+				BE1AF5BC20B0C1E50053163C /* DatePickerTableViewCell.swift */,
+				BE1AF5BE20B0C7930053163C /* PickerTableViewCell.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -579,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1AF5B720B0B2770053163C /* ResultsDetailTableViewController.swift in Sources */,
 				BE1C9E72201CCFC800776B78 /* AddCharacterViewController.swift in Sources */,
 				BE1C9E70201CBD5C00776B78 /* RatingView.swift in Sources */,
 				BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */,
@@ -587,7 +603,9 @@
 				BE21692D1FD1FFD1009F0703 /* ResultsTableViewController.swift in Sources */,
 				BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */,
 				BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */,
+				BE1AF5BB20B0C1CA0053163C /* ButtonTableViewCell.swift in Sources */,
 				BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */,
+				BE1AF5B920B0C1BA0053163C /* LabelTableViewCell.swift in Sources */,
 				BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */,
 				BE3F883F2096358500EE9849 /* StatisticsDetailTableViewController.swift in Sources */,
 				BE4247551FC1E717003E08A8 /* CharactersTableViewCell.swift in Sources */,
@@ -595,7 +613,9 @@
 				BE3E651E203B7A5A00961A29 /* SettingsTableViewCell.swift in Sources */,
 				BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */,
 				BEC74F57204954A60081820B /* SfButtonWithDescription.swift in Sources */,
+				BE1AF5BD20B0C1E50053163C /* DatePickerTableViewCell.swift in Sources */,
 				BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */,
+				BE1AF5BF20B0C7930053163C /* PickerTableViewCell.swift in Sources */,
 				BE4F225A20420D8B00900013 /* StatisticsTableViewController.swift in Sources */,
 				BECC1D29205096FE00A93900 /* ConfirmViewController.swift in Sources */,
 				BE3F8841209635AA00EE9849 /* StatisticsDetailTableViewCell.swift in Sources */,

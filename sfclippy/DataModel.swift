@@ -17,11 +17,19 @@ func getFormatter( ) -> DateFormatter {
     return formatter
 }
 
+func getUserFormatter() -> DateFormatter {
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    return formatter
+}
+
 func simplifyName( _ name : String ) -> String {
     return name.lowercased().replacingOccurrences(of: ".", with: "")
 }
 
-class UsageStatistic {
+// "struct" implementation so it has copy rather than reference semantics
+struct UsageStatistic {
     var qtyBattles : Int
     var qtyWins : Int
     var lastBattle : Date?
@@ -39,13 +47,12 @@ class UsageStatistic {
         self.lastWin = lastWin
     }
     
-    func addResult( won: Bool, date: Date = Date() ) {
-        qtyBattles += 1
-        lastBattle = (nil == lastBattle) ? date : max(date, lastBattle!)
-        if won {
-            qtyWins += 1
-            lastWin = (nil == lastWin) ? date : max(date, lastWin!)
-        }
+    func addResult( won: Bool, date: Date = Date() ) -> UsageStatistic {
+        let nextQtyBattles = qtyBattles + 1
+        let nextLastBattle = (nil == lastBattle) ? date : max(date, lastBattle!)
+        let nextQtyWins = won ? qtyWins+1 : qtyWins;
+        let nextLastWin = won ? ((nil == lastWin) ? date : max(date, lastWin!)) : lastWin
+        return UsageStatistic(qtyBattles: nextQtyBattles, qtyWins: nextQtyWins, lastBattle: nextLastBattle, lastWin: nextLastWin)
     }
     
     func toMap( ) -> [String:Any] {
@@ -84,7 +91,8 @@ class UsageStatistic {
     }
 }
 
-class BattleResult {
+// "struct" implementation so it has copy rather than reference semantics
+struct BattleResult : Equatable {
     var date : Date
     var p1Id : String
     var p1Name : String
@@ -145,6 +153,32 @@ class BattleResult {
             debugPrint("missing values in result map")
             return nil
         }
+    }
+    
+    func updateDate( _ newDate : Date ) -> BattleResult {
+        return BattleResult(date: newDate, p1Id: p1Id, p1Name: p1Name, p2Id: p2Id, p2Name: p2Name, p1Won: p1Won, id: id)
+    }
+    
+    func updateWinner( p1Win : Bool ) -> BattleResult {
+        return BattleResult(date: date, p1Id: p1Id, p1Name: p1Name, p2Id: p2Id, p2Name: p2Name, p1Won: p1Win, id: id)
+    }
+    
+    func updateP1Char( _ p1Char : CharacterPref ) -> BattleResult {
+        return BattleResult(date: date, p1Id: p1Char.id!, p1Name: p1Char.name, p2Id: p2Id, p2Name: p2Name, p1Won: p1Won, id: id)
+    }
+    
+    func updateP2Char( _ p2Char : CharacterPref ) -> BattleResult {
+        return BattleResult(date: date, p1Id: p1Id, p1Name: p1Name, p2Id: p2Char.id!, p2Name: p2Char.name, p1Won: p1Won, id: id)
+    }
+    
+    static func == (lhs : BattleResult, rhs : BattleResult) -> Bool {
+        return lhs.date == rhs.date &&
+            lhs.id == rhs.id &&
+            lhs.p1Id == rhs.p1Id &&
+            lhs.p1Won == rhs.p1Won &&
+            lhs.p2Id == rhs.p2Id &&
+            lhs.p2Name == rhs.p2Name &&
+            lhs.p1Won == rhs.p1Won
     }
 }
 
@@ -286,8 +320,8 @@ func p2VsStatisticsRef( database: Database, p2Id: String, p1Id: String ) -> Data
 }
 
 private func updateStatisticsMap( map: inout [String:UsageStatistic], key: String, won: Bool, date: Date ) {
-    let statistic = map[key, default: UsageStatistic()]
-    statistic.addResult(won: won, date:date)
+    var statistic = map[key, default: UsageStatistic()]
+    statistic = statistic.addResult(won: won, date:date)
     map[key] = statistic
 }
 
@@ -299,7 +333,7 @@ private func updateStatisticsMapMap( map: inout [String:[String:UsageStatistic]]
 
 func regenerateStatistics( database: Database, snapshot: DataSnapshot, p1CharId : String? = nil, p2CharId : String? = nil) {
     
-    let overall = UsageStatistic()
+    var overall = UsageStatistic()
     var p1CharOverall = [String:UsageStatistic]()
     var p2CharOverall = [String:UsageStatistic]()
     var p1CharMap = [String:[String:UsageStatistic]]()
@@ -314,7 +348,7 @@ func regenerateStatistics( database: Database, snapshot: DataSnapshot, p1CharId 
                 let p2Id = result.p2Id
                 let p1Won = result.p1Won
                 
-                overall.addResult(won: p1Won, date: date)
+                overall = overall.addResult(won: p1Won, date: date)
                 
                 updateStatisticsMap(map: &p1CharOverall, key: p1Id, won: p1Won, date: date)
                 updateStatisticsMap(map: &p2CharOverall, key: p2Id, won: !p1Won, date: date)

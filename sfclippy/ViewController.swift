@@ -157,7 +157,7 @@ class ViewController: UIViewController, DragToSelectObserver, ButtonClickObserve
         } else {
             debugPrint("initialising statistic from empty \(snapshot.key)")
         }
-        stat.addResult(won: won, date: date)
+        stat = stat.addResult(won: won, date: date)
         snapshot.ref.setValue(stat.toMap())
         return stat
     }

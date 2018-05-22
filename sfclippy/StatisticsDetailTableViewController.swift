@@ -18,6 +18,7 @@ class StatisticsDetailTableViewController: UITableViewController {
 
         debugPrint("loaded detail table view controller")
         if let comp = compare {
+            debugPrint("statistics detail \(comp.getDescription()) \(String(describing:optIsP1))")
             stats = stats.sorted(by: { (prefa, prefb) -> Bool in
                 return comp.isGreater(prefa, prefb)
             })

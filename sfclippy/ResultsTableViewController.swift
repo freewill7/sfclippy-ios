@@ -190,7 +190,12 @@ class ResultsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
-        performSegue(withIdentifier: "showResult", sender: self)
+        if ( tableView.isEditing ) {
+            debugPrint("editing item...")
+            performSegue(withIdentifier: "showResult", sender: self)
+        } else {
+            debugPrint("selected... but not editing")
+        }
     }
     
     // Override to support conditional editing of the table view.
@@ -289,9 +294,9 @@ class ResultsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let dest = segue.destination as? ResultViewController,
+        if let dest = segue.destination as? ResultsDetailTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-            dest.result = resultForIndex(indexPath)
+            dest.referenceResult = resultForIndex(indexPath)
         }
     }
 
@@ -302,6 +307,12 @@ class ResultsTableViewController: UITableViewController {
         } else {
             barEditButton.title = "Edit"
         }
+    }
+    
+    @IBAction func unwindToResults(unwindSegue: UIStoryboardSegue) {
+        debugPrint("unwound to results")
+        
+        // nothing to do  
     }
 }
 

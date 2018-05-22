@@ -81,6 +81,24 @@ class DataModelTests: XCTestCase {
         XCTAssertEqual("ryu", simplifyName("Ryu"))
     }
     
+    func testStatistics() {
+        let original = UsageStatistic(qtyBattles: 0, qtyWins: 0, lastBattle: nil, lastWin: nil)
+        let date1 = Date(timeIntervalSince1970: 24*60*60)
+        
+        let win = original.addResult(won: true, date: date1)
+        XCTAssertEqual(win.lastBattle, date1)
+        XCTAssertEqual(win.qtyBattles, 1)
+        XCTAssertEqual(win.qtyWins, 1)
+        XCTAssertEqual(win.lastWin, date1)
+        
+        let date2 = Date(timeIntervalSince1970: 48*60*60)
+        let loss = win.addResult(won: false, date: date2)
+        XCTAssertEqual(loss.lastBattle, date2)
+        XCTAssertEqual(loss.qtyBattles, 2)
+        XCTAssertEqual(win.qtyWins, 1)
+        XCTAssertEqual(loss.lastWin, date1)
+    }
+    
     func testBasicPreferenceConservation() {
         // check we can de-serialise
         
@@ -177,5 +195,76 @@ class DataModelTests: XCTestCase {
         XCTAssertEqual(16, stats2.qtyWins)
         XCTAssertEqual("2018-05-10T21:12:49", getFormatter().string(from: stats2.lastBattle!))
         XCTAssertEqual("2018-05-10T21:12:49", getFormatter().string(from: stats2.lastWin!))
+    }
+    
+    func testCompareBattleResult( ) {
+        let originalDate = Date(timeIntervalSince1970: 24*60*60)
+        let originalP1Id = "P1XX";
+        let originalP1Name = "Ryu"
+        let originalP2Id = "P2YY"
+        let originalP2Name = "Ken"
+        let originalP1Won = false
+        let id = "ZZ"
+        let originalResult = BattleResult(date: originalDate, p1Id: originalP1Id, p1Name: originalP1Name, p2Id: originalP2Id, p2Name: originalP2Name, p1Won: originalP1Won, id: id)
+        
+        // check direct copy compares equally
+        let copyResult = BattleResult(date: originalDate, p1Id: originalP1Id, p1Name: originalP1Name, p2Id: originalP2Id, p2Name: originalP2Name, p1Won: originalP1Won, id: id)
+        XCTAssertEqual(originalResult, copyResult)
+        
+        // check different winner compares differently
+        let differentWinner = copyResult.updateWinner(p1Win: true)
+        XCTAssertTrue(originalResult != differentWinner)
+        
+        // check different date compares differently
+        let differentDate = copyResult.updateDate(Date(timeIntervalSince1970: 2*24*60*60))
+        XCTAssertTrue(originalResult != differentDate)
+        
+        // check different p1 compares differently
+        let alternativeP1 = CharacterPref(name: "Zangief", p1Rating: 1, p2Rating: 2, id: "ZZ", p1Statistics: nil, p2Statistics: nil)
+        let differentP1 = copyResult.updateP1Char(alternativeP1)
+        XCTAssertTrue(originalResult != differentP1)
+        
+        // check different p2 compares differently
+        let alternativeP2 = CharacterPref(name: "Laura", p1Rating: 1, p2Rating: 2, id: "LL", p1Statistics: nil, p2Statistics: nil)
+        let differentP2 = copyResult.updateP1Char(alternativeP2)
+        XCTAssertTrue(originalResult != differentP2)
+    }
+    
+    func testBattleResultMutation( ) {
+        let originalDate = Date(timeIntervalSince1970: 24*60*60)
+        let originalP1Id = "P1XX";
+        let originalP1Name = "Ryu"
+        let originalP2Id = "P2YY"
+        let originalP2Name = "Ken"
+        let originalP1Won = false
+        let id = "ZZ"
+        let originalResult = BattleResult(date: originalDate, p1Id: originalP1Id, p1Name: originalP1Name, p2Id: originalP2Id, p2Name: originalP2Name, p1Won: originalP1Won, id: id)
+        
+        // change player 1 character
+        let pref1 = CharacterPref(name: "Juri", p1Rating: 1, p2Rating: 2)
+        pref1.id = "AA"
+        let changedP1 = originalResult.updateP1Char(pref1)
+        XCTAssertEqual(pref1.name, changedP1.p1Name)
+        XCTAssertEqual(pref1.id, changedP1.p1Id)
+        XCTAssertEqual(originalP2Id, changedP1.p2Id)
+        XCTAssertEqual(originalP2Name, changedP1.p2Name)
+        
+        // change player 2 character
+        let pref2 = CharacterPref(name: "Dhalsim", p1Rating: 1, p2Rating: 2)
+        pref2.id = "BB"
+        let changedP2 = originalResult.updateP2Char(pref2)
+        XCTAssertEqual(originalP1Name, changedP2.p1Name)
+        XCTAssertEqual(originalP1Id, changedP2.p1Id)
+        XCTAssertEqual(pref2.name, changedP2.p2Name)
+        XCTAssertEqual(pref2.id, changedP2.p2Id)
+        
+        // change winner
+        let changedWinner = originalResult.updateWinner(p1Win: true)
+        XCTAssertEqual(changedWinner.p1Won, true)
+        
+        // change date
+        let date2 = Date(timeIntervalSince1970: 2*24*60*60)
+        let changedDate = originalResult.updateDate(date2)
+        XCTAssertEqual(date2, changedDate.date)
     }
 }

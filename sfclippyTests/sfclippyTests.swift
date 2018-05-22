@@ -31,8 +31,8 @@ class sfclippyTests: XCTestCase {
         XCTAssertNil(noStatsCopy!.lastBattle)
         XCTAssertNil(noStatsCopy!.lastWin)
         
-        let losingStat = UsageStatistic()
-        losingStat.addResult(won: false)
+        var losingStat = UsageStatistic()
+        losingStat = losingStat.addResult(won: false)
         let losingMap = losingStat.toMap()
         let losingCopy = UsageStatistic.initFromMap(fromMap: losingMap)
         XCTAssertNotNil(losingCopy)
@@ -41,8 +41,8 @@ class sfclippyTests: XCTestCase {
         XCTAssertNil(losingCopy!.lastWin)
         XCTAssertNotNil(losingCopy!.lastBattle)
         
-        let winningStat = UsageStatistic()
-        winningStat.addResult(won: true)
+        var winningStat = UsageStatistic()
+        winningStat = winningStat.addResult(won: true)
         let winningMap = winningStat.toMap()
         let winningCopy = UsageStatistic.initFromMap(fromMap: winningMap)
         XCTAssertNotNil(winningCopy)
@@ -57,11 +57,11 @@ class sfclippyTests: XCTestCase {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-mm-DD HH:MM:SS"
         
-        let stat = UsageStatistic()
-        stat.addResult(won: false)
+        var stat = UsageStatistic()
+        stat = stat.addResult(won: false)
         let lastWin = formatter.date(from: "2017-01-01 09:01:02")!
-        stat.addResult(won: true, date: lastWin)
-        stat.addResult(won: false)
+        stat = stat.addResult(won: true, date: lastWin)
+        stat = stat.addResult(won: false)
         let lastBattle = stat.lastBattle!
         
         let serialised = stat.toMap()
