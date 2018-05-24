@@ -29,7 +29,7 @@ func simplifyName( _ name : String ) -> String {
 }
 
 // "struct" implementation so it has copy rather than reference semantics
-struct UsageStatistic {
+struct UsageStatistic : Equatable {
     var qtyBattles : Int
     var qtyWins : Int
     var lastBattle : Date?
@@ -182,7 +182,16 @@ struct BattleResult : Equatable {
     }
 }
 
-class CharacterPref {
+struct CharacterPref : Equatable {
+    static func == (lhs: CharacterPref, rhs: CharacterPref) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.p1Rating == rhs.p1Rating
+            && lhs.p2Rating == rhs.p2Rating
+            && lhs.p1Statistics == rhs.p1Statistics
+            && lhs.p2Statistics == rhs.p2Statistics
+    }
+    
     var id : String?
     var name : String
     var p1Rating : Int
@@ -247,6 +256,18 @@ class CharacterPref {
             debugPrint("character map missing fields",map)
             return nil
         }
+    }
+    
+    func changeName( _ newName : String ) -> CharacterPref {
+        return CharacterPref(name: newName, p1Rating: p1Rating, p2Rating: p2Rating, id: id, p1Statistics: p1Statistics, p2Statistics: p2Statistics)
+    }
+    
+    func changeP1Rating( _ rating : Int ) -> CharacterPref {
+        return CharacterPref(name: name, p1Rating: rating, p2Rating: p2Rating, id: id, p1Statistics: p1Statistics, p2Statistics: p2Statistics)
+    }
+    
+    func changeP2Rating( _ rating : Int ) -> CharacterPref {
+        return CharacterPref(name: name, p1Rating: p1Rating, p2Rating: rating, id: id, p1Statistics: p1Statistics, p2Statistics: p2Statistics)
     }
 }
 
@@ -331,8 +352,25 @@ private func updateStatisticsMapMap( map: inout [String:[String:UsageStatistic]]
     map[key1] = statsMap
 }
 
+func parseResultsSnapshot( snapshot : DataSnapshot ) -> [BattleResult] {
+    var ret = [BattleResult]()
+    if let results = snapshot.value as? [String:[String:Any]] {
+        for pair in results {
+            if let result = BattleResult.initFromMap(fromMap: pair.value, withId: pair.key) {
+                ret.append( result )
+            }
+        }
+    }
+    return ret
+}
+
 func regenerateStatistics( database: Database, snapshot: DataSnapshot, p1CharId : String? = nil, p2CharId : String? = nil) {
+    let results = parseResultsSnapshot(snapshot: snapshot)
+    regenerateStatistics(database: database, results: results, p1CharId: p1CharId, p2CharId: p2CharId)
+}
     
+func regenerateStatistics( database: Database, results: [BattleResult], p1CharId : String? = nil, p2CharId : String? = nil) {
+
     var overall = UsageStatistic()
     var p1CharOverall = [String:UsageStatistic]()
     var p2CharOverall = [String:UsageStatistic]()
@@ -340,23 +378,19 @@ func regenerateStatistics( database: Database, snapshot: DataSnapshot, p1CharId 
     var p2CharMap = [String:[String:UsageStatistic]]()
     
     // generate statistics
-    if let results = snapshot.value as? [String:[String:Any]] {
-        for pair in results {
-            if let result = BattleResult.initFromMap(fromMap: pair.value, withId: pair.key) {
-                let date = result.date
-                let p1Id = result.p1Id
-                let p2Id = result.p2Id
-                let p1Won = result.p1Won
-                
-                overall = overall.addResult(won: p1Won, date: date)
-                
-                updateStatisticsMap(map: &p1CharOverall, key: p1Id, won: p1Won, date: date)
-                updateStatisticsMap(map: &p2CharOverall, key: p2Id, won: !p1Won, date: date)
-                
-                updateStatisticsMapMap(map: &p1CharMap, key1: p1Id, key2: p2Id, won: p1Won, date: date)
-                updateStatisticsMapMap(map: &p2CharMap, key1: p2Id, key2: p1Id, won: !p1Won, date: date)
-            }
-        }
+    for result in results {
+        let date = result.date
+        let p1Id = result.p1Id
+        let p2Id = result.p2Id
+        let p1Won = result.p1Won
+        
+        overall = overall.addResult(won: p1Won, date: date)
+        
+        updateStatisticsMap(map: &p1CharOverall, key: p1Id, won: p1Won, date: date)
+        updateStatisticsMap(map: &p2CharOverall, key: p2Id, won: !p1Won, date: date)
+        
+        updateStatisticsMapMap(map: &p1CharMap, key1: p1Id, key2: p2Id, won: p1Won, date: date)
+        updateStatisticsMapMap(map: &p2CharMap, key1: p2Id, key2: p1Id, won: !p1Won, date: date)
     }
     
     // store statistics
@@ -404,3 +438,41 @@ func regenerateStatistics( database: Database, snapshot: DataSnapshot, p1CharId 
         }
     }
 }
+
+func renameResults( database: Database, snapshot: DataSnapshot, pref : CharacterPref ) {
+    
+    var results = parseResultsSnapshot(snapshot: snapshot)
+    
+    // update name
+    let range = 0...(results.count-1)
+    for idx in range {
+        var result = results[idx]
+        if let id = result.id {
+            
+            var changed = false
+                
+            if result.p1Id == pref.id {
+                result = result.updateP1Char(pref)
+                changed = true
+            }
+                
+            if result.p2Id == pref.id {
+                result = result.updateP2Char(pref)
+                changed = true
+            }
+                
+            if changed {
+                if let ref = userResultsRecordRef( database : database, id: id ) {
+                    let serialise = result.toMap()
+                    ref.setValue(serialise)
+                }
+                
+                results[idx] = result
+            }
+        }
+    }
+    
+    // regenerate statistics
+    regenerateStatistics(database: database, results: results)
+}
+

@@ -213,7 +213,7 @@ class ResultsDetailTableViewController: UITableViewController, UIPickerViewDeleg
             }
         default:
             // shouldn't happen
-            return tableView.dequeueReusableCell(withIdentifier: "cellLabel", for: indexPath)
+            return cellPlayer1!
         }
     }
 

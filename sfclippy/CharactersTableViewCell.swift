@@ -67,19 +67,20 @@ class CharactersTableViewCell: UITableViewCell, RatingObserver {
     func changeRating( _ sender : RatingView, nextVal: Int) {
         debugPrint("change rating to ",nextVal)
         let database = Database.database()
-        if let char = character,
+        if var char = character,
             let p1 = isP1Rating,
             let id = char.id {
             
             if p1 {
-                char.p1Rating = nextVal
+                char = char.changeP1Rating(nextVal)
             } else {
-                char.p2Rating = nextVal
+                char = char.changeP2Rating(nextVal)
             }
             
             let ref = userCharactersPref(database: database, characterId: id)
             ref?.setValue( char.toMap() )
         }
+        
     }
     
     override func awakeFromNib() {

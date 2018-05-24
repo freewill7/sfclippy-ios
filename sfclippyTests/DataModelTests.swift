@@ -10,15 +10,7 @@ import XCTest
 @testable import sfclippy
 
 // allow us to compare and debug CharacterPref
-extension CharacterPref : Equatable, CustomStringConvertible {
-    static public func ==( lhs : CharacterPref, rhs : CharacterPref ) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.p1Rating == rhs.p1Rating &&
-            lhs.p2Rating == rhs.p2Rating &&
-            lhs.p1Statistics == rhs.p1Statistics &&
-            lhs.p2Statistics == rhs.p2Statistics &&
-            lhs.id == rhs.id
-    }
+extension CharacterPref : CustomStringConvertible {
     
     public var description : String {
         return "CharacterPref{name=\(self.name)," +
@@ -31,31 +23,7 @@ extension CharacterPref : Equatable, CustomStringConvertible {
 }
 
 // allow us to compare and debug UsageStatistic
-extension UsageStatistic : Equatable, CustomStringConvertible {
-    
-    static public func == (lhs : UsageStatistic, rhs : UsageStatistic ) -> Bool {
-        if lhs.qtyBattles != rhs.qtyBattles {
-            debugPrint("qty battles differs")
-            return false
-        }
-        
-        if lhs.qtyWins != rhs.qtyWins {
-            debugPrint("qty wins differs")
-            return false
-        }
-        
-        if lhs.lastBattle != rhs.lastBattle {
-            debugPrint("differing last battles")
-            return false
-        }
-        
-        if lhs.lastWin != rhs.lastWin {
-            debugPrint("differing last win")
-            return false
-        }
-        
-        return true
-    }
+extension UsageStatistic : CustomStringConvertible {
     
     public var description : String {
         return "UsageStatistic{wins=\(self.qtyWins),battles=\(self.qtyBattles),lastBattle=\(String(describing:self.lastBattle)),lastWin=\(String(describing:self.lastWin))}"
@@ -99,11 +67,48 @@ class DataModelTests: XCTestCase {
         XCTAssertEqual(loss.lastWin, date1)
     }
     
+    func testCompareUsage() {
+        let monday = Date(timeIntervalSince1970: 24*60*60)
+        let tuesday = Date(timeIntervalSince1970: 48*60*60)
+        let usage1 = UsageStatistic(qtyBattles: 1, qtyWins: 1, lastBattle: tuesday, lastWin: monday)
+        let usage2 = UsageStatistic(qtyBattles: 1, qtyWins: 1, lastBattle: tuesday, lastWin: monday)
+        
+        XCTAssertEqual(usage1, usage2)
+        
+        let moreRecent = UsageStatistic(qtyBattles: 1, qtyWins: 1, lastBattle: tuesday, lastWin: tuesday)
+        XCTAssert(moreRecent != usage1)
+        
+        let differentCount = UsageStatistic(qtyBattles: 2, qtyWins: 1, lastBattle: tuesday, lastWin: monday)
+        XCTAssert(differentCount != usage1)
+    }
+    
+    func testPreferenceMutation( ) {
+        let preference1 = CharacterPref(name: "Ryu", p1Rating: 2, p2Rating: 3)
+        let indirectCopy = CharacterPref(name: "Ryu", p1Rating: 2, p2Rating: 3)
+        XCTAssertEqual(preference1, indirectCopy)
+        
+        let changeOfName = preference1.changeName("Ken")
+        XCTAssertTrue(preference1 != changeOfName)
+        XCTAssertEqual("Ken", changeOfName.name)
+        XCTAssertEqual(2, changeOfName.p1Rating)
+        XCTAssertEqual(3, changeOfName.p2Rating)
+        
+        let changeOfP1 = preference1.changeP1Rating(4)
+        XCTAssertTrue(preference1 != changeOfP1)
+        XCTAssertEqual("Ryu", changeOfP1.name)
+        XCTAssertEqual(4, changeOfP1.p1Rating)
+        XCTAssertEqual(3, changeOfP1.p2Rating)
+        
+        let changeOfP2 = preference1.changeP2Rating(1)
+        XCTAssertTrue(preference1 != changeOfP2)
+        XCTAssertEqual("Ryu", changeOfP2.name)
+        XCTAssertEqual(2, changeOfP2.p1Rating)
+        XCTAssertEqual(1, changeOfP2.p2Rating)
+    }
+    
     func testBasicPreferenceConservation() {
         // check we can de-serialise
-        
-        let original = CharacterPref(name: "Ryu", p1Rating: 2, p2Rating: 4)
-        original.id = "XX"
+        let original = CharacterPref(name: "Ryu", p1Rating: 2, p2Rating: 4, id: "XX", p1Statistics: nil, p2Statistics: nil)
         
         let serialised = original.toMap()
         guard let deserialised = CharacterPref.initFromMap(fromMap: serialised, withId: "XX") else {
@@ -241,8 +246,7 @@ class DataModelTests: XCTestCase {
         let originalResult = BattleResult(date: originalDate, p1Id: originalP1Id, p1Name: originalP1Name, p2Id: originalP2Id, p2Name: originalP2Name, p1Won: originalP1Won, id: id)
         
         // change player 1 character
-        let pref1 = CharacterPref(name: "Juri", p1Rating: 1, p2Rating: 2)
-        pref1.id = "AA"
+        let pref1 = CharacterPref(name: "Juri", p1Rating: 1, p2Rating: 2, id: "AA", p1Statistics: nil, p2Statistics: nil)
         let changedP1 = originalResult.updateP1Char(pref1)
         XCTAssertEqual(pref1.name, changedP1.p1Name)
         XCTAssertEqual(pref1.id, changedP1.p1Id)
@@ -250,8 +254,7 @@ class DataModelTests: XCTestCase {
         XCTAssertEqual(originalP2Name, changedP1.p2Name)
         
         // change player 2 character
-        let pref2 = CharacterPref(name: "Dhalsim", p1Rating: 1, p2Rating: 2)
-        pref2.id = "BB"
+        let pref2 = CharacterPref(name: "Dhalsim", p1Rating: 1, p2Rating: 2, id: "BB", p1Statistics: nil, p2Statistics: nil)
         let changedP2 = originalResult.updateP2Char(pref2)
         XCTAssertEqual(originalP1Name, changedP2.p1Name)
         XCTAssertEqual(originalP1Id, changedP2.p1Id)

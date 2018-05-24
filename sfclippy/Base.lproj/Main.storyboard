@@ -279,8 +279,8 @@
                     <connections>
                         <outlet property="buttonEditCancel" destination="67L-Z4-fV9" id="5zm-XC-QcK"/>
                         <segue destination="AUx-nR-xje" kind="unwind" identifier="segueUnwindToBattle" unwindAction="unwindToBattleWithUnwindSegue:" id="lIx-gL-mcm"/>
-                        <segue destination="OAC-YW-Fgx" kind="show" identifier="editCharacter" id="Hff-QG-Lfq"/>
-                        <segue destination="OAC-YW-Fgx" kind="show" identifier="createCharacter" id="Qp3-mi-q5c"/>
+                        <segue destination="ZKH-nr-hbB" kind="show" identifier="createCharacter" id="phR-HP-Mn6"/>
+                        <segue destination="ZKH-nr-hbB" kind="show" identifier="editCharacter" id="g6L-jm-PQQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zN-7Y-KSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -288,98 +288,87 @@
             </objects>
             <point key="canvasLocation" x="2063.1999999999998" y="-202.84857571214394"/>
         </scene>
-        <!--Add Character-->
-        <scene sceneID="Xif-n6-0qC">
+        <!--Edit Character-->
+        <scene sceneID="ZpF-KC-l0X">
             <objects>
-                <viewController title="Add Character" id="OAC-YW-Fgx" customClass="AddCharacterViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xSr-AE-2xm">
+                <tableViewController id="ZKH-nr-hbB" customClass="CharactersDetailTableViewController" customModule="sfclippy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gsY-gu-nfY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3V-vv-y8s">
-                                <rect key="frame" x="4" y="72" width="50" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dOs-hD-KHs">
-                                <rect key="frame" x="62" y="67.5" width="305" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="textEntryEdited:" destination="OAC-YW-Fgx" eventType="editingChanged" id="LRI-rP-ihn"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1 Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2Q-13-EmB">
-                                <rect key="frame" x="4" y="100.5" width="367" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZQ-O1-Fia" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
-                                <rect key="frame" x="16" y="121.5" width="120" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="color_primary_1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="9VC-wX-bfX"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2 Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjT-vz-DRX">
-                                <rect key="frame" x="4" y="189.5" width="367" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJw-Eg-meD" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
-                                <rect key="frame" x="16" y="218.5" width="120" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="color_primary_1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="dXj-7I-mr9"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="c3V-vv-y8s" firstAttribute="top" secondItem="a7a-B3-nvA" secondAttribute="top" constant="8" id="6eE-d6-WRe"/>
-                            <constraint firstItem="oZQ-O1-Fia" firstAttribute="leading" secondItem="a7a-B3-nvA" secondAttribute="leading" constant="16" id="6uo-ln-Uaw"/>
-                            <constraint firstItem="oZQ-O1-Fia" firstAttribute="top" secondItem="S2Q-13-EmB" secondAttribute="bottom" id="BCl-Dj-3aH"/>
-                            <constraint firstItem="c3V-vv-y8s" firstAttribute="leading" secondItem="a7a-B3-nvA" secondAttribute="leading" constant="4" id="EmY-eb-zjA"/>
-                            <constraint firstItem="vjT-vz-DRX" firstAttribute="top" secondItem="oZQ-O1-Fia" secondAttribute="bottom" constant="8" id="N9S-j2-Ps2"/>
-                            <constraint firstItem="dOs-hD-KHs" firstAttribute="centerY" secondItem="c3V-vv-y8s" secondAttribute="centerY" id="ODi-Kr-J03"/>
-                            <constraint firstItem="ZJw-Eg-meD" firstAttribute="top" secondItem="vjT-vz-DRX" secondAttribute="bottom" constant="8" id="Uk2-yi-RNg"/>
-                            <constraint firstItem="vjT-vz-DRX" firstAttribute="leading" secondItem="a7a-B3-nvA" secondAttribute="leading" constant="4" id="WMo-OV-yyk"/>
-                            <constraint firstItem="ZJw-Eg-meD" firstAttribute="leading" secondItem="a7a-B3-nvA" secondAttribute="leading" constant="16" id="ZX1-1N-lwz"/>
-                            <constraint firstItem="a7a-B3-nvA" firstAttribute="trailing" secondItem="vjT-vz-DRX" secondAttribute="trailing" constant="4" id="clb-dX-3ox"/>
-                            <constraint firstItem="S2Q-13-EmB" firstAttribute="leading" secondItem="a7a-B3-nvA" secondAttribute="leading" constant="4" id="fzS-S0-7yC"/>
-                            <constraint firstItem="a7a-B3-nvA" firstAttribute="trailing" secondItem="dOs-hD-KHs" secondAttribute="trailing" constant="8" id="ikk-bN-iIa"/>
-                            <constraint firstItem="S2Q-13-EmB" firstAttribute="top" secondItem="c3V-vv-y8s" secondAttribute="bottom" constant="8" id="jnf-iJ-enK"/>
-                            <constraint firstItem="dOs-hD-KHs" firstAttribute="leading" secondItem="c3V-vv-y8s" secondAttribute="trailing" constant="8" id="lIt-rc-ACT"/>
-                            <constraint firstItem="a7a-B3-nvA" firstAttribute="trailing" secondItem="S2Q-13-EmB" secondAttribute="trailing" constant="4" id="web-uT-9Rj"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="a7a-B3-nvA"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="New Character" id="KZK-lU-j84">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="4he-Re-eEa"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="sas-U9-EzV">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellRating" id="nre-Wa-7Vd" customClass="RatingTableViewCell" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nre-Wa-7Vd" id="NV2-Ti-b56">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cej-qD-ZDc" customClass="RatingView" customModule="sfclippy" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="8" width="120" height="27.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="myK-On-VJF"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Cej-qD-ZDc" secondAttribute="bottom" constant="8" id="CZ9-Yk-f4V"/>
+                                        <constraint firstItem="Cej-qD-ZDc" firstAttribute="top" secondItem="NV2-Ti-b56" secondAttribute="top" constant="8" id="VO9-DQ-D4X"/>
+                                        <constraint firstItem="Cej-qD-ZDc" firstAttribute="leading" secondItem="NV2-Ti-b56" secondAttribute="leading" constant="16" id="buC-YP-KFk"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ratingView" destination="Cej-qD-ZDc" id="Gl4-av-VXC"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellTextField" id="FFh-fh-rTN" customClass="TextTableViewCell" customModule="sfclippy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FFh-fh-rTN" id="Il8-bN-yi4">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="09a-XT-wTr">
+                                            <rect key="frame" x="16" y="8" width="343" height="27.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="09a-XT-wTr" secondAttribute="bottom" constant="8" id="I7d-Ni-gVR"/>
+                                        <constraint firstItem="09a-XT-wTr" firstAttribute="leading" secondItem="Il8-bN-yi4" secondAttribute="leading" constant="16" id="hrh-NX-ykV"/>
+                                        <constraint firstAttribute="trailing" secondItem="09a-XT-wTr" secondAttribute="trailing" constant="16" id="iGG-C7-TTC"/>
+                                        <constraint firstItem="09a-XT-wTr" firstAttribute="top" secondItem="Il8-bN-yi4" secondAttribute="top" constant="8" id="qQr-S6-Ag3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="09a-XT-wTr" id="EiH-rY-SpW"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZKH-nr-hbB" id="QlP-Uc-lwt"/>
+                            <outlet property="delegate" destination="ZKH-nr-hbB" id="BqH-o8-ArE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Character" id="bmo-4M-BFB">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="mx6-DY-pga">
                             <connections>
-                                <segue destination="Jnm-Wy-hi2" kind="unwind" unwindAction="unwindToCharactersWithUnwindSegue:" id="M5E-yW-6Cf"/>
+                                <action selector="saveChanges:" destination="ZKH-nr-hbB" id="bnw-tJ-Jwi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnSave" destination="sas-U9-EzV" id="KXb-T1-38W"/>
-                        <outlet property="ratingViewP1" destination="oZQ-O1-Fia" id="caJ-to-HA3"/>
-                        <outlet property="ratingViewP2" destination="ZJw-Eg-meD" id="3mw-tJ-qhc"/>
-                        <outlet property="textCharacter" destination="dOs-hD-KHs" id="pyz-sF-KJ1"/>
+                        <outlet property="buttonSave" destination="mx6-DY-pga" id="3lG-9e-acd"/>
+                        <segue destination="kCE-jn-mbW" kind="unwind" identifier="segueUnwindToCharacters" unwindAction="unwindToCharactersWithUnwindSegue:" id="dT7-jn-WUd"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hND-Tq-td6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Jnm-Wy-hi2" userLabel="Exit" sceneMemberID="exit"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hvr-31-3kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="kCE-jn-mbW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3045.5999999999999" y="-203.74812593703149"/>
+            <point key="canvasLocation" x="3284" y="-203"/>
         </scene>
         <!--Results-->
         <scene sceneID="lLW-KX-EYH">
@@ -735,33 +724,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellLabel" id="wjj-Zj-Iex" customClass="LabelTableViewCell" customModule="sfclippy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wjj-Zj-Iex" id="sx4-9P-VnS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wS-tj-HYW">
-                                            <rect key="frame" x="16" y="11" width="343" height="22"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="4wS-tj-HYW" firstAttribute="leading" secondItem="sx4-9P-VnS" secondAttribute="leadingMargin" id="43E-rb-xa9"/>
-                                        <constraint firstItem="4wS-tj-HYW" firstAttribute="top" secondItem="sx4-9P-VnS" secondAttribute="topMargin" id="AuA-jr-gnj"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="4wS-tj-HYW" secondAttribute="trailing" id="CMT-gb-KAE"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="4wS-tj-HYW" secondAttribute="bottom" id="WaL-q2-HHW"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="label" destination="4wS-tj-HYW" id="3Of-3U-nUy"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellButton" id="yTA-bX-rIs" customClass="ButtonTableViewCell" customModule="sfclippy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yTA-bX-rIs" id="nUJ-19-GTw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -787,7 +751,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellDatePicker" id="nao-9k-6Ep" customClass="DatePickerTableViewCell" customModule="sfclippy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nao-9k-6Ep" id="ojs-CO-IxY">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -813,7 +777,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellPicker" id="lI2-5G-TlN" customClass="PickerTableViewCell" customModule="sfclippy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lI2-5G-TlN" id="5xA-SD-avO">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -982,7 +946,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qp3-mi-q5c"/>
+        <segue reference="phR-HP-Mn6"/>
         <segue reference="Ico-AI-s2f"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

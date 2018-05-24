@@ -14,8 +14,10 @@
 		BE1AF5BB20B0C1CA0053163C /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5BA20B0C1CA0053163C /* ButtonTableViewCell.swift */; };
 		BE1AF5BD20B0C1E50053163C /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5BC20B0C1E50053163C /* DatePickerTableViewCell.swift */; };
 		BE1AF5BF20B0C7930053163C /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5BE20B0C7930053163C /* PickerTableViewCell.swift */; };
+		BE1AF5C120B5D9420053163C /* CharactersDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5C020B5D9420053163C /* CharactersDetailTableViewController.swift */; };
+		BE1AF5C320B5D9920053163C /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5C220B5D9920053163C /* RatingTableViewCell.swift */; };
+		BE1AF5C520B5D9B40053163C /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AF5C420B5D9B40053163C /* TextTableViewCell.swift */; };
 		BE1C9E70201CBD5C00776B78 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C9E6F201CBD5C00776B78 /* RatingView.swift */; };
-		BE1C9E72201CCFC800776B78 /* AddCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */; };
 		BE1F23F81FBE11E500CD6447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */; };
 		BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F23F91FBE11E500CD6447 /* ViewController.swift */; };
 		BE1F23FD1FBE11E500CD6447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1F23FB1FBE11E500CD6447 /* Main.storyboard */; };
@@ -80,8 +82,10 @@
 		BE1AF5BA20B0C1CA0053163C /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		BE1AF5BC20B0C1E50053163C /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		BE1AF5BE20B0C7930053163C /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
+		BE1AF5C020B5D9420053163C /* CharactersDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDetailTableViewController.swift; sourceTree = "<group>"; };
+		BE1AF5C220B5D9920053163C /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
+		BE1AF5C420B5D9B40053163C /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		BE1C9E6F201CBD5C00776B78 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
-		BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCharacterViewController.swift; sourceTree = "<group>"; };
 		BE1F23F41FBE11E500CD6447 /* sfclippy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sfclippy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F23F71FBE11E500CD6447 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1F23F91FBE11E500CD6447 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -212,7 +216,6 @@
 				BE2169321FD350B2009F0703 /* DragToSelectView.swift */,
 				BE2169341FD35D75009F0703 /* DragToSelectView.xib */,
 				BE985F8D1FEEC1BD00AA1BF0 /* SelectionMechanism.swift */,
-				BE1C9E71201CCFC800776B78 /* AddCharacterViewController.swift */,
 				BE3E651B203B78EB00961A29 /* SettingsTableViewController.swift */,
 				BE3E651D203B7A5A00961A29 /* SettingsTableViewCell.swift */,
 				BE4F225920420D8B00900013 /* StatisticsTableViewController.swift */,
@@ -229,6 +232,9 @@
 				BE1AF5BA20B0C1CA0053163C /* ButtonTableViewCell.swift */,
 				BE1AF5BC20B0C1E50053163C /* DatePickerTableViewCell.swift */,
 				BE1AF5BE20B0C7930053163C /* PickerTableViewCell.swift */,
+				BE1AF5C020B5D9420053163C /* CharactersDetailTableViewController.swift */,
+				BE1AF5C220B5D9920053163C /* RatingTableViewCell.swift */,
+				BE1AF5C420B5D9B40053163C /* TextTableViewCell.swift */,
 			);
 			path = sfclippy;
 			sourceTree = "<group>";
@@ -585,7 +591,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1AF5B720B0B2770053163C /* ResultsDetailTableViewController.swift in Sources */,
-				BE1C9E72201CCFC800776B78 /* AddCharacterViewController.swift in Sources */,
 				BE1C9E70201CBD5C00776B78 /* RatingView.swift in Sources */,
 				BE1F23FA1FBE11E500CD6447 /* ViewController.swift in Sources */,
 				BE26C20B205AB437007B6409 /* ErrorSignInViewController.swift in Sources */,
@@ -594,6 +599,8 @@
 				BE21692F1FD31F27009F0703 /* ResultsTableViewCell.swift in Sources */,
 				BE4247531FC1E661003E08A8 /* CharactersTableViewController.swift in Sources */,
 				BE1AF5BB20B0C1CA0053163C /* ButtonTableViewCell.swift in Sources */,
+				BE1AF5C120B5D9420053163C /* CharactersDetailTableViewController.swift in Sources */,
+				BE1AF5C320B5D9920053163C /* RatingTableViewCell.swift in Sources */,
 				BE985F8E1FEEC1BD00AA1BF0 /* SelectionMechanism.swift in Sources */,
 				BE1AF5B920B0C1BA0053163C /* LabelTableViewCell.swift in Sources */,
 				BE4247511FC1D3B0003E08A8 /* DataModel.swift in Sources */,
@@ -606,6 +613,7 @@
 				BE3E651C203B78EC00961A29 /* SettingsTableViewController.swift in Sources */,
 				BE1AF5BF20B0C7930053163C /* PickerTableViewCell.swift in Sources */,
 				BE4F225A20420D8B00900013 /* StatisticsTableViewController.swift in Sources */,
+				BE1AF5C520B5D9B40053163C /* TextTableViewCell.swift in Sources */,
 				BECC1D29205096FE00A93900 /* ConfirmViewController.swift in Sources */,
 				BE3F8841209635AA00EE9849 /* StatisticsDetailTableViewCell.swift in Sources */,
 				BE42474F1FC070C3003E08A8 /* SignInViewController.swift in Sources */,

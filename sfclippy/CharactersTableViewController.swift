@@ -45,6 +45,7 @@ class CharactersTableViewController: UITableViewController {
     
     @IBAction func clickButtonCreate(_ sender: Any) {
         debugPrint("create clicked")
+        self.selected = nil
         performSegue(withIdentifier: "createCharacter", sender: self)
     }
     
@@ -94,23 +95,6 @@ class CharactersTableViewController: UITableViewController {
         
         let charPref = CharacterPref(name: characterName, p1Rating: p1Rating, p2Rating: p2Rating)
         characterDir.childByAutoId().setValue( charPref.toMap() )
-    }
-    
-    func updateCharacter( characterDir : DatabaseReference, characterId: String, characterName : String, p1Rating : Int, p2Rating : Int ) {
-        let ref = characterDir.child(characterId)
-        ref.child(CharacterPref.keyName).setValue(characterName)
-        ref.child(CharacterPref.keyP1Rating).setValue(p1Rating)
-        ref.child(CharacterPref.keyP2Rating).setValue(p2Rating)
-        
-        // update cache
-        for character in characters {
-            if character.id == characterId {
-                character.name = characterName
-                character.p1Rating = p1Rating
-                character.p2Rating = p2Rating
-            }
-        }
-        tableView.reloadData()
     }
     
     func populateWithSample( characterDir: DatabaseReference ) {
@@ -270,12 +254,10 @@ class CharactersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath ) {
         debugPrint("selected row at \(indexPath.row)")
         
-        let character = characterForIndex(indexPath)
+        self.selected = characterForIndex(indexPath)
         if tableView.isEditing {
             performSegue(withIdentifier: "editCharacter", sender: self)
         } else {
-            self.selected = character
-                
             if isFiltering() {
                 self.searchController.dismiss(animated: true, completion: {
                     self.performSegue(withIdentifier: "segueUnwindToBattle", sender: self)
@@ -289,6 +271,7 @@ class CharactersTableViewController: UITableViewController {
     @IBAction func unwindToCharacters(unwindSegue: UIStoryboardSegue) {
         debugPrint("unwound to characters")
         
+        /*
         if let addChar = unwindSegue.source as? AddCharacterViewController {
             let database = Database.database()
             let optionalRef = userCharactersDir(database: database)
@@ -307,7 +290,7 @@ class CharactersTableViewController: UITableViewController {
                 }
             }
         }
-
+*/
 
     }
     
@@ -377,20 +360,12 @@ class CharactersTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createCharacter" {
-            if let dest = segue.destination as? AddCharacterViewController {
-                dest.characterId = nil
-                dest.characterName = ""
-                dest.p1Rating = 1
-                dest.p2Rating = 1
+            if let dest = segue.destination as? CharactersDetailTableViewController {
+                dest.referenceCharacter = self.selected
             }
         } else if segue.identifier == "editCharacter" {
-            if let dest = segue.destination as? AddCharacterViewController,
-                let indexPath = tableView.indexPathForSelectedRow {
-                let character = characterForIndex(indexPath)
-                dest.characterId = character.id
-                dest.characterName = character.name
-                dest.p1Rating = character.p1Rating
-                dest.p2Rating = character.p2Rating
+            if let dest = segue.destination as? CharactersDetailTableViewController {
+                dest.referenceCharacter = self.selected
             }
         }
         navigationController?.setToolbarHidden(true, animated: false)

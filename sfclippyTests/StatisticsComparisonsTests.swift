@@ -35,15 +35,17 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("P1 Wins", comparison1.getDescription() )
         XCTAssertEqual("P2 Wins", comparison2.getDescription() )
         
-        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4)
-        char1.p1Statistics = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
-        char1.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
-        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5)
+        let stats1 = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
+        let stats2 = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
+        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4, p1Statistics: stats1, p2Statistics: stats2 )
+        
         // missing p1Statistics
-        char2.p2Statistics = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: now, lastWin: twoMonths)
-        let char3 = CharacterPref( name : "juri", p1Rating: 3, p2Rating: 6)
-        char3.p1Statistics = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: nil, lastWin: nil)
+        let stats3 = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: now, lastWin: twoMonths)
+        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5, p1Statistics: nil, p2Statistics: stats3 )
+
         // missing p2Statistics
+        let stats4 = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: nil, lastWin: nil)
+        let char3 = CharacterPref( name : "juri", p1Rating: 3, p2Rating: 6, p1Statistics: stats4, p2Statistics: nil)
         
         XCTAssert( comparison1.isGreater(char1, char2) )
         XCTAssertEqual("1", comparison1.getFormattedValue(pref: char1))
@@ -67,15 +69,17 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("P1 Usage", comparison1.getDescription() )
         XCTAssertEqual("P2 Usage", comparison2.getDescription() )
         
-        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4)
-        char1.p1Statistics = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
-        char1.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
-        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5)
+        let stats1 = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
+        let stats2 = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
+        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4, p1Statistics: stats1, p2Statistics: stats2)
+
         // missing p1Statistics
-        char2.p2Statistics = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: twoMonths, lastWin: nil)
-        let char3 = CharacterPref( name : "juri", p1Rating: 3, p2Rating: 6)
-        char3.p1Statistics = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: nil, lastWin: nil)
+        let stats3 = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: twoMonths, lastWin: nil)
+        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5, p1Statistics: nil, p2Statistics: stats3)
+        
         // missing p2Statistics
+        let stats4 = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: nil, lastWin: nil)
+        let char3 = CharacterPref( name : "juri", p1Rating: 3, p2Rating: 6, p1Statistics: stats4, p2Statistics: nil)
         
         XCTAssert( comparison1.isGreater(char1, char2) )
         XCTAssertEqual("7", comparison1.getFormattedValue(pref: char1))
@@ -99,15 +103,17 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("P1 Win Percentage", comparison1.getDescription() )
         XCTAssertEqual("P2 Win Percentage", comparison2.getDescription() )
         
-        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4)
-        char1.p1Statistics = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: now, lastWin: now)
-        char1.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 6, lastBattle: now, lastWin: yesterday)
-        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5)
+        let stats1 = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: now, lastWin: now)
+        let stats2 = UsageStatistic(qtyBattles: 8, qtyWins: 6, lastBattle: now, lastWin: yesterday)
+        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4, p1Statistics: stats1, p2Statistics: stats2)
+
         // missing p1Statistics
-        char2.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 4, lastBattle: twoWeeks, lastWin: twoMonths)
-        let char3 = CharacterPref( name : "juri", p1Rating: 3, p2Rating: 6)
-        char3.p1Statistics = UsageStatistic(qtyBattles: 10, qtyWins: 2, lastBattle: nil, lastWin: nil)
+        let stats3 = UsageStatistic(qtyBattles: 8, qtyWins: 4, lastBattle: twoWeeks, lastWin: twoMonths)
+        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5, p1Statistics: nil, p2Statistics: stats3)
+        
         // missing p2Statistics
+        let stats4 = UsageStatistic(qtyBattles: 10, qtyWins: 2, lastBattle: nil, lastWin: nil)
+        let char3 = CharacterPref( name : "juri", p1Rating: 3, p2Rating: 6, p1Statistics: stats4, p2Statistics: nil)
         
         XCTAssert( comparison1.isGreater(char1, char2) )
         XCTAssertEqual("25% (1/4)", comparison1.getFormattedValue(pref: char1))
@@ -131,18 +137,22 @@ class StatisticsComparisonsTests: XCTestCase {
         XCTAssertEqual("P1 Recent", comparison1.getDescription() )
         XCTAssertEqual("P2 Recent", comparison2.getDescription() )
         
-        let ryu = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4)
-        ryu.p1Statistics = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: now, lastWin: nil)
-        ryu.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 6, lastBattle: yesterday, lastWin: nil)
-        let ken = CharacterPref( name : "ken", p1Rating: 1, p2Rating: 4)
-        ken.p1Statistics = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: now, lastWin: nil)
-        ken.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 6, lastBattle: now, lastWin: nil)
-        let laura = CharacterPref( name : "laura", p1Rating: 5, p2Rating: 1)
-        laura.p1Statistics = UsageStatistic(qtyBattles: 2, qtyWins: 1, lastBattle: twoWeeks, lastWin: nil)
-        let ibuki = CharacterPref( name : "ibuki", p1Rating: 1, p2Rating: 5)
-        ibuki.p2Statistics = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: lastMonth, lastWin: nil)
-        let karin = CharacterPref( name: "karin", p1Rating: 4, p2Rating : 4)
-        karin.p1Statistics = UsageStatistic(qtyBattles: 3, qtyWins: 2, lastBattle: twoMonths, lastWin: nil)
+        let stats1 = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: now, lastWin: nil)
+        let stats2 = UsageStatistic(qtyBattles: 8, qtyWins: 6, lastBattle: yesterday, lastWin: nil)
+        let ryu = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4, p1Statistics: stats1, p2Statistics: stats2 )
+ 
+        let stats3 = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: now, lastWin: nil)
+        let stats4 = UsageStatistic(qtyBattles: 8, qtyWins: 6, lastBattle: now, lastWin: nil)
+        let ken = CharacterPref( name : "ken", p1Rating: 1, p2Rating: 4, p1Statistics: stats3, p2Statistics: stats4 )
+
+        let stats5 = UsageStatistic(qtyBattles: 2, qtyWins: 1, lastBattle: twoWeeks, lastWin: nil)
+        let laura = CharacterPref( name : "laura", p1Rating: 5, p2Rating: 1, p1Statistics: stats5, p2Statistics: nil)
+
+        let stats6 = UsageStatistic(qtyBattles: 4, qtyWins: 1, lastBattle: lastMonth, lastWin: nil)
+        let ibuki = CharacterPref( name : "ibuki", p1Rating: 1, p2Rating: 5, p1Statistics: nil, p2Statistics: stats6)
+
+        let stats8 = UsageStatistic(qtyBattles: 3, qtyWins: 2, lastBattle: twoMonths, lastWin: nil)
+        let karin = CharacterPref( name: "karin", p1Rating: 4, p2Rating : 4, p1Statistics: stats8, p2Statistics: nil)
         
         XCTAssert( comparison1.isGreater(ken, ryu) ) // alphabatical order
         XCTAssert( comparison1.isGreater(ken, laura) )
@@ -169,12 +179,13 @@ class StatisticsComparisonsTests: XCTestCase {
     }
     
     func testTrends( ) {
-        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4)
-        char1.p1Statistics = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
-        char1.p2Statistics = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
-        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5)
+        let stats1 = UsageStatistic(qtyBattles: 7, qtyWins: 1, lastBattle: now, lastWin: now)
+        let stats2 = UsageStatistic(qtyBattles: 8, qtyWins: 2, lastBattle: now, lastWin: yesterday)
+        let char1 = CharacterPref( name : "ryu", p1Rating: 1, p2Rating: 4, p1Statistics: stats1, p2Statistics: stats2 )
+
         // missing p1Statistics
-        char2.p2Statistics = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: twoMonths, lastWin: twoMonths)
+        let stats3 = UsageStatistic(qtyBattles: 9, qtyWins: 3, lastBattle: twoMonths, lastWin: twoMonths)
+        let char2 = CharacterPref( name : "ken", p1Rating: 2, p2Rating: 5, p1Statistics: nil, p2Statistics: stats3)
         
         // both stats have had wins in the last month
         XCTAssertEqual(StatisticsTrend.TrendingUp, identifyCharacterTrend(pref: char1, isP1: true, today: now))

@@ -91,17 +91,17 @@ class SelectionMechanismTests: XCTestCase {
     
     func testLeastRecentlyUsed() {
         // no p1 usage, youngest p2 usage
-        let char1 = CharacterPref( name: "ryu", p1Rating: 1, p2Rating: 1 )
-        char1.p2Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 5000), lastWin: nil)
+        let stats1 = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 5000), lastWin: nil)
+        let char1 = CharacterPref( name: "ryu", p1Rating: 1, p2Rating: 1, p1Statistics: nil, p2Statistics: stats1 )
         
         // oldest p1 usage, no p2 usage
-        let char2 = CharacterPref( name: "ken", p1Rating: 1, p2Rating: 1 )
-        char2.p1Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 1000), lastWin: nil)
+        let stats2 = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 1000), lastWin: nil)
+        let char2 = CharacterPref( name: "ken", p1Rating: 1, p2Rating: 1, p1Statistics: stats2, p2Statistics: nil )
         
         // youngest p1 usage, oldest p2 usage
-        let char3 = CharacterPref(name: "juri", p1Rating: 1, p2Rating: 1)
-        char3.p1Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 2000), lastWin: nil)
-        char3.p2Statistics = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 4000), lastWin: nil)
+        let stats3 = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 2000), lastWin: nil)
+        let stats4 = UsageStatistic(qtyBattles: 1, qtyWins: 0, lastBattle: Date(timeIntervalSince1970: 4000), lastWin: nil)
+        let char3 = CharacterPref(name: "juri", p1Rating: 1, p2Rating: 1, p1Statistics: stats3, p2Statistics: stats4 )
         
         let chars = [char1, char2, char3]
         
