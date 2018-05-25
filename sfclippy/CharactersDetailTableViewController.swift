@@ -37,10 +37,10 @@ class CharactersDetailTableViewController: UITableViewController, RatingObserver
         super.viewDidLoad()
 
         if let ref = referenceCharacter {
-            navigationController?.title = "Add Character"
+            title = "Edit Character"
             modifiedCharacter = ref
         } else {
-            navigationController?.title = "Edit Character"
+            title = "Add Character"
             modifiedCharacter = CharacterPref(name: "", p1Rating: 1, p2Rating: 1)
         }
         
