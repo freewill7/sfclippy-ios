@@ -40,7 +40,7 @@ class CharactersDetailTableViewController: UITableViewController, RatingObserver
             title = "Edit Character"
             modifiedCharacter = ref
         } else {
-            title = "Add Character"
+            title = "Add Character" 
             modifiedCharacter = CharacterPref(name: "", p1Rating: 1, p2Rating: 1)
         }
         
